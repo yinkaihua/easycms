@@ -9,18 +9,19 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.coding17.easycms.soa.dao.channel.TChannelDAO;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 
 public class ChannelTest {
 
 	private BeanFactory factory;
 	
-	private SqlSessionTemplate template;
+	private TChannelDAO dao;
 	
 	@Before
 	public void before() {
-		factory = new ClassPathXmlApplicationContext("spring-mybatis-test.xml");
-		template = (SqlSessionTemplate) factory.getBean("sqlSessionTemplate");
+		factory = new ClassPathXmlApplicationContext("spring-conf.xml");
+		dao = (TChannelDAO) factory.getBean("tChannelDAO");
 	}
 	
 	@After
@@ -34,7 +35,7 @@ public class ChannelTest {
 		c.setName("书记");
 		c.setPath("/sj");
 		c.setCreateTime(new Date());
-		template.insert("TChannelMapper.insert", c);
+		dao.insert(c);
 	}
 	
 }

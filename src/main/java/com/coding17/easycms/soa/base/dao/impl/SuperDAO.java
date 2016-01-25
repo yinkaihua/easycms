@@ -2,10 +2,19 @@ package com.coding17.easycms.soa.base.dao.impl;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.coding17.easycms.soa.base.dao.ISuperDAO;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 
+/**
+ * ISuperDAO 实现类
+ * @Title: SuperDAO.java 
+ * @Package: com.coding17.easycms.soa.base.dao.impl  
+ * @author: yin.kh
+ * @date: 2016年1月25日 下午11:13:53
+ */
+@Repository
 public class SuperDAO<T> implements ISuperDAO<T> {
 
 	private static final String statement_selectByPrimaryKey = "selectByPrimaryKey";
@@ -54,7 +63,7 @@ public class SuperDAO<T> implements ISuperDAO<T> {
 	}
 	
 	private String getStatementPrefix(T t) {
-		return t.getClass().getName() + ".";
+		return t.getClass().getName();
 	}
 	
 	public static void main(String[] args) {
