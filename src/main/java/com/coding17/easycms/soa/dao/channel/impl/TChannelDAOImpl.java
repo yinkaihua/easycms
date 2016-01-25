@@ -16,6 +16,10 @@ import com.coding17.easycms.soa.entity.channel.TChannel;
 @Repository("tChannelDAO")
 public class TChannelDAOImpl extends SuperDAO<TChannel> implements TChannelDAO {
 
+	@Override
+	protected String getStatementPrefix() {
+		return TChannel.class.getName();
+	}
 	/**
 	 *
 	 * @Title: TChannelDAOImpl.java 

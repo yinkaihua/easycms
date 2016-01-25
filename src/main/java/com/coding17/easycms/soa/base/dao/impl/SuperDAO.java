@@ -14,8 +14,8 @@ import com.coding17.easycms.soa.entity.channel.TChannel;
  * @author: yin.kh
  * @date: 2016年1月25日 下午11:13:53
  */
-@Repository
-public class SuperDAO<T> implements ISuperDAO<T> {
+/*@Repository*/
+public abstract class SuperDAO<T> implements ISuperDAO<T> {
 
 	private static final String statement_selectByPrimaryKey = "selectByPrimaryKey";
 	
@@ -34,37 +34,39 @@ public class SuperDAO<T> implements ISuperDAO<T> {
 	
 	@Override
 	public T selectByPrimaryKey(T t) {
-		return template.selectOne(getStatementPrefix(t) + "." + statement_selectByPrimaryKey, t);
+		return template.selectOne(getStatementPrefix() + "." + statement_selectByPrimaryKey, t);
 	}
 
 	@Override
 	public Integer deleteByPrimaryKey(T t) {
-		return template.delete(getStatementPrefix(t) + "." + statement_deleteByPrimaryKey, t);
+		return template.delete(getStatementPrefix() + "." + statement_deleteByPrimaryKey, t);
 	}
 
 	@Override
 	public Integer insertSelective(T t) {
-		return template.insert(getStatementPrefix(t) + "." + statement_insertSelective, t);
+		return template.insert(getStatementPrefix() + "." + statement_insertSelective, t);
 	}
 
 	@Override
 	public Integer insert(T t) {
-		return template.insert(getStatementPrefix(t) + "." + statement_insert, t);
+		return template.insert(getStatementPrefix() + "." + statement_insert, t);
 	}
 
 	@Override
 	public Integer updateByPrimaryKeySelective(T t) {
-		return template.update(getStatementPrefix(t) + "." + statement_updateByPrimaryKeySelective, t);
+		return template.update(getStatementPrefix() + "." + statement_updateByPrimaryKeySelective, t);
 	}
 
 	@Override
 	public Integer update(T t) {
-		return template.update(getStatementPrefix(t) + "." + statement_update, t);
+		return template.update(getStatementPrefix() + "." + statement_update, t);
 	}
 	
-	private String getStatementPrefix(T t) {
-		return t.getClass().getName();
-	}
+	/**
+	 * 子类必须重写此方法
+	 * @return
+	 */
+	protected abstract String getStatementPrefix();
 	
 	public static void main(String[] args) {
 		TChannel c = new TChannel();
