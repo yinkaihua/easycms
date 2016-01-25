@@ -20,11 +20,5 @@ public class TChannelDAOImpl extends SuperDAO<TChannel> implements TChannelDAO {
 	protected String getStatementPrefix() {
 		return TChannel.class.getName();
 	}
-	/**
-	 *
-	 * @Title: TChannelDAOImpl.java 
-	 * @Package: com.coding17.easycms.soa.dao.channel.impl  
-	 * @author: yin.kh
-	 * @date: 2016年1月25日 下午11:13:05 
-	 */
+
 }
