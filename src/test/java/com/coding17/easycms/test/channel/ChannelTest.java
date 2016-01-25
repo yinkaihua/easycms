@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.coding17.easycms.soa.dao.channel.TChannelDAO;
 import com.coding17.easycms.soa.entity.channel.TChannel;
+import com.coding17.easycms.soa.service.channel.TChannelService;
 
 public class ChannelTest {
 
@@ -18,10 +19,13 @@ public class ChannelTest {
 	
 	private TChannelDAO dao;
 	
+	private TChannelService tChannelService;
+	
 	@Before
 	public void before() {
 		factory = new ClassPathXmlApplicationContext("spring-conf.xml");
 		dao = (TChannelDAO) factory.getBean("tChannelDAO");
+		tChannelService = (TChannelService) factory.getBean("tChannelService");
 	}
 	
 	@After
@@ -35,7 +39,8 @@ public class ChannelTest {
 		c.setName("书记");
 		c.setPath("/sj");
 		c.setCreateTime(new Date());
-		dao.insert(c);
+//		dao.insert(c);
+		tChannelService.createChannel(c);
 	}
 	
 }
