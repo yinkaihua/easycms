@@ -15,7 +15,7 @@
 	<bean id="methodInvokeAspect" class="com.coding17.easycms.soa.base.aop.MethodInvokeAspect"/>
 
 	<aop:config>
-		<aop:aspect id="methodInvokeAspect" ref="methodInvokeAspect">
+		<aop:aspect id="TestAspect" ref="methodInvokeAspect">
 			<!--配置com.spring.service包下所有类或接口的所有方法 -->
 			<aop:pointcut id="businessService" expression="execution(* com.coding17.easycms.soa.service.*.impl.*.*(..))" />
 			<aop:around pointcut-ref="businessService" method="doAround" />
