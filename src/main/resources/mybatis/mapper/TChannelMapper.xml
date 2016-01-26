@@ -21,16 +21,20 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from t_channel
+		delete from
+		t_channel
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.channel.TChannel">
-		insert into t_channel (id, path, name,
+		insert into t_channel (id,
+		path, name,
 		pid, create_time, state
 		)
-		values (#{id,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR},
+		values (#{id,jdbcType=INTEGER},
+		#{path,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},
-		#{pid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}
+		#{pid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+		#{state,jdbcType=TINYINT}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.coding17.easycms.soa.entity.channel.TChannel">
@@ -102,7 +106,8 @@
 		set path = #{path,jdbcType=VARCHAR},
 		name = #{name,jdbcType=VARCHAR},
 		pid = #{pid,jdbcType=INTEGER},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
 		state = #{state,jdbcType=TINYINT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
