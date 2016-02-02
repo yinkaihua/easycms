@@ -38,9 +38,11 @@ public class ChannelTest {
 		TChannel c = new TChannel();
 		c.setName("书记");
 		c.setPath("/sj");
+		c.setPid(0);
+		c.setSiteId(0);
 		c.setCreateTime(new Date());
 //		dao.insert(c);
-		tChannelService.createChannel(c);
+		tChannelService.create(c);
 	}
 	
 }

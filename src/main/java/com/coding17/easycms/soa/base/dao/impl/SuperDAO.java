@@ -17,17 +17,17 @@ import com.coding17.easycms.soa.entity.channel.TChannel;
 /*@Repository*/
 public abstract class SuperDAO<T> implements ISuperDAO<T> {
 
-	private static final String statement_selectByPrimaryKey = "selectByPrimaryKey";
+	private static final String statement_selectByPrimaryKey = "findByPriKey";
 	
-	private static final String statement_deleteByPrimaryKey = "deleteByPrimaryKey";
+	private static final String statement_deleteByPrimaryKey = "deleteByPriKey";
 	
 	private static final String statement_insertSelective = "insertSelective";
 	
 	private static final String statement_insert = "insert";
 	
-	private static final String statement_updateByPrimaryKeySelective = "updateByPrimaryKeySelective";
+	private static final String statement_updateByPrimaryKeySelective = "update";
 	
-	private static final String statement_update = "update";
+	private static final String statement_update = "updateBak";
 	
 	@Autowired
 	private SqlSessionTemplate template;

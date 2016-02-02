@@ -11,7 +11,7 @@ import com.coding17.easycms.soa.entity.site.TSite;
  * @author：系统生成
  * @version:1.0
  */
-@Repository
+@Repository("tSiteDAO")
 public class TSiteDAOImpl extends SuperDAO<TSite> implements TSiteDAO {
 
 	@Override

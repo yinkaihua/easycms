@@ -20,6 +20,8 @@ public class BasicEntity implements Serializable {
 	private Integer pageSize;
 	
 	private Integer offset;
+	
+	private String orderby;
 
 	public Integer getPageNum() {
 		return pageNum;
@@ -43,6 +45,14 @@ public class BasicEntity implements Serializable {
 
 	public void setOffset(Integer offset) {
 		this.offset = offset;
+	}
+
+	public String getOrderby() {
+		return orderby;
+	}
+
+	public void setOrderby(String orderby) {
+		this.orderby = orderby;
 	}
 
 }

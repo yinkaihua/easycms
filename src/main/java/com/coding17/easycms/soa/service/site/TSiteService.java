@@ -1,5 +1,6 @@
 package com.coding17.easycms.soa.service.site;
 
+import com.coding17.easycms.soa.base.service.BaseService;
 import com.coding17.easycms.soa.entity.site.TSite;
 
 /**
@@ -7,6 +8,6 @@ import com.coding17.easycms.soa.entity.site.TSite;
  * @author：系统生成
  * @version:1.0
  */
-public interface TSiteService {
+public interface TSiteService extends BaseService<TSite> {
 	
 }
