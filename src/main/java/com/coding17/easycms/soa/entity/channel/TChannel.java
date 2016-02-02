@@ -1,87 +1,160 @@
 package com.coding17.easycms.soa.entity.channel;
 
 import java.util.Date;
-
 import com.coding17.easycms.soa.base.entity.BasicEntity;
 
 /**
- * 栏目实体类
- * 
- * @Title: TChannel.java
- * @Package: com.coding17.easycms.soa.entity.channel
- * @author: yin.kh
- * @date: 2016年1月25日 下午11:28:39
+ * 描述：</b><br>
+ * @author：系统生成
+ * @version:1.0
  */
 public class TChannel extends BasicEntity {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 *
+	 */
 	private Integer id;
-
-	private String path;
-
-	private String name;
-
+	/**
+	 *父栏目ID，为0表示顶级栏目
+	 */
 	private Integer pid;
-
+	/**
+	 *站点ID
+	 */
+	private Integer siteId;
+	/**
+	 *显示名称
+	 */
+	private String name;
+	/**
+	 *访问路径
+	 */
+	private String path;
+	/**
+	 *创建时间
+	 */
 	private Date createTime;
-
-	private Byte state;
-
-	public Integer getId() {
-		return id;
+	/**
+	 *状态；1：正常，9：删除
+	 */
+	private Integer state;
+	
+	/**
+	 *获取
+	 */
+	public Integer getId(){
+		return this.id;
 	}
-
-	public void setId(Integer id) {
+	
+	/**
+	 *设置
+	 */
+	public void setId(Integer id){
 		this.id = id;
 	}
-
-	public String getPath() {
-		return path;
+	
+	/**
+	 *获取父栏目ID，为0表示顶级栏目
+	 */
+	public Integer getPid(){
+		return this.pid;
 	}
-
-	public void setPath(String path) {
-		this.path = path == null ? null : path.trim();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
-	}
-
-	public Integer getPid() {
-		return pid;
-	}
-
-	public void setPid(Integer pid) {
+	
+	/**
+	 *设置父栏目ID，为0表示顶级栏目
+	 */
+	public void setPid(Integer pid){
 		this.pid = pid;
 	}
-
-	public Date getCreateTime() {
-		return createTime;
+	
+	/**
+	 *获取站点ID
+	 */
+	public Integer getSiteId(){
+		return this.siteId;
 	}
-
-	public void setCreateTime(Date createTime) {
+	
+	/**
+	 *设置站点ID
+	 */
+	public void setSiteId(Integer siteId){
+		this.siteId = siteId;
+	}
+	
+	/**
+	 *获取显示名称
+	 */
+	public String getName(){
+		return this.name;
+	}
+	
+	/**
+	 *设置显示名称
+	 */
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	/**
+	 *获取访问路径
+	 */
+	public String getPath(){
+		return this.path;
+	}
+	
+	/**
+	 *设置访问路径
+	 */
+	public void setPath(String path){
+		this.path = path;
+	}
+	
+	/**
+	 *获取创建时间
+	 */
+	public Date getCreateTime(){
+		return this.createTime;
+	}
+	
+	/**
+	 *设置创建时间
+	 */
+	public void setCreateTime(Date createTime){
 		this.createTime = createTime;
 	}
-
-	public Byte getState() {
-		return state;
+	
+	/**
+	 *获取状态；1：正常，9：删除
+	 */
+	public Integer getState(){
+		return this.state;
 	}
-
-	public void setState(Byte state) {
+	
+	/**
+	 *设置状态；1：正常，9：删除
+	 */
+	public void setState(Integer state){
 		this.state = state;
 	}
-
+	
+    
+    /**
+     * 重写toString()
+     */
 	@Override
     public String toString() {
-		return "com.coding17.easycms.soa.entity.channel.TChannel[serialVersionUID=" + this.serialVersionUID + ",id="
-				+ this.id + ",path=" + this.path + ",name=" + this.name + ",pid=" + this.pid + ",createTime="
-				+ this.createTime + ",state=" + this.state + "]";
+    	StringBuffer tos = new StringBuffer("TChannel[");
+    	tos.append("id=").append(this.id).append(",");
+    	tos.append("pid=").append(this.pid).append(",");
+    	tos.append("siteId=").append(this.siteId).append(",");
+    	tos.append("name=").append(this.name).append(",");
+    	tos.append("path=").append(this.path).append(",");
+    	tos.append("createTime=").append(this.createTime).append(",");
+    	tos.append("state=").append(this.state).append(",");
+    	tos.append("]");
+        return tos.toString();
     }
+    
 }
+

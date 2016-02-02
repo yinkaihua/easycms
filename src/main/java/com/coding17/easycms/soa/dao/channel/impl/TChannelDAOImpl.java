@@ -7,13 +7,11 @@ import com.coding17.easycms.soa.dao.channel.TChannelDAO;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 
 /**
- * 栏目DAO
- * @Title: TChannelDAOImpl.java 
- * @Package: com.coding17.easycms.soa.dao.channel.impl  
- * @author: yin.kh
- * @date: 2016年1月25日 下午11:14:01
+ * 描述：</b><br>
+ * @author：系统生成
+ * @version:1.0
  */
-@Repository("tChannelDAO")
+@Repository
 public class TChannelDAOImpl extends SuperDAO<TChannel> implements TChannelDAO {
 
 	@Override
