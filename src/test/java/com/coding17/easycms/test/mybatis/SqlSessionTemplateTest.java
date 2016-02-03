@@ -34,7 +34,7 @@ public class SqlSessionTemplateTest {
 		c.setName("书记");
 		c.setPath("/sj");
 		c.setCreateTime(new Date());
-		template.insert("TChannelMapper.insert", c);
+		//template.insert("TChannelMapper.insert", c);
 	}
 	
 }
