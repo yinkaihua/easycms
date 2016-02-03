@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 功能模块:  -->
+<mapper namespace="com.coding17.easycms.soa.entity.dict.TDict" >
+
+	<!--通用表字段列表-->
+	<resultMap id="BaseResultMap" type="com.coding17.easycms.soa.entity.dict.TDict">
+		<result column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="CATALOG_CODE" property="catalogCode" jdbcType="VARCHAR"/>
+		<result column="KEY" property="key" jdbcType="VARCHAR"/>
+		<result column="VALUE" property="value" jdbcType="VARCHAR"/>
+		<result column="DESC" property="desc" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--通用表字段列表-->
+    
+	<!--user customize code start-->
+
+	<!--user customize code end  -->
+    
+	<!--通用查询条件组装-->
+	<sql id="whereContation">
+			<if test="id != null">
+				AND  ID=#{id,jdbcType=INTEGER}  
+			</if>
+			<if test="catalogCode != null">
+				AND  CATALOG_CODE=#{catalogCode,jdbcType=VARCHAR}  
+			</if>
+			<if test="key != null">
+				AND  KEY=#{key,jdbcType=VARCHAR}  
+			</if>
+			<if test="value != null">
+				AND  VALUE=#{value,jdbcType=VARCHAR}  
+			</if>
+			<if test="desc != null">
+				AND  DESC=#{desc,jdbcType=VARCHAR}  
+			</if>
+	</sql>
+	
+	<!--查询字段列表拼装-->
+	<sql id="baseColumnList">
+			 ID		 
+			,CATALOG_CODE		 
+			,KEY		 
+			,VALUE		 
+			,DESC		 
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: TDictEntityMapper.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.dict.TDict" >
+ 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	 	INSERT  INTO  T_DICT
+	 		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null">
+					ID,
+					</if>
+					<if test="catalogCode != null">
+					CATALOG_CODE,
+					</if>
+					<if test="key != null">
+					KEY,
+					</if>
+					<if test="value != null">
+					VALUE,
+					</if>
+					<if test="desc != null">
+					DESC,
+					</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="id != null">
+					 #{id,jdbcType=INTEGER},
+					</if>
+					<if test="catalogCode != null">
+					 #{catalogCode,jdbcType=VARCHAR},
+					</if>
+					<if test="key != null">
+					 #{key,jdbcType=VARCHAR},
+					</if>
+					<if test="value != null">
+					 #{value,jdbcType=VARCHAR},
+					</if>
+					<if test="desc != null">
+					 #{desc,jdbcType=VARCHAR},
+					</if>
+			</trim>
+	</insert>
+	
+	<!--
+	方法名称: update
+	调用路径: TDictEntityMapper.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterType="com.coding17.easycms.soa.entity.dict.TDict" >
+		UPDATE   T_DICT  	 
+	  	<set> 
+				<if test="catalogCode != null">
+			 		CATALOG_CODE = #{catalogCode,jdbcType=VARCHAR},
+			 	</if>
+				<if test="key != null">
+			 		KEY = #{key,jdbcType=VARCHAR},
+			 	</if>
+				<if test="value != null">
+			 		VALUE = #{value,jdbcType=VARCHAR},
+			 	</if>
+				<if test="desc != null">
+			 		DESC = #{desc,jdbcType=VARCHAR},
+			 	</if>
+		</set>
+		WHERE  
+			ID = #{id,jdbcType=INTEGER}		 
+	</update>
+	
+	<!--
+	方法名称: updateBak
+	调用路径: TDictEntityMapper.updateBak
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="updateBak" parameterType="com.coding17.easycms.soa.entity.dict.TDict" >
+		UPDATE   T_DICT  	 
+	  	<set> 
+			 		CATALOG_CODE = #{catalogCode,jdbcType=VARCHAR},
+			 		KEY = #{key,jdbcType=VARCHAR},
+			 		VALUE = #{value,jdbcType=VARCHAR},
+			 		DESC = #{desc,jdbcType=VARCHAR},
+		</set>
+		WHERE  
+			ID = #{id,jdbcType=INTEGER}		 
+	</update>
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径:TDictEntityMapper.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterType="com.coding17.easycms.soa.entity.dict.TDict">
+		DELETE 	FROM T_DICT 	 
+		WHERE 
+			ID = #{id,jdbcType=INTEGER}		 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: TDictEntityMapper.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterType="com.coding17.easycms.soa.entity.dict.TDict"  resultMap="BaseResultMap">
+		SELECT   
+		   <include refid="baseColumnList"/>
+		FROM   T_DICT         
+		WHERE
+				ID = #{id,jdbcType=INTEGER}		 
+	</select>
+	
+	<!--
+	方法名称: selectListByPagination
+	调用路径: TDictEntityMapper.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="selectListByPagination" parameterType="com.coding17.easycms.soa.entity.dict.TDict"  resultMap="BaseResultMap">
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationPrefix"/>
+		SELECT   
+	 		<include refid="baseColumnList"/>
+		FROM   T_DICT          
+		WHERE 1=1
+		 	<include refid="whereContation"/>
+		 	<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		 	</if>
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationSuffix"/>
+	</select>
+	
+	<!--
+	方法名称: selectCountByCondition
+	调用路径: TDictEntityMapper.getPagenationList-count
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="selectCountByCondition" parameterType="com.coding17.easycms.soa.entity.dict.TDict" resultType="int">
+		SELECT count(1)  FROM  T_DICT     
+		 WHERE 1=1
+		<include refid="whereContation"/>
+	</select>
+	
+	<!--
+	方法名称: getList
+	调用路径: TDictEntityMapper.getList
+	开发信息: 
+	处理信息: 根据条件查询记录
+	-->
+	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.dict.TDict"  resultMap="BaseResultMap">
+	   SELECT   
+	   		<include refid="baseColumnList"/>
+	   FROM   T_DICT           
+	   WHERE 1=1
+		<include refid="whereContation"/>
+		<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		</if>
+		limit 0,100
+	</select>
+	
+	
+</mapper>

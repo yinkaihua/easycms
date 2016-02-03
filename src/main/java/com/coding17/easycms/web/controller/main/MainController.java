@@ -28,9 +28,8 @@ public class MainController extends BaseController<BaseVo> {
 	
 	@RequestMapping("/left")
 	public String left() {
-		//super.respContent = "Hello,This is Left Area.";
-//		tMenuService.se
-		return writeResponse();
+		
+		return "main/menu";
 	}
 	
 }
