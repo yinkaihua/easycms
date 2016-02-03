@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  * @author yin.kh
  * @date 2016年1月21日 下午9:55:01
  */
-public class BaseController<P> {
+public class BaseController<P extends BaseVo> {
 
 	protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 	
