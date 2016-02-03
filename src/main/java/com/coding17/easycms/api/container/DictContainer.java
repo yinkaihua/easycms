@@ -43,8 +43,9 @@ public class DictContainer {
 					entry = new HashMap<String, String>();
 				}
 				entry.put(d.getKey(), d.getValue());
+				dict.put(d.getCatalogCode(), entry);
 			}
-			LOG.info("==============>字典Container初始化成功，用时：{}", (System.currentTimeMillis() - now));
+			LOG.info("==============>字典Container初始化成功，用时：{}，dict：{}", (System.currentTimeMillis() - now), dict);
 		} catch (Exception ex) {
 			LOG.error("==============>字典Container初始化失败", ex);
 		}
@@ -52,6 +53,12 @@ public class DictContainer {
 	
 	public static void refresh() {
 		init();
+	}
+	
+	public static class State {
+		public static Integer getValidState() {
+			return Integer.parseInt(dict.get("state").get("valid"));
+		}
 	}
 	
 }

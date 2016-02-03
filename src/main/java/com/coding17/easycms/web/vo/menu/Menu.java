@@ -27,6 +27,10 @@ public class Menu extends BaseVo {
 	 */
 	private String action;
 	/**
+	 *排序字段
+	 */
+	private Integer sort;
+	/**
 	 *状态，1：正常，9：删除
 	 */
 	private Integer state;
@@ -88,6 +92,20 @@ public class Menu extends BaseVo {
 	}
 	
 	/**
+	 *获取排序字段
+	 */
+	public Integer getSort(){
+		return this.sort;
+	}
+	
+	/**
+	 *设置排序字段
+	 */
+	public void setSort(Integer sort){
+		this.sort = sort;
+	}
+	
+	/**
 	 *获取状态，1：正常，9：删除
 	 */
 	public Integer getState(){
@@ -112,6 +130,7 @@ public class Menu extends BaseVo {
     	tos.append("pid=").append(this.pid).append(",");
     	tos.append("text=").append(this.text).append(",");
     	tos.append("action=").append(this.action).append(",");
+    	tos.append("sort=").append(this.sort).append(",");
     	tos.append("state=").append(this.state).append(",");
     	tos.append("]");
         return tos.toString();
