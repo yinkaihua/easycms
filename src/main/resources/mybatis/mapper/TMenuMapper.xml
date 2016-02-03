@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 功能模块:  -->
+<mapper namespace="com.coding17.easycms.soa.entity.menu.TMenu" >
+
+	<!--通用表字段列表-->
+	<resultMap id="BaseResultMap" type="com.coding17.easycms.soa.entity.menu.TMenu">
+		<result column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="PID" property="pid" jdbcType="INTEGER"/>
+		<result column="TEXT" property="text" jdbcType="VARCHAR"/>
+		<result column="ACTION" property="action" jdbcType="VARCHAR"/>
+		<result column="STATE" property="state" jdbcType="INTEGER"/>
+    </resultMap>
+    <!--通用表字段列表-->
+    
+	<!--user customize code start-->
+
+	<!--user customize code end  -->
+    
+	<!--通用查询条件组装-->
+	<sql id="whereContation">
+			<if test="id != null">
+				AND  ID=#{id,jdbcType=INTEGER}  
+			</if>
+			<if test="pid != null">
+				AND  PID=#{pid,jdbcType=INTEGER}  
+			</if>
+			<if test="text != null">
+				AND  TEXT=#{text,jdbcType=VARCHAR}  
+			</if>
+			<if test="action != null">
+				AND  ACTION=#{action,jdbcType=VARCHAR}  
+			</if>
+			<if test="state != null">
+				AND  STATE=#{state,jdbcType=INTEGER}  
+			</if>
+	</sql>
+	
+	<!--查询字段列表拼装-->
+	<sql id="baseColumnList">
+			 ID		 
+			,PID		 
+			,TEXT		 
+			,ACTION		 
+			,STATE		 
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: TMenuEntityMapper.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.menu.TMenu" >
+ 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	 	INSERT  INTO  T_MENU
+	 		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null">
+					ID,
+					</if>
+					<if test="pid != null">
+					PID,
+					</if>
+					<if test="text != null">
+					TEXT,
+					</if>
+					<if test="action != null">
+					ACTION,
+					</if>
+					<if test="state != null">
+					STATE,
+					</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="id != null">
+					 #{id,jdbcType=INTEGER},
+					</if>
+					<if test="pid != null">
+					 #{pid,jdbcType=INTEGER},
+					</if>
+					<if test="text != null">
+					 #{text,jdbcType=VARCHAR},
+					</if>
+					<if test="action != null">
+					 #{action,jdbcType=VARCHAR},
+					</if>
+					<if test="state != null">
+					 #{state,jdbcType=INTEGER},
+					</if>
+			</trim>
+	</insert>
+	
+	<!--
+	方法名称: update
+	调用路径: TMenuEntityMapper.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterType="com.coding17.easycms.soa.entity.menu.TMenu" >
+		UPDATE   T_MENU  	 
+	  	<set> 
+				<if test="pid != null">
+			 		PID = #{pid,jdbcType=INTEGER},
+			 	</if>
+				<if test="text != null">
+			 		TEXT = #{text,jdbcType=VARCHAR},
+			 	</if>
+				<if test="action != null">
+			 		ACTION = #{action,jdbcType=VARCHAR},
+			 	</if>
+				<if test="state != null">
+			 		STATE = #{state,jdbcType=INTEGER},
+			 	</if>
+		</set>
+		WHERE  
+			ID = #{id,jdbcType=INTEGER}		 
+	</update>
+	
+	<!--
+	方法名称: updateBak
+	调用路径: TMenuEntityMapper.updateBak
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="updateBak" parameterType="com.coding17.easycms.soa.entity.menu.TMenu" >
+		UPDATE   T_MENU  	 
+	  	<set> 
+			 		PID = #{pid,jdbcType=INTEGER},
+			 		TEXT = #{text,jdbcType=VARCHAR},
+			 		ACTION = #{action,jdbcType=VARCHAR},
+			 		STATE = #{state,jdbcType=INTEGER},
+		</set>
+		WHERE  
+			ID = #{id,jdbcType=INTEGER}		 
+	</update>
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径:TMenuEntityMapper.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterType="com.coding17.easycms.soa.entity.menu.TMenu">
+		DELETE 	FROM T_MENU 	 
+		WHERE 
+			ID = #{id,jdbcType=INTEGER}		 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: TMenuEntityMapper.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterType="com.coding17.easycms.soa.entity.menu.TMenu"  resultMap="BaseResultMap">
+		SELECT   
+		   <include refid="baseColumnList"/>
+		FROM   T_MENU         
+		WHERE
+				ID = #{id,jdbcType=INTEGER}		 
+	</select>
+	
+	<!--
+	方法名称: selectListByPagination
+	调用路径: TMenuEntityMapper.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="selectListByPagination" parameterType="com.coding17.easycms.soa.entity.menu.TMenu"  resultMap="BaseResultMap">
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationPrefix"/>
+		SELECT   
+	 		<include refid="baseColumnList"/>
+		FROM   T_MENU          
+		WHERE 1=1
+		 	<include refid="whereContation"/>
+		 	<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		 	</if>
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationSuffix"/>
+	</select>
+	
+	<!--
+	方法名称: selectCountByCondition
+	调用路径: TMenuEntityMapper.getPagenationList-count
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="selectCountByCondition" parameterType="com.coding17.easycms.soa.entity.menu.TMenu" resultType="int">
+		SELECT count(1)  FROM  T_MENU     
+		 WHERE 1=1
+		<include refid="whereContation"/>
+	</select>
+	
+	<!--
+	方法名称: getList
+	调用路径: TMenuEntityMapper.getList
+	开发信息: 
+	处理信息: 根据条件查询记录
+	-->
+	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.menu.TMenu"  resultMap="BaseResultMap">
+	   SELECT   
+	   		<include refid="baseColumnList"/>
+	   FROM   T_MENU           
+	   WHERE 1=1
+		<include refid="whereContation"/>
+		<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		</if>
+		limit 0,100
+	</select>
+	
+	
+</mapper>
