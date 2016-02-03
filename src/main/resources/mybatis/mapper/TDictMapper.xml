@@ -38,11 +38,11 @@
 	
 	<!--查询字段列表拼装-->
 	<sql id="baseColumnList">
-			 ID		 
-			,CATALOG_CODE		 
-			,KEY		 
-			,VALUE		 
-			,DESC		 
+			 `ID`	 
+			,`CATALOG_CODE`
+			,`KEY`
+			,`VALUE`
+			,`DESC`
 	</sql>
 	
 	<!--

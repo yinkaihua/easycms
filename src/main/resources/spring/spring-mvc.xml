@@ -4,15 +4,39 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="   
 	    http://www.springframework.org/schema/context  
 	    http://www.springframework.org/schema/context/spring-context-4.2.xsd
 	    http://www.springframework.org/schema/beans
-	    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
-
-	<context:component-scan base-package="com.coding17.easycms"/>
+	    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	    http://www.springframework.org/schema/mvc
+	    http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
 	<!-- 对模型视图添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+	
+	<mvc:annotation-driven/>
+	
+	<!-- 不拦截静态资源 -->
+	<mvc:resources location="/res/" mapping="/res/**" />
 
+	<!-- spring工具类 -->
+	<bean id="springBeanUtil" class="com.coding17.easycms.api.util.SpringBeanUtil"/>
+
+	<!-- 异常统一处理 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+	    <!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->  
+	    <property name="defaultErrorView" value="common/error"/>
+	    <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->  
+	    <property name="exceptionAttribute" value="ex"/>  
+	    <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->  
+	    <!-- <property name="exceptionMappings">  
+	        <props>  
+	            <prop key="cn.basttg.core.exception.BusinessException">error-business</prop>  
+	            <prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>  
+	        </props>  
+	    </property> -->
+	</bean>  
+	
 </beans>

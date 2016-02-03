@@ -10,8 +10,21 @@
 		<param-value>WEB-INF/classes/logback.xml</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/spring*.xml</param-value>
+	</context-param>
+	
 	<listener>
 		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>com.coding17.easycms.web.listener.InitializeListener</listener-class>
 	</listener>
 	
 	<servlet>
