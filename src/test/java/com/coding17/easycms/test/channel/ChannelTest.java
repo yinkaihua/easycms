@@ -45,4 +45,18 @@ public class ChannelTest {
 		tChannelService.create(c);
 	}
 	
+	@Test
+	public void selectCount() {
+		TChannel c = new TChannel();
+		//c.setId(1);
+		System.out.println(tChannelService.selectCountByCondition(c));
+	}
+	
+	@Test
+	public void selectByPriKey() {
+		TChannel c = new TChannel();
+		c.setId(2);
+		System.out.println(tChannelService.getByPriKey(c));
+	}
+	
 }

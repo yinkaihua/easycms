@@ -14,6 +14,21 @@ import java.util.List;
 public class Pagination<T> implements Serializable {
 
 	/**
+	 * 默认页码
+	 */
+	public static final Integer DEFAULT_PAGENUM = 1;
+	
+	/**
+	 * 默认每页数量
+	 */
+	public static final Integer DEFAULT_PAGESIZE = 10;
+	
+	/**
+	 * 每页数量最大值
+	 */
+	public static final Integer MAX_PAGESIZE = 50;
+	
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -43,6 +58,16 @@ public class Pagination<T> implements Serializable {
 	 */
 	private List<T> datas;
 
+	public Pagination() {}
+	
+	public Pagination(int pageNum, int pageSize, int totalCount, int totalPage, List<T> datas) {
+		this.pageNum = pageNum;
+		this.pageSize = pageSize;
+		this.totalCount = totalCount;
+		this.totalPage = totalPage;
+		this.datas = datas;
+	}
+	
 	public Integer getPageNum() {
 		return pageNum;
 	}
@@ -83,4 +108,21 @@ public class Pagination<T> implements Serializable {
 		this.datas = datas;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuffer tos = new StringBuffer("Pagination[");
+		tos.append("pageNum=").append(this.pageNum).append(",");
+		tos.append("pageSize=").append(this.pageSize).append(",");
+		tos.append("totalCount=").append(this.totalCount).append(",");
+		tos.append("totalPage=").append(this.totalPage).append(",");
+		tos.append("datas=[");
+		if (datas!=null && datas.size()>0) {
+			for (int i = 0; i < datas.size(); i++) {
+				T t = datas.get(i);
+				tos.append(t).append(",");
+			}
+		}
+		tos.append("]]");
+		return tos.toString();
+	}
 }

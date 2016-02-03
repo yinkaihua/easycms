@@ -1,5 +1,7 @@
 package com.coding17.easycms.soa.base.dao;
 
+import java.util.List;
+
 /**
  * 所有dao的基类，提供基本的增删改查
  * @Title: ISuperDAO.java 
@@ -50,4 +52,25 @@ public interface ISuperDAO<T> {
 	 * @return
 	 */
 	Integer update(T t);
+	
+	/**
+	 * 条件查询
+	 * @param t
+	 * @return
+	 */
+	List<T> selectListByCondition(T t);
+	
+	/**
+	 * 分页查询
+	 * @param t
+	 * @return
+	 */
+	List<T> selectListByPagination(T t);
+	
+	/**
+	 * 数量查询
+	 * @param t
+	 * @return
+	 */
+	Integer selectCountByCondition(T t);
 }

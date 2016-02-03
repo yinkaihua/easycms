@@ -1,5 +1,7 @@
 package com.coding17.easycms.soa.base.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,13 +23,19 @@ public abstract class SuperDAO<T> implements ISuperDAO<T> {
 	
 	private static final String statement_deleteByPrimaryKey = "deleteByPriKey";
 	
-	private static final String statement_insertSelective = "insertSelective";
+	private static final String statement_insertSelective = "insert";
 	
 	private static final String statement_insert = "insert";
 	
 	private static final String statement_updateByPrimaryKeySelective = "update";
 	
 	private static final String statement_update = "updateBak";
+	
+	private static final String statement_selectListByCondition = "selectListByCondition";
+	
+	private static final String statement_selectListByPagination = "selectListByPagination";
+	
+	private static final String statement_selectCountByCondition = "selectCountByCondition";
 	
 	@Autowired
 	private SqlSessionTemplate template;
@@ -62,14 +70,25 @@ public abstract class SuperDAO<T> implements ISuperDAO<T> {
 		return template.update(getStatementPrefix() + "." + statement_update, t);
 	}
 	
+	@Override
+	public List<T> selectListByCondition(T t) {
+		return template.selectList(getStatementPrefix()+"."+statement_selectListByCondition, t);
+	}
+
+	@Override
+	public List<T> selectListByPagination(T t) {
+		return template.selectList(getStatementPrefix()+"."+statement_selectListByPagination, t);
+	}
+
+	@Override
+	public Integer selectCountByCondition(T t) {
+		return (Integer) template.selectOne(getStatementPrefix() + "." + statement_selectCountByCondition, t);
+	}
+
 	/**
 	 * 子类必须重写此方法
 	 * @return
 	 */
 	protected abstract String getStatementPrefix();
-	
-	public static void main(String[] args) {
-		TChannel c = new TChannel();
-		System.out.println(c.getClass().getPackage().getName() + c.getClass().getName());
-	}
+
 }

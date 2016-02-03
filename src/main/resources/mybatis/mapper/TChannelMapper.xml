@@ -193,12 +193,12 @@
 	</select>
 	
 	<!--
-	方法名称: getPagenationList
+	方法名称: selectListByPagination
 	调用路径: TChannelEntityMapper.getPagenationList
 	开发信息: 
 	处理信息: 分页查询记录
 	-->
-	<select id="getPagenationList" parameterType="com.coding17.easycms.soa.entity.channel.TChannel"  resultMap="BaseResultMap">
+	<select id="selectListByPagination" parameterType="com.coding17.easycms.soa.entity.channel.TChannel"  resultMap="BaseResultMap">
 		<!-- 分页条 -->
 		<include refid="CommonEntity.paginationPrefix"/>
 		SELECT   
@@ -214,12 +214,12 @@
 	</select>
 	
 	<!--
-	方法名称: getPagenationList-count
+	方法名称: selectCountByCondition
 	调用路径: TChannelEntityMapper.getPagenationList-count
 	开发信息: 
 	处理信息: 查询记录数
 	-->
-	<select id="getPagenationList-count" parameterType="com.coding17.easycms.soa.entity.channel.TChannel" resultType="int">
+	<select id="selectCountByCondition" parameterType="com.coding17.easycms.soa.entity.channel.TChannel" resultType="int">
 		SELECT count(1)  FROM  T_CHANNEL     
 		 WHERE 1=1
 		<include refid="whereContation"/>
@@ -231,7 +231,7 @@
 	开发信息: 
 	处理信息: 根据条件查询记录
 	-->
-	<select id="getList" parameterType="com.coding17.easycms.soa.entity.channel.TChannel"  resultMap="BaseResultMap">
+	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.channel.TChannel"  resultMap="BaseResultMap">
 	   SELECT   
 	   		<include refid="baseColumnList"/>
 	   FROM   T_CHANNEL           
