@@ -19,6 +19,10 @@ public class TMenu extends BasicEntity {
 	 */
 	private Integer pid;
 	/**
+	 *菜单级别
+	 */
+	private Integer level;
+	/**
 	 *菜单名
 	 */
 	private String text;
@@ -61,6 +65,20 @@ public class TMenu extends BasicEntity {
 	 */
 	public void setPid(Integer pid){
 		this.pid = pid;
+	}
+	
+	/**
+	 *获取菜单级别
+	 */
+	public Integer getLevel(){
+		return this.level;
+	}
+	
+	/**
+	 *设置菜单级别
+	 */
+	public void setLevel(Integer level){
+		this.level = level;
 	}
 	
 	/**
@@ -128,6 +146,7 @@ public class TMenu extends BasicEntity {
     	StringBuffer tos = new StringBuffer("TMenu[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("pid=").append(this.pid).append(",");
+    	tos.append("level=").append(this.level).append(",");
     	tos.append("text=").append(this.text).append(",");
     	tos.append("action=").append(this.action).append(",");
     	tos.append("sort=").append(this.sort).append(",");

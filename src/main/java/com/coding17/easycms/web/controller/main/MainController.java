@@ -13,6 +13,8 @@ import com.coding17.easycms.soa.entity.menu.TMenu;
 import com.coding17.easycms.soa.service.menu.TMenuService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.base.BaseVo;
+import com.coding17.easycms.web.controller.menu.MenuController;
+import com.coding17.easycms.web.vo.menu.Menu;
 
 @Scope(value="prototype")
 @RequestMapping("/main")
@@ -38,12 +40,13 @@ public class MainController extends BaseController<BaseVo> {
 	public String left() {
 		TMenu para = new TMenu();
 		para.setState(DictContainer.State.getValidState());
-		List<TMenu> menus = tMenuService.selectListByCondition(para);
-		if (!CollectionUtils.isEmpty(menus)) {
-			
+		List<TMenu> tMenus = tMenuService.selectListByCondition(para);
+		List<Menu> menus = null;
+		if (!CollectionUtils.isEmpty(tMenus)) {
+			menus = MenuController.buildMenus(0, tMenus);
 		}
 		request.setAttribute("menus", menus);
-		return "main/menu";
+		return "main/left";
 	}
 	
 }

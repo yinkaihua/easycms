@@ -10,30 +10,34 @@
 	<%@ include file="/WEB-INF/jsp/include/common_css.jsp" %>
 	<%@ include file="/WEB-INF/jsp/include/common_js.jsp" %>
 </head>
-<body>
-<div class="panel-group" id="accordion">
+<body style="padding:10px;">
+<div class="panel-group" id="accordion" style="width:500px">
 <c:forEach items="${menus}" var="item" varStatus="stat">
-  <div class="panel panel-default">
+  <div class="panel panel-info">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse${stat.index}">
         ${item.text }
         </a>
+        <a class="del" href="javascript:;" style="float:right">删除</a><a class="edit" href="javascript:;" style="float:right;margin-right:5px;">编辑</a>
       </h4>
     </div>
-    <div id="collapse${stat.index}" class="panel-collapse collapse">
+    <div id="collapse${stat.index}" class="panel-collapse collapse in">
       <div class="panel-body">
         <ul class="list-group">
-		   <li class="list-group-item">免费域名注册</li>
-		   <li class="list-group-item">免费 Window 空间托管</li>
-		   <li class="list-group-item">图像的数量</li>
-		   <li class="list-group-item">24*7 支持</li>
-		   <li class="list-group-item">每年更新成本</li>
+           <c:forEach items="${item.subMenus}" var="menu">
+           	  <li class="list-group-item">${menu.text}<a class="del" href="javascript:;" style="float:right">删除</a><a class="edit"  href="javascript:;" style="float:right;margin-right:5px;">编辑</a></li>
+           </c:forEach>
 		</ul>
       </div>
     </div>
   </div>
 </c:forEach>
 </div>
+<script type="text/javascript">
+$(function() {
+	
+})
+</script>
 </body>
 </html>

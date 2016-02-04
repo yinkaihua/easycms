@@ -12,6 +12,6 @@
 </head>
 <frameset cols="210,*">
 	<frame src="${_ctxPath}/main/left" name="leftFrame" noresize="noresize" />
-	<frame src="${_ctxPath}/main/center" name="rightFrame" />
+	<frame name="rightFrame" />
 </frameset>
 </html>

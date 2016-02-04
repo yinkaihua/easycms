@@ -7,6 +7,7 @@
 	<resultMap id="BaseResultMap" type="com.coding17.easycms.soa.entity.menu.TMenu">
 		<result column="ID" property="id" jdbcType="INTEGER"/>
 		<result column="PID" property="pid" jdbcType="INTEGER"/>
+		<result column="LEVEL" property="level" jdbcType="INTEGER"/>
 		<result column="TEXT" property="text" jdbcType="VARCHAR"/>
 		<result column="ACTION" property="action" jdbcType="VARCHAR"/>
 		<result column="SORT" property="sort" jdbcType="INTEGER"/>
@@ -26,6 +27,9 @@
 			<if test="pid != null">
 				AND  PID=#{pid,jdbcType=INTEGER}  
 			</if>
+			<if test="level != null">
+				AND  LEVEL=#{level,jdbcType=INTEGER}  
+			</if>
 			<if test="text != null">
 				AND  TEXT=#{text,jdbcType=VARCHAR}  
 			</if>
@@ -44,6 +48,7 @@
 	<sql id="baseColumnList">
 			 `ID`	 
 			,`PID`
+			,`LEVEL`
 			,`TEXT`
 			,`ACTION`
 			,`SORT`
@@ -68,6 +73,9 @@
 					<if test="pid != null">
 					PID,
 					</if>
+					<if test="level != null">
+					LEVEL,
+					</if>
 					<if test="text != null">
 					TEXT,
 					</if>
@@ -87,6 +95,9 @@
 					</if>
 					<if test="pid != null">
 					 #{pid,jdbcType=INTEGER},
+					</if>
+					<if test="level != null">
+					 #{level,jdbcType=INTEGER},
 					</if>
 					<if test="text != null">
 					 #{text,jdbcType=VARCHAR},
@@ -115,6 +126,9 @@
 				<if test="pid != null">
 			 		PID = #{pid,jdbcType=INTEGER},
 			 	</if>
+				<if test="level != null">
+			 		LEVEL = #{level,jdbcType=INTEGER},
+			 	</if>
 				<if test="text != null">
 			 		TEXT = #{text,jdbcType=VARCHAR},
 			 	</if>
@@ -142,6 +156,7 @@
 		UPDATE   T_MENU  	 
 	  	<set> 
 			 		PID = #{pid,jdbcType=INTEGER},
+			 		LEVEL = #{level,jdbcType=INTEGER},
 			 		TEXT = #{text,jdbcType=VARCHAR},
 			 		ACTION = #{action,jdbcType=VARCHAR},
 			 		SORT = #{sort,jdbcType=INTEGER},
