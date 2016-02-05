@@ -40,7 +40,7 @@ public class MenuController extends BaseController<Menu> {
 			menus = buildMenus(0, tMenus);
 		}
 		request.setAttribute("menus", menus);
-		return "menu/view";
+		return "menu/menu_view";
 	}
 	
 	@RequestMapping("/add")
