@@ -31,7 +31,7 @@
       </div>
     </div>
   </div> --%>
-	<div title="${item.text}" data-options="" style="padding:10px;">
+	<div title="${item.text}" data-options="collapsed:false" style="padding:10px;">
 		<ul class="easyui-tree">
 			<c:forEach items="${item.subMenus}" var="menu">
 				<li><a href="${_ctxPath}/${menu.action}" target="rightFrame">${menu.text}</a></li>

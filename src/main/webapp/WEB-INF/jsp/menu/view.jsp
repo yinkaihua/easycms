@@ -18,24 +18,21 @@
 </div>
 <div id="acc" class="easyui-accordion" style="width:100%;">
 <c:forEach items="${menus}" var="item" varStatus="stat">
-<div data-options="title:'${item.text}'" style="padding:10px;" id="${item.id}" text="${item.text}">
-	<ul class="easyui-tree" data-options="animate: true,onContextMenu: function(e,node){
+<div data-options="title:'${item.text}',collapsed:false" style="padding:10px;" id="${item.id}" text="${item.text}">
+	<ul id="tree${item.id}" class="easyui-tree" data-options="animate: true,onContextMenu: function(e,node){
 					e.preventDefault();
 					$(this).tree('select',node.target);
+					$('#selectedSubMenu').val(node.id);
 					$('#mm${stat.index}').menu('show',{
 						left: e.pageX,
 						top: e.pageY
 					});}">
 		<c:forEach items="${item.subMenus}" var="menu">
-			<li>${menu.text}</li>
+			<li id="${menu.id}">${menu.text}</li>
 		</c:forEach>
 	</ul>
 	<div id="mm${stat.index}" class="easyui-menu" style="width:120px;">
-		<div onclick="append()" data-options="iconCls:'icon-add'">Append</div>
-		<div onclick="removeit()" data-options="iconCls:'icon-remove'">Remove</div>
-		<div class="menu-sep"></div>
-		<div onclick="expand()">Expand</div>
-		<div onclick="collapse()">Collapse</div>
+		<div onclick="removeSubMenu()" data-options="iconCls:'icon-remove'">Remove</div>
 	</div>
 </div>
 </c:forEach>
@@ -135,7 +132,7 @@
 	</form>
 	<form id="delForm" method="post" action="${_ctxPath}/menu/remove"><input type="hidden" name="id"></form>
 </div>
-
+<input type="hidden" id="selectedSubMenu">
 <script type="text/javascript">
 $(function() {
 	$("#addLvlOneBtn").click(function() {
@@ -154,6 +151,12 @@ $(function() {
 		}
 	});
 })
+function removeSubMenu() {
+	if (confirm("是否确认删除菜单？注意：子菜单也会删除")) {
+		$("input[name='id']").val($("#selectedSubMenu").val());
+		$("#delForm").submit();
+	}
+}
 </script>
 </body>
 </html>
