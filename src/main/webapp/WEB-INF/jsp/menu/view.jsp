@@ -10,33 +10,149 @@
 	<%@ include file="/WEB-INF/jsp/include/common_css.jsp" %>
 	<%@ include file="/WEB-INF/jsp/include/common_js.jsp" %>
 </head>
-<body style="padding:10px;">
-<div class="panel-group" id="accordion" style="width:500px">
+<body>
+<div style="padding:5px 0;">
+	<a id="addLvlOneBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加一级菜单</a>
+	<a id="addLvlTwoBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加子菜单</a>
+	<a id="delBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除菜单</a>
+</div>
+<div id="acc" class="easyui-accordion" style="width:100%;">
 <c:forEach items="${menus}" var="item" varStatus="stat">
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse${stat.index}">
-        ${item.text }
-        </a>
-        <a class="del" href="javascript:;" style="float:right">删除</a><a class="edit" href="javascript:;" style="float:right;margin-right:5px;">编辑</a>
-      </h4>
-    </div>
-    <div id="collapse${stat.index}" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <ul class="list-group">
-           <c:forEach items="${item.subMenus}" var="menu">
-           	  <li class="list-group-item">${menu.text}<a class="del" href="javascript:;" style="float:right">删除</a><a class="edit"  href="javascript:;" style="float:right;margin-right:5px;">编辑</a></li>
-           </c:forEach>
-		</ul>
-      </div>
-    </div>
-  </div>
+<div data-options="title:'${item.text}'" style="padding:10px;" id="${item.id}" text="${item.text}">
+	<ul class="easyui-tree" data-options="animate: true,onContextMenu: function(e,node){
+					e.preventDefault();
+					$(this).tree('select',node.target);
+					$('#mm${stat.index}').menu('show',{
+						left: e.pageX,
+						top: e.pageY
+					});}">
+		<c:forEach items="${item.subMenus}" var="menu">
+			<li>${menu.text}</li>
+		</c:forEach>
+	</ul>
+	<div id="mm${stat.index}" class="easyui-menu" style="width:120px;">
+		<div onclick="append()" data-options="iconCls:'icon-add'">Append</div>
+		<div onclick="removeit()" data-options="iconCls:'icon-remove'">Remove</div>
+		<div class="menu-sep"></div>
+		<div onclick="expand()">Expand</div>
+		<div onclick="collapse()">Collapse</div>
+	</div>
+</div>
 </c:forEach>
 </div>
+<div id="addMenu" class="easyui-dialog" title="添加一级菜单" style="top:100px;left:100px;width:200px;padding:10px"
+	data-options="
+		iconCls: 'icon-save',
+		modal:true,
+		closed:true,
+		buttons: [{
+			text:'确定',
+			iconCls:'icon-ok',
+			handler:function(){
+				$('#addLvlOneForm').form('submit',{
+					url:'${_ctxPath}/menu/add',
+					method:'post',
+					onSubmit:function(none) {
+						$(this).form('validate');
+					},
+					success:function() {
+						location.href='${_ctxPath}/menu/view';
+					}
+				});
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#addMenu').dialog('close');
+			}
+		}]
+	">
+	<form id="addLvlOneForm">
+	<input name="action" style="display:none;" value="0">
+	<input name="pid" style="display:none;" value="0">
+	<input name="level" style="display:none;" value="1">
+	<div style="margin-bottom:20px">
+		<div>名称</div>
+		<input name="text" class="easyui-textbox" style="width:100%;height:25px" data-options="required:true">
+		<div>排序</div>
+		<input name="sort" class="easyui-textbox" style="width:100%;height:25px" data-options="required:true">
+		<div>是否启用</div>
+		<select name="state" class="easyui-combobox" style="width:100%">
+			<option value="1">是</option>
+			<option value="9">否</option>
+		</select>
+	</div>
+	</form>
+	<form id="delForm" method="post" action="${_ctxPath}/menu/remove"><input type="hidden" name="id"></form>
+</div>
+<div id="addSubMenu" class="easyui-dialog" title="添加子菜单" style="top:100px;left:100px;width:200px;padding:10px"
+	data-options="
+		iconCls: 'icon-save',
+		modal:true,
+		closed:true,
+		buttons: [{
+			text:'确定',
+			iconCls:'icon-ok',
+			handler:function(){
+				$('#addLvlTwoForm').form('submit',{
+					url:'${_ctxPath}/menu/add',
+					method:'post',
+					onSubmit:function(none) {
+						$(this).form('validate');
+					},
+					success:function() {
+						location.href='${_ctxPath}/menu/view';
+					}
+				});
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#addSubMenu').dialog('close');
+			}
+		}]
+	">
+	<form id="addLvlTwoForm">
+	<input name="action" style="display:none;" value="0">
+	<input name="pid" style="display:none;">
+	<input name="level" style="display:none;" value="2">
+	<div style="margin-bottom:20px">
+		父菜单：<span id="superMenu"></span>
+		<div>名称</div>
+		<input name="text" class="easyui-textbox" style="width:100%;height:25px" data-options="required:true">
+		<div>排序</div>
+		<input name="sort" class="easyui-textbox" style="width:100%;height:25px" data-options="required:true">
+		<div>动作</div>
+		<input name="action" class="easyui-textbox" style="width:100%;height:25px" data-options="required:true">
+		<div>是否启用</div>
+		<select name="state" class="easyui-combobox" style="width:100%">
+			<option value="1">是</option>
+			<option value="9">否</option>
+		</select>
+	</div>
+	</form>
+	<form id="delForm" method="post" action="${_ctxPath}/menu/remove"><input type="hidden" name="id"></form>
+</div>
+
 <script type="text/javascript">
 $(function() {
-	
+	$("#addLvlOneBtn").click(function() {
+		$("#addMenu").dialog("open");
+	});
+	$("#addLvlTwoBtn").click(function() {
+		$("#superMenu").html($("#acc").accordion("getSelected").panel('body').attr("text"));
+		$("input[name='pid']").val($("#acc").accordion("getSelected").panel('body').attr("id"));
+		$("#addSubMenu").dialog("open");
+	});
+	$("#delBtn").click(function() {
+		if (confirm("是否确认删除菜单？注意：子菜单也会删除")) {
+			var id = $("#acc").accordion("getSelected").panel('body').attr("id");
+			$("input[name='id']").val(id);
+			$("#delForm").submit();
+		}
+	});
 })
 </script>
 </body>

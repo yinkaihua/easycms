@@ -33,6 +33,7 @@ public class MenuController extends BaseController<Menu> {
 	public String view() {
 		TMenu para = new TMenu();
 		para.setState(DictContainer.State.getValidState());
+		para.setOrderby("sort asc");
 		List<TMenu> tMenus = tMenuService.selectListByCondition(para);
 		List<Menu> menus = null;
 		if (!CollectionUtils.isEmpty(tMenus)) {
@@ -40,6 +41,31 @@ public class MenuController extends BaseController<Menu> {
 		}
 		request.setAttribute("menus", menus);
 		return "menu/view";
+	}
+	
+	@RequestMapping("/add")
+	public String add() {
+		LOG.info("=====>添加菜单，{}", p);
+		TMenu tMenu = new TMenu();
+		BeanUtils.copyProperties(p, tMenu);
+		tMenuService.create(tMenu);
+		return view();
+	}
+	
+	@RequestMapping("/remove")
+	public String remove() {
+		LOG.info("=====>删除菜单，{}", p);
+		TMenu tMenu = new TMenu();
+		tMenu.setPid(p.getId());
+		//有子菜单先删除子菜单
+		List<TMenu> subMenus = tMenuService.selectListByCondition(tMenu);
+		for (TMenu t : subMenus) {
+			LOG.info("=====>删除子菜单，{}", t);
+			tMenuService.deleteByPriKey(t);
+		}
+		tMenu.setId(p.getId());
+		tMenuService.deleteByPriKey(tMenu);
+		return view();
 	}
 	
 	public static List<Menu> buildMenus(int pid, List<TMenu> tMenus) {
