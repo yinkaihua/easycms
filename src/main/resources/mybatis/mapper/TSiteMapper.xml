@@ -8,6 +8,7 @@
 		<result column="ID" property="id" jdbcType="INTEGER"/>
 		<result column="DOMAIN" property="domain" jdbcType="VARCHAR"/>
 		<result column="NAME" property="name" jdbcType="VARCHAR"/>
+		<result column="PATH" property="path" jdbcType="VARCHAR"/>
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
 		<result column="ACCOUNT" property="account" jdbcType="INTEGER"/>
 		<result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR"/>
@@ -30,6 +31,9 @@
 			<if test="name != null">
 				AND  NAME=#{name,jdbcType=VARCHAR}  
 			</if>
+			<if test="path != null">
+				AND  PATH=#{path,jdbcType=VARCHAR}  
+			</if>
 			<if test="createTime != null">
 				AND  CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}  
 			</if>
@@ -46,13 +50,14 @@
 	
 	<!--查询字段列表拼装-->
 	<sql id="baseColumnList">
-			 ID		 
-			,DOMAIN		 
-			,NAME		 
-			,CREATE_TIME		 
-			,ACCOUNT		 
-			,ACCOUNT_NAME		 
-			,STATE		 
+			 `ID`	 
+			,`DOMAIN`
+			,`NAME`
+			,`PATH`
+			,`CREATE_TIME`
+			,`ACCOUNT`
+			,`ACCOUNT_NAME`
+			,`STATE`
 	</sql>
 	
 	<!--
@@ -76,6 +81,9 @@
 					<if test="name != null">
 					NAME,
 					</if>
+					<if test="path != null">
+					PATH,
+					</if>
 					<if test="createTime != null">
 					CREATE_TIME,
 					</if>
@@ -98,6 +106,9 @@
 					</if>
 					<if test="name != null">
 					 #{name,jdbcType=VARCHAR},
+					</if>
+					<if test="path != null">
+					 #{path,jdbcType=VARCHAR},
 					</if>
 					<if test="createTime != null">
 					 #{createTime,jdbcType=TIMESTAMP},
@@ -129,6 +140,9 @@
 				<if test="name != null">
 			 		NAME = #{name,jdbcType=VARCHAR},
 			 	</if>
+				<if test="path != null">
+			 		PATH = #{path,jdbcType=VARCHAR},
+			 	</if>
 				<if test="createTime != null">
 			 		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
 			 	</if>
@@ -157,6 +171,7 @@
 	  	<set> 
 			 		DOMAIN = #{domain,jdbcType=VARCHAR},
 			 		NAME = #{name,jdbcType=VARCHAR},
+			 		PATH = #{path,jdbcType=VARCHAR},
 			 		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
 			 		ACCOUNT = #{account,jdbcType=INTEGER},
 			 		ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},

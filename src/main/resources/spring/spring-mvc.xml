@@ -20,6 +20,7 @@
 	
 	<!-- 不拦截静态资源 -->
 	<mvc:resources location="/res/" mapping="/res/**" />
+	<mvc:resources location="/tlds/" mapping="/tlds/**" />
 
 	<!-- spring工具类 -->
 	<bean id="springBeanUtil" class="com.coding17.easycms.api.util.SpringBeanUtil"/>

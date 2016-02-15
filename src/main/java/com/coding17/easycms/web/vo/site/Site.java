@@ -24,6 +24,10 @@ public class Site extends BaseVo {
 	 */
 	private String name;
 	/**
+	 *访问路径
+	 */
+	private String path;
+	/**
 	 *创建时间
 	 */
 	private Date createTime;
@@ -80,6 +84,20 @@ public class Site extends BaseVo {
 	 */
 	public void setName(String name){
 		this.name = name;
+	}
+	
+	/**
+	 *获取访问路径
+	 */
+	public String getPath(){
+		return this.path;
+	}
+	
+	/**
+	 *设置访问路径
+	 */
+	public void setPath(String path){
+		this.path = path;
 	}
 	
 	/**
@@ -148,6 +166,7 @@ public class Site extends BaseVo {
     	tos.append("id=").append(this.id).append(",");
     	tos.append("domain=").append(this.domain).append(",");
     	tos.append("name=").append(this.name).append(",");
+    	tos.append("path=").append(this.path).append(",");
     	tos.append("createTime=").append(this.createTime).append(",");
     	tos.append("account=").append(this.account).append(",");
     	tos.append("accountName=").append(this.accountName).append(",");

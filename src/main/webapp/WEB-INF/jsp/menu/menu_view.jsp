@@ -16,7 +16,7 @@
 	<a id="addLvlTwoBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加子菜单</a>
 	<a id="delBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除菜单</a>
 </div>
-<div id="acc" class="easyui-accordion" style="width:100%;">
+<div id="acc" class="easyui-accordion" style="margin-left:50px;width:200px;">
 <c:forEach items="${menus}" var="item" varStatus="stat">
 <div data-options="title:'${item.text}',collapsed:false" style="padding:10px;" id="${item.id}" text="${item.text}">
 	<ul id="tree${item.id}" class="easyui-tree" data-options="animate: true,onContextMenu: function(e,node){

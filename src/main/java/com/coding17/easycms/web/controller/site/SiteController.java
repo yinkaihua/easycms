@@ -1,6 +1,7 @@
 package com.coding17.easycms.web.controller.site;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -28,9 +29,10 @@ public class SiteController extends BaseController<Site> {
 	@Autowired
 	private TSiteService tSiteService;
 	
+	@RequestMapping("/view")
 	public String view() {
 		TSite para = new TSite();
-		para.setState(DictContainer.State.getValidState());
+//		para.setState(DictContainer.State.getValidState());
 		List<TSite> list = tSiteService.selectListByCondition(para);
 		List<Site> sites = new ArrayList<Site>();
 		for (TSite s : list) {
@@ -40,6 +42,60 @@ public class SiteController extends BaseController<Site> {
 		}
 		request.setAttribute("sites", sites);
 		return "site/site_view";
+	}
+	
+	@RequestMapping("/to_add")
+	public String toAdd() {
+		return "site/site_info";
+	}
+	
+	@RequestMapping("/save")
+	public String save() {
+		LOG.info("=====>保存站点，{}", p);
+		TSite para = new TSite();
+		BeanUtils.copyProperties(p, para);
+		if (p.getId()==null) {
+			para.setCreateTime(new Date());
+			para.setAccount(1000);
+			para.setAccountName("admin");
+			try {
+				tSiteService.create(para);
+			} catch (Exception ex) {
+				LOG.error("=====>创建站点失败，{}", p, ex);
+			}
+		} else {
+			try {
+				tSiteService.update(para);
+			} catch (Exception ex) {
+				LOG.error("=====>更新站点失败，{}", p, ex);
+			}
+		}
+		return view();
+	}
+	
+	@RequestMapping("/to_edit")
+	public String toEdit() {
+		TSite para = new TSite();
+		para.setId(p.getId());
+		TSite site = tSiteService.getByPriKey(para);
+		Site vo = new Site();
+		BeanUtils.copyProperties(site, vo);
+		request.setAttribute("so", vo);
+		request.setAttribute("isEdit", "yes");
+		return "site/site_info";
+	}
+	
+	@RequestMapping("/remove")
+	public String remove() {
+		LOG.info("=====>删除站点，{}", p);
+		TSite para = new TSite();
+		para.setId(p.getId());
+		try {
+			tSiteService.deleteByPriKey(para);
+		} catch (Exception ex) {
+			LOG.error("=====>删除站点失败，{}", p, ex);
+		}
+		return view();
 	}
 	
 }

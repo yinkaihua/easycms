@@ -55,6 +55,23 @@ public class DictContainer {
 		init();
 	}
 	
+	/**
+	 * 查询字典静态方法
+	 * @param catalog
+	 * @param code
+	 * @return
+	 */
+	public static String getVal(String catalog, String code) {
+		return dict.get(catalog).get(code);
+	}
+	
+	/**
+	 * 状态内部类
+	 * @Title: State
+	 * @Package: com.coding17.easycms.api.container
+	 * @author: yin.kh
+	 * @date: 2016年2月15日 下午4:12:24
+	 */
 	public static class State {
 		public static Integer getValidState() {
 			return Integer.parseInt(dict.get("state").get("valid"));
