@@ -11,9 +11,7 @@
 	<%@ include file="/WEB-INF/jsp/include/common_js.jsp" %>
 </head>
 <body>
-出错啦！<br>
-<%
-	((Throwable)request.getAttribute("ex")).printStackTrace();
-%>
+出错啦！<br/>
+${ex}
 </body>
 </html>

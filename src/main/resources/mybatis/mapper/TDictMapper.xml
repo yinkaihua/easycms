@@ -10,6 +10,7 @@
 		<result column="KEY" property="key" jdbcType="VARCHAR"/>
 		<result column="VALUE" property="value" jdbcType="VARCHAR"/>
 		<result column="DESC" property="desc" jdbcType="VARCHAR"/>
+		<result column="SORT" property="sort" jdbcType="INTEGER"/>
     </resultMap>
     <!--通用表字段列表-->
     
@@ -20,19 +21,22 @@
 	<!--通用查询条件组装-->
 	<sql id="whereContation">
 			<if test="id != null">
-				AND  ID=#{id,jdbcType=INTEGER}  
+				AND  `ID`=#{id,jdbcType=INTEGER}  
 			</if>
 			<if test="catalogCode != null">
-				AND  CATALOG_CODE=#{catalogCode,jdbcType=VARCHAR}  
+				AND  `CATALOG_CODE`=#{catalogCode,jdbcType=VARCHAR}  
 			</if>
 			<if test="key != null">
-				AND  KEY=#{key,jdbcType=VARCHAR}  
+				AND  `KEY`=#{key,jdbcType=VARCHAR}  
 			</if>
 			<if test="value != null">
-				AND  VALUE=#{value,jdbcType=VARCHAR}  
+				AND  `VALUE`=#{value,jdbcType=VARCHAR}  
 			</if>
 			<if test="desc != null">
-				AND  DESC=#{desc,jdbcType=VARCHAR}  
+				AND  `DESC`=#{desc,jdbcType=VARCHAR}  
+			</if>
+			<if test="sort != null">
+				AND  `SORT`=#{sort,jdbcType=INTEGER}  
 			</if>
 	</sql>
 	
@@ -43,6 +47,7 @@
 			,`KEY`
 			,`VALUE`
 			,`DESC`
+			,`SORT`
 	</sql>
 	
 	<!--
@@ -58,19 +63,22 @@
 	 	INSERT  INTO  T_DICT
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 					<if test="id != null">
-					ID,
+					`ID`,
 					</if>
 					<if test="catalogCode != null">
-					CATALOG_CODE,
+					`CATALOG_CODE`,
 					</if>
 					<if test="key != null">
-					KEY,
+					`KEY`,
 					</if>
 					<if test="value != null">
-					VALUE,
+					`VALUE`,
 					</if>
 					<if test="desc != null">
-					DESC,
+					`DESC`,
+					</if>
+					<if test="sort != null">
+					`SORT`,
 					</if>
 			</trim>
 			<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -89,6 +97,9 @@
 					<if test="desc != null">
 					 #{desc,jdbcType=VARCHAR},
 					</if>
+					<if test="sort != null">
+					 #{sort,jdbcType=INTEGER},
+					</if>
 			</trim>
 	</insert>
 	
@@ -102,20 +113,23 @@
 		UPDATE   T_DICT  	 
 	  	<set> 
 				<if test="catalogCode != null">
-			 		CATALOG_CODE = #{catalogCode,jdbcType=VARCHAR},
+			 		`CATALOG_CODE` = #{catalogCode,jdbcType=VARCHAR},
 			 	</if>
 				<if test="key != null">
-			 		KEY = #{key,jdbcType=VARCHAR},
+			 		`KEY` = #{key,jdbcType=VARCHAR},
 			 	</if>
 				<if test="value != null">
-			 		VALUE = #{value,jdbcType=VARCHAR},
+			 		`VALUE` = #{value,jdbcType=VARCHAR},
 			 	</if>
 				<if test="desc != null">
-			 		DESC = #{desc,jdbcType=VARCHAR},
+			 		`DESC` = #{desc,jdbcType=VARCHAR},
+			 	</if>
+				<if test="sort != null">
+			 		`SORT` = #{sort,jdbcType=INTEGER},
 			 	</if>
 		</set>
 		WHERE  
-			ID = #{id,jdbcType=INTEGER}		 
+			`ID` = #{id,jdbcType=INTEGER}		 
 	</update>
 	
 	<!--
@@ -127,13 +141,14 @@
  	<update id="updateBak" parameterType="com.coding17.easycms.soa.entity.dict.TDict" >
 		UPDATE   T_DICT  	 
 	  	<set> 
-			 		CATALOG_CODE = #{catalogCode,jdbcType=VARCHAR},
-			 		KEY = #{key,jdbcType=VARCHAR},
-			 		VALUE = #{value,jdbcType=VARCHAR},
-			 		DESC = #{desc,jdbcType=VARCHAR},
+			 		`CATALOG_CODE` = #{catalogCode,jdbcType=VARCHAR},
+			 		`KEY` = #{key,jdbcType=VARCHAR},
+			 		`VALUE` = #{value,jdbcType=VARCHAR},
+			 		`DESC` = #{desc,jdbcType=VARCHAR},
+			 		`SORT` = #{sort,jdbcType=INTEGER},
 		</set>
 		WHERE  
-			ID = #{id,jdbcType=INTEGER}		 
+			`ID` = #{id,jdbcType=INTEGER}		 
 	</update>
 	
 	<!--
@@ -145,7 +160,7 @@
 	<delete id="deleteByPriKey" parameterType="com.coding17.easycms.soa.entity.dict.TDict">
 		DELETE 	FROM T_DICT 	 
 		WHERE 
-			ID = #{id,jdbcType=INTEGER}		 
+			`ID` = #{id,jdbcType=INTEGER}		 
 	</delete>
 	
 	<!--
@@ -159,7 +174,7 @@
 		   <include refid="baseColumnList"/>
 		FROM   T_DICT         
 		WHERE
-				ID = #{id,jdbcType=INTEGER}		 
+				`ID` = #{id,jdbcType=INTEGER}		 
 	</select>
 	
 	<!--

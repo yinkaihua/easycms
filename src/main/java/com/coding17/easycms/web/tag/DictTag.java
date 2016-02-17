@@ -6,6 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.coding17.easycms.api.container.DictContainer;
+import com.coding17.easycms.web.vo.dict.Dict;
 
 /**
  * 自定义字典标签
@@ -22,11 +23,27 @@ public class DictTag extends SimpleTagSupport {
 	
 	@Override
 	public void doTag() throws JspException, IOException {
-		String val = DictContainer.getVal(catalog, code);
-		if (val==null) {
+		Dict dict = DictContainer.getDictByVal(catalog, code);
+		if (dict==null) {
 			throw new NullPointerException("字典表查询不到");
 		}
-		getJspContext().getOut().println(val);
+		getJspContext().getOut().println(dict.getDesc());
+	}
+
+	public String getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 }

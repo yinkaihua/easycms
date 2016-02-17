@@ -36,6 +36,10 @@ public class Channel extends BaseVo {
 	 */
 	private Date createTime;
 	/**
+	 *排序
+	 */
+	private Integer sort;
+	/**
 	 *状态；1：正常，9：删除
 	 */
 	private Integer state;
@@ -125,6 +129,20 @@ public class Channel extends BaseVo {
 	}
 	
 	/**
+	 *获取排序
+	 */
+	public Integer getSort(){
+		return this.sort;
+	}
+	
+	/**
+	 *设置排序
+	 */
+	public void setSort(Integer sort){
+		this.sort = sort;
+	}
+	
+	/**
 	 *获取状态；1：正常，9：删除
 	 */
 	public Integer getState(){
@@ -151,6 +169,7 @@ public class Channel extends BaseVo {
     	tos.append("name=").append(this.name).append(",");
     	tos.append("path=").append(this.path).append(",");
     	tos.append("createTime=").append(this.createTime).append(",");
+    	tos.append("sort=").append(this.sort).append(",");
     	tos.append("state=").append(this.state).append(",");
     	tos.append("]");
         return tos.toString();

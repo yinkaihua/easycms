@@ -34,7 +34,7 @@
 			<td>${s.name }</td>
 			<td>${s.domain }</td>
 			<td><fmt:formatDate value="${s.createTime }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-			<td></td>
+			<td><ec:dict catalog="state" code="${s.state }"/> </td>
 			<td>${s.accountName }</td>
 			<td><a href="${_ctxPath}/site/to_edit?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delSite('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
 		</tr>

@@ -11,6 +11,7 @@
 		<result column="NAME" property="name" jdbcType="VARCHAR"/>
 		<result column="PATH" property="path" jdbcType="VARCHAR"/>
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="SORT" property="sort" jdbcType="INTEGER"/>
 		<result column="STATE" property="state" jdbcType="INTEGER"/>
     </resultMap>
     <!--通用表字段列表-->
@@ -22,37 +23,41 @@
 	<!--通用查询条件组装-->
 	<sql id="whereContation">
 			<if test="id != null">
-				AND  ID=#{id,jdbcType=INTEGER}  
+				AND  `ID`=#{id,jdbcType=INTEGER}  
 			</if>
 			<if test="pid != null">
-				AND  PID=#{pid,jdbcType=INTEGER}  
+				AND  `PID`=#{pid,jdbcType=INTEGER}  
 			</if>
 			<if test="siteId != null">
-				AND  SITE_ID=#{siteId,jdbcType=INTEGER}  
+				AND  `SITE_ID`=#{siteId,jdbcType=INTEGER}  
 			</if>
 			<if test="name != null">
-				AND  NAME=#{name,jdbcType=VARCHAR}  
+				AND  `NAME`=#{name,jdbcType=VARCHAR}  
 			</if>
 			<if test="path != null">
-				AND  PATH=#{path,jdbcType=VARCHAR}  
+				AND  `PATH`=#{path,jdbcType=VARCHAR}  
 			</if>
 			<if test="createTime != null">
-				AND  CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}  
+				AND  `CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
+			</if>
+			<if test="sort != null">
+				AND  `SORT`=#{sort,jdbcType=INTEGER}  
 			</if>
 			<if test="state != null">
-				AND  STATE=#{state,jdbcType=INTEGER}  
+				AND  `STATE`=#{state,jdbcType=INTEGER}  
 			</if>
 	</sql>
 	
 	<!--查询字段列表拼装-->
 	<sql id="baseColumnList">
-			 ID		 
-			,PID		 
-			,SITE_ID		 
-			,NAME		 
-			,PATH		 
-			,CREATE_TIME		 
-			,STATE		 
+			 `ID`	 
+			,`PID`
+			,`SITE_ID`
+			,`NAME`
+			,`PATH`
+			,`CREATE_TIME`
+			,`SORT`
+			,`STATE`
 	</sql>
 	
 	<!--
@@ -68,25 +73,28 @@
 	 	INSERT  INTO  T_CHANNEL
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 					<if test="id != null">
-					ID,
+					`ID`,
 					</if>
 					<if test="pid != null">
-					PID,
+					`PID`,
 					</if>
 					<if test="siteId != null">
-					SITE_ID,
+					`SITE_ID`,
 					</if>
 					<if test="name != null">
-					NAME,
+					`NAME`,
 					</if>
 					<if test="path != null">
-					PATH,
+					`PATH`,
 					</if>
 					<if test="createTime != null">
-					CREATE_TIME,
+					`CREATE_TIME`,
+					</if>
+					<if test="sort != null">
+					`SORT`,
 					</if>
 					<if test="state != null">
-					STATE,
+					`STATE`,
 					</if>
 			</trim>
 			<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -108,6 +116,9 @@
 					<if test="createTime != null">
 					 #{createTime,jdbcType=TIMESTAMP},
 					</if>
+					<if test="sort != null">
+					 #{sort,jdbcType=INTEGER},
+					</if>
 					<if test="state != null">
 					 #{state,jdbcType=INTEGER},
 					</if>
@@ -124,26 +135,29 @@
 		UPDATE   T_CHANNEL  	 
 	  	<set> 
 				<if test="pid != null">
-			 		PID = #{pid,jdbcType=INTEGER},
+			 		`PID` = #{pid,jdbcType=INTEGER},
 			 	</if>
 				<if test="siteId != null">
-			 		SITE_ID = #{siteId,jdbcType=INTEGER},
+			 		`SITE_ID` = #{siteId,jdbcType=INTEGER},
 			 	</if>
 				<if test="name != null">
-			 		NAME = #{name,jdbcType=VARCHAR},
+			 		`NAME` = #{name,jdbcType=VARCHAR},
 			 	</if>
 				<if test="path != null">
-			 		PATH = #{path,jdbcType=VARCHAR},
+			 		`PATH` = #{path,jdbcType=VARCHAR},
 			 	</if>
 				<if test="createTime != null">
-			 		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			 		`CREATE_TIME` = #{createTime,jdbcType=TIMESTAMP},
+			 	</if>
+				<if test="sort != null">
+			 		`SORT` = #{sort,jdbcType=INTEGER},
 			 	</if>
 				<if test="state != null">
-			 		STATE = #{state,jdbcType=INTEGER},
+			 		`STATE` = #{state,jdbcType=INTEGER},
 			 	</if>
 		</set>
 		WHERE  
-			ID = #{id,jdbcType=INTEGER}		 
+			`ID` = #{id,jdbcType=INTEGER}		 
 	</update>
 	
 	<!--
@@ -155,15 +169,16 @@
  	<update id="updateBak" parameterType="com.coding17.easycms.soa.entity.channel.TChannel" >
 		UPDATE   T_CHANNEL  	 
 	  	<set> 
-			 		PID = #{pid,jdbcType=INTEGER},
-			 		SITE_ID = #{siteId,jdbcType=INTEGER},
-			 		NAME = #{name,jdbcType=VARCHAR},
-			 		PATH = #{path,jdbcType=VARCHAR},
-			 		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-			 		STATE = #{state,jdbcType=INTEGER},
+			 		`PID` = #{pid,jdbcType=INTEGER},
+			 		`SITE_ID` = #{siteId,jdbcType=INTEGER},
+			 		`NAME` = #{name,jdbcType=VARCHAR},
+			 		`PATH` = #{path,jdbcType=VARCHAR},
+			 		`CREATE_TIME` = #{createTime,jdbcType=TIMESTAMP},
+			 		`SORT` = #{sort,jdbcType=INTEGER},
+			 		`STATE` = #{state,jdbcType=INTEGER},
 		</set>
 		WHERE  
-			ID = #{id,jdbcType=INTEGER}		 
+			`ID` = #{id,jdbcType=INTEGER}		 
 	</update>
 	
 	<!--
@@ -175,7 +190,7 @@
 	<delete id="deleteByPriKey" parameterType="com.coding17.easycms.soa.entity.channel.TChannel">
 		DELETE 	FROM T_CHANNEL 	 
 		WHERE 
-			ID = #{id,jdbcType=INTEGER}		 
+			`ID` = #{id,jdbcType=INTEGER}		 
 	</delete>
 	
 	<!--
@@ -189,7 +204,7 @@
 		   <include refid="baseColumnList"/>
 		FROM   T_CHANNEL         
 		WHERE
-				ID = #{id,jdbcType=INTEGER}		 
+				`ID` = #{id,jdbcType=INTEGER}		 
 	</select>
 	
 	<!--

@@ -30,6 +30,10 @@ public class Dict extends BaseVo {
 	 *描述
 	 */
 	private String desc;
+	/**
+	 *排序字段
+	 */
+	private Integer sort;
 	
 	/**
 	 *获取
@@ -101,6 +105,20 @@ public class Dict extends BaseVo {
 		this.desc = desc;
 	}
 	
+	/**
+	 *获取排序字段
+	 */
+	public Integer getSort(){
+		return this.sort;
+	}
+	
+	/**
+	 *设置排序字段
+	 */
+	public void setSort(Integer sort){
+		this.sort = sort;
+	}
+	
     
     /**
      * 重写toString()
@@ -113,6 +131,7 @@ public class Dict extends BaseVo {
     	tos.append("key=").append(this.key).append(",");
     	tos.append("value=").append(this.value).append(",");
     	tos.append("desc=").append(this.desc).append(",");
+    	tos.append("sort=").append(this.sort).append(",");
     	tos.append("]");
         return tos.toString();
     }
