@@ -1,6 +1,8 @@
 package com.coding17.easycms.web.vo.channel;
 
 import java.util.Date;
+import java.util.List;
+
 import com.coding17.easycms.web.base.BaseVo;
 
 /**
@@ -36,6 +38,10 @@ public class Channel extends BaseVo {
 	 */
 	private Date createTime;
 	/**
+	 *栏目级别
+	 */
+	private Integer level;
+	/**
 	 *排序
 	 */
 	private Integer sort;
@@ -44,6 +50,15 @@ public class Channel extends BaseVo {
 	 */
 	private Integer state;
 	
+	private List<Channel> subChannel;
+	
+	public List<Channel> getSubChannel() {
+		return subChannel;
+	}
+
+	public void setSubChannel(List<Channel> subChannel) {
+		this.subChannel = subChannel;
+	}
 	/**
 	 *获取
 	 */
@@ -129,6 +144,20 @@ public class Channel extends BaseVo {
 	}
 	
 	/**
+	 *获取栏目级别
+	 */
+	public Integer getLevel(){
+		return this.level;
+	}
+	
+	/**
+	 *设置栏目级别
+	 */
+	public void setLevel(Integer level){
+		this.level = level;
+	}
+	
+	/**
 	 *获取排序
 	 */
 	public Integer getSort(){
@@ -169,6 +198,7 @@ public class Channel extends BaseVo {
     	tos.append("name=").append(this.name).append(",");
     	tos.append("path=").append(this.path).append(",");
     	tos.append("createTime=").append(this.createTime).append(",");
+    	tos.append("level=").append(this.level).append(",");
     	tos.append("sort=").append(this.sort).append(",");
     	tos.append("state=").append(this.state).append(",");
     	tos.append("]");

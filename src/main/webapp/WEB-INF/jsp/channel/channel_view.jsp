@@ -22,9 +22,31 @@
 	<a id="addLvlOneBtn" href="${_ctxPath}/channel/to_add?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
 	<a id="addLvlTwoBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
 </div>
-<table class="table table-bordered table-hover" style="width:800px; margin:20px">
+<hr>
+<div class="easyui-layout" style="width:500px;height:200px;margin:50px;">
+	<div region="west" split="false" title="栏目" style="width:200px;">
+		<ul class="easyui-tree" style="margin:10px">
+			<li><span>栏目</span>
+				<ul>
+				<c:forEach items="${channels}" var="c">
+					<li><span>${c.name}</span>
+						<ul>
+							<c:forEach items="${c.subChannel}" var="s"><li><span>${s.name }</span></li></c:forEach>
+						</ul>
+					</li>
+				</c:forEach>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div id="content" region="center" title="编辑面板" style="padding:5px;">
+	</div>
+</div>
+
+<%-- <table class="table table-bordered table-hover" style="width:800px; margin:20px">
 	<thead>
 		<tr class="success">
+			<td>序号</td>
 			<td>名称</td>
 			<td>路径</td>
 			<td>排序</td>
@@ -33,17 +55,18 @@
 		</tr>
 	</thead>
 	<tbody>
-	<c:forEach items="${channels}" var="s">
+	<c:forEach items="${channels}" var="s" varStatus="vs">
 		<tr>
+			<td>${vs.index+1 }</td>
 			<td>${s.name }</td>
 			<td>${s.path }</td>
 			<td>${s.sort }</td>
 			<td><ec:dict catalog="state" code="${s.state }"/></td>
-			<td><a href="${_ctxPath}/channel/to_edit?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delDict('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
+			<td><a href="${_ctxPath}/channel/to_edit?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delChannel('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
 		</tr>
 	</c:forEach>
 	</tbody>
-</table>
+</table> --%>
 <script type="text/javascript">
 $(function() {
 	$("#siteCombo").combobox({
@@ -52,10 +75,9 @@ $(function() {
 		}
 	});
 })
-function removeSubMenu() {
-	if (confirm("是否确认删除菜单？注意：子菜单也会删除")) {
-		$("input[name='id']").val($("#selectedSubMenu").val());
-		$("#delForm").submit();
+function delChannel(id) {
+	if (confirm("确认删除栏目？")) {
+		location.href="${_ctxPath}/channel/remove?id="+id;
 	}
 }
 </script>

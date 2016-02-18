@@ -36,6 +36,10 @@ public class TChannel extends BasicEntity {
 	 */
 	private Date createTime;
 	/**
+	 *栏目级别
+	 */
+	private Integer level;
+	/**
 	 *排序
 	 */
 	private Integer sort;
@@ -129,6 +133,20 @@ public class TChannel extends BasicEntity {
 	}
 	
 	/**
+	 *获取栏目级别
+	 */
+	public Integer getLevel(){
+		return this.level;
+	}
+	
+	/**
+	 *设置栏目级别
+	 */
+	public void setLevel(Integer level){
+		this.level = level;
+	}
+	
+	/**
 	 *获取排序
 	 */
 	public Integer getSort(){
@@ -169,6 +187,7 @@ public class TChannel extends BasicEntity {
     	tos.append("name=").append(this.name).append(",");
     	tos.append("path=").append(this.path).append(",");
     	tos.append("createTime=").append(this.createTime).append(",");
+    	tos.append("level=").append(this.level).append(",");
     	tos.append("sort=").append(this.sort).append(",");
     	tos.append("state=").append(this.state).append(",");
     	tos.append("]");

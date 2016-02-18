@@ -16,6 +16,7 @@
 	<div style="padding:10px 20px 20px 20px">
     <form id="ff" method="post">
     	<input type="hidden" name="pid" value="${p.pid}" />
+    	<input type="hidden" name="id" />
     	<table cellpadding="5">
     		<tr>
     			<td>名称：</td>
@@ -47,11 +48,11 @@
 <script type="text/javascript">
 <c:if test="${isEdit=='yes'}">
 $("#ff").form("load", {
-	catalogCode:'${so.catalogCode}',
-	key:'${so.key}',
-	value:'${so.value}',
-	desc:'${so.desc}',
-	sort:'${so.sort}'
+	id:'${so.id}',
+	name:'${so.name}',
+	path:'${so.path}',
+	sort:'${so.sort}',
+	state:'${so.state}'
 });
 </c:if>
 function submitForm(){

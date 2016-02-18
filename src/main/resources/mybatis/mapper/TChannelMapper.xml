@@ -11,6 +11,7 @@
 		<result column="NAME" property="name" jdbcType="VARCHAR"/>
 		<result column="PATH" property="path" jdbcType="VARCHAR"/>
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="LEVEL" property="level" jdbcType="INTEGER"/>
 		<result column="SORT" property="sort" jdbcType="INTEGER"/>
 		<result column="STATE" property="state" jdbcType="INTEGER"/>
     </resultMap>
@@ -40,6 +41,9 @@
 			<if test="createTime != null">
 				AND  `CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
 			</if>
+			<if test="level != null">
+				AND  `LEVEL`=#{level,jdbcType=INTEGER}  
+			</if>
 			<if test="sort != null">
 				AND  `SORT`=#{sort,jdbcType=INTEGER}  
 			</if>
@@ -56,6 +60,7 @@
 			,`NAME`
 			,`PATH`
 			,`CREATE_TIME`
+			,`LEVEL`
 			,`SORT`
 			,`STATE`
 	</sql>
@@ -90,6 +95,9 @@
 					<if test="createTime != null">
 					`CREATE_TIME`,
 					</if>
+					<if test="level != null">
+					`LEVEL`,
+					</if>
 					<if test="sort != null">
 					`SORT`,
 					</if>
@@ -115,6 +123,9 @@
 					</if>
 					<if test="createTime != null">
 					 #{createTime,jdbcType=TIMESTAMP},
+					</if>
+					<if test="level != null">
+					 #{level,jdbcType=INTEGER},
 					</if>
 					<if test="sort != null">
 					 #{sort,jdbcType=INTEGER},
@@ -149,6 +160,9 @@
 				<if test="createTime != null">
 			 		`CREATE_TIME` = #{createTime,jdbcType=TIMESTAMP},
 			 	</if>
+				<if test="level != null">
+			 		`LEVEL` = #{level,jdbcType=INTEGER},
+			 	</if>
 				<if test="sort != null">
 			 		`SORT` = #{sort,jdbcType=INTEGER},
 			 	</if>
@@ -174,6 +188,7 @@
 			 		`NAME` = #{name,jdbcType=VARCHAR},
 			 		`PATH` = #{path,jdbcType=VARCHAR},
 			 		`CREATE_TIME` = #{createTime,jdbcType=TIMESTAMP},
+			 		`LEVEL` = #{level,jdbcType=INTEGER},
 			 		`SORT` = #{sort,jdbcType=INTEGER},
 			 		`STATE` = #{state,jdbcType=INTEGER},
 		</set>

@@ -22,7 +22,7 @@ public class SiteContext {
 	
 	public static void set(HttpSession session, Integer siteId) {
 		Object obj = session.getAttribute(SITE_CONTEXT);
-		if (obj==null || ((Site)obj).getId()==siteId) {
+		if (obj!=null && ((Site)obj).getId()==siteId) {
 			return;
 		}
 		TSite para = new TSite();

@@ -48,6 +48,10 @@ public class BaseController<P extends BaseVo> {
 		this.request.setAttribute("p", p);   //参数回传
 	}
 	
+	protected void refreshP(P p) {
+		request.setAttribute("p", p);
+	}
+	
 	protected String writeResponse() {
 		if (respContent==null) {
 			respContent = "";

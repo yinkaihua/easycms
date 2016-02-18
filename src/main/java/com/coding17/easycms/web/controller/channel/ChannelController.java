@@ -1,9 +1,9 @@
 package com.coding17.easycms.web.controller.channel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -44,22 +44,25 @@ public class ChannelController extends BaseController<Channel> {
 		request.setAttribute("sites", sites);
 		
 		Integer siteId = null;
-		if (p.getSiteId()!=null && p.getSiteId()!=-1) {
+		if (p.getSiteId()!=null) {
 			siteId = p.getSiteId();
 		}
 		if (siteId == null && SiteContext.get(request.getSession())!=null) {
 			siteId = SiteContext.get(request.getSession()).getId();
 		}
 		
-		//已选择站点
-		if (siteId != null) {
+		//已选择站点, siteId==-1表示用户自己不选择站点
+		if (siteId != null && siteId != -1) {
 			TChannel c = new TChannel();
 			c.setSiteId(siteId);
 			List<TChannel> list = tChannelService.selectListByCondition(c);
-			List<Channel> channels = BeanConverter.listC(list, Channel.class);
-			request.setAttribute("channels", channels);
+//			List<Channel> channels = BeanConverter.listC(list, Channel.class);
+			request.setAttribute("channels", buildChannels(0, list));
 			
-			SiteContext.set(request.getSession(), p.getSiteId());
+			SiteContext.set(request.getSession(), siteId);
+			
+			p.setSiteId(siteId);
+			refreshP(p);
 		} else {
 			SiteContext.clear(request.getSession());
 		}
@@ -70,6 +73,18 @@ public class ChannelController extends BaseController<Channel> {
 	@RequestMapping("/to_add")
 	public String toAdd() {
 		checkSite();
+		return "channel/channel_info";
+	}
+	
+	@RequestMapping("/to_edit")
+	public String toEdit() {
+		checkSite();
+		TChannel para = new TChannel();
+		para.setId(p.getId());
+		TChannel tc = tChannelService.getByPriKey(para);
+		Channel channel = BeanConverter.objectC(tc, Channel.class);
+		request.setAttribute("so", channel);
+		request.setAttribute("isEdit", "yes");
 		return "channel/channel_info";
 	}
 	
@@ -94,6 +109,33 @@ public class ChannelController extends BaseController<Channel> {
 			}
 		}
 		return view();
+	}
+	
+	@RequestMapping("/remove")
+	public String remove() {
+		LOG.info("=====>删除栏目，{}", p);
+		TChannel para = new TChannel();
+		para.setId(p.getId());
+		try {
+			tChannelService.deleteByPriKey(para);
+		} catch (Exception ex) {
+			LOG.error("=====>删除栏目失败，{}", p, ex);
+		}
+		return view();
+	}
+	
+	public static List<Channel> buildChannels(int pid, List<TChannel> tChannels) {
+		List<Channel> menus = new ArrayList<Channel>();
+		for (TChannel tm : tChannels) {
+			if (tm.getPid()==pid) {
+				Channel m = BeanConverter.objectC(tm, Channel.class);
+				if (m.getLevel()==1) {
+					m.setSubChannel(buildChannels(m.getId(), tChannels));
+				}
+				menus.add(m);
+			}
+		}
+		return menus;
 	}
 	
 	private void checkSite() {
