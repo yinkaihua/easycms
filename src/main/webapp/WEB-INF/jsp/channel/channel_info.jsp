@@ -19,6 +19,10 @@
     	<input type="hidden" name="id" />
     	<table cellpadding="5">
     		<tr>
+    			<td>父栏目：</td>
+    			<td><c:choose><c:when test="${p.pid==0}">顶级栏目<input type="hidden" name="level" value="1" /></c:when><c:otherwise>${c.name}<input type="hidden" name="level" value="${c.level+1}" /></c:otherwise></c:choose></td>
+    		</tr>
+    		<tr>
     			<td>名称：</td>
     			<td><input class="easyui-textbox" type="text" name="name" data-options="required:true"/></td>
     		</tr>

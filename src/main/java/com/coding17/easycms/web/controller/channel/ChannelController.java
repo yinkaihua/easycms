@@ -2,16 +2,20 @@ package com.coding17.easycms.web.controller.channel;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.exception.CmsWebException;
 import com.coding17.easycms.web.util.BeanConverter;
+import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.SiteContext;
 import com.coding17.easycms.api.container.DictContainer;
 import com.coding17.easycms.soa.entity.channel.TChannel;
@@ -70,9 +74,33 @@ public class ChannelController extends BaseController<Channel> {
 		return "channel/channel_view";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/children_list_ajax")
+	public Map<String, Object> getListByPid() {
+		Map<String, Object> json = new HashMap<String, Object>();
+		TChannel para = new TChannel();
+		para.setPid(p.getPid());
+		para.setOrderby("sort asc");
+		try {
+			List<TChannel> list = tChannelService.selectListByCondition(para);
+			json.put("state", 0);
+			json.put("data", list);
+		} catch (Exception ex) {
+			LOG.error("=====>查询子栏目失败，PID={}", p.getPid(), ex);
+			json.put("state", 1);
+		}
+		return json;
+	}
+	
 	@RequestMapping("/to_add")
 	public String toAdd() {
 		checkSite();
+		if (p.getPid()!=null && p.getPid()!=0) {
+			TChannel para = new TChannel();
+			para.setId(p.getPid());
+			TChannel c = tChannelService.getByPriKey(para);
+			request.setAttribute("c", c);
+		}
 		return "channel/channel_info";
 	}
 	
@@ -82,6 +110,12 @@ public class ChannelController extends BaseController<Channel> {
 		TChannel para = new TChannel();
 		para.setId(p.getId());
 		TChannel tc = tChannelService.getByPriKey(para);
+		p.setPid(tc.getPid());
+		if (tc.getPid()!=0) {
+			//查询父栏目
+			para.setId(tc.getPid());
+			request.setAttribute("c", tChannelService.getByPriKey(para));
+		}
 		Channel channel = BeanConverter.objectC(tc, Channel.class);
 		request.setAttribute("so", channel);
 		request.setAttribute("isEdit", "yes");
@@ -109,6 +143,22 @@ public class ChannelController extends BaseController<Channel> {
 			}
 		}
 		return view();
+	}
+	
+	@ResponseBody
+	@RequestMapping("/has_children")
+	public Map<String, Object> hasChildren() {
+		Map<String, Object> json = new HashMap<String, Object>();
+		TChannel para = new TChannel();
+		para.setPid(p.getId());
+		List<TChannel> list = tChannelService.selectListByCondition(para);
+		if (list.size()>0) {
+			json.put("state", DictProperties.getFailJsonState());
+			json.put("msg", "当前栏目存在子栏目");
+		} else {
+			json.put("state", DictProperties.getSuccessJsonState());
+		}
+		return json;
 	}
 	
 	@RequestMapping("/remove")

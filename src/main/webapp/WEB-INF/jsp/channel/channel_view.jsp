@@ -19,19 +19,21 @@
 		<option value="${s.id }" <c:if test="${p.siteId==s.id}"> selected="selected"</c:if>>${s.name}</option>
 		</c:forEach>
 	</select>
-	<a id="addLvlOneBtn" href="${_ctxPath}/channel/to_add?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
-	<a id="addLvlTwoBtn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
+	<a href="${_ctxPath}/channel/to_add?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
+	<a href="javascript:createSubChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
+	<a href="javascript:editChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
+	<a href="javascript:delChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <hr>
-<div class="easyui-layout" style="width:500px;height:200px;margin:50px;">
+<div class="easyui-layout" style="width:700px;height:200px;margin:50px;">
 	<div region="west" split="false" title="栏目" style="width:200px;">
 		<ul class="easyui-tree" style="margin:10px">
-			<li><span>栏目</span>
+			<li id="0"><span>栏目</span>
 				<ul>
 				<c:forEach items="${channels}" var="c">
-					<li><span>${c.name}</span>
+					<li id="${c.id}"><span>${c.name}</span>
 						<ul>
-							<c:forEach items="${c.subChannel}" var="s"><li><span>${s.name }</span></li></c:forEach>
+							<c:forEach items="${c.subChannel}" var="s"><li id="${s.id}"><span>${s.name }</span></li></c:forEach>
 						</ul>
 					</li>
 				</c:forEach>
@@ -40,33 +42,19 @@
 		</ul>
 	</div>
 	<div id="content" region="center" title="编辑面板" style="padding:5px;">
+		<table id="tt" class="easyui-datagrid" singleSelect=true style="width:100%;height:auto;">
+		<thead>
+			<tr>
+				<th field="id" width="80">栏目ID</th>
+				<th field="name" width="80">名称</th>
+				<th field="path" width="80">路径</th>
+				<th field="state" width="80">状态</th>
+				<th field="sort" width="80">排序</th>
+			</tr>
+		</thead>                         
+	</table>
 	</div>
 </div>
-
-<%-- <table class="table table-bordered table-hover" style="width:800px; margin:20px">
-	<thead>
-		<tr class="success">
-			<td>序号</td>
-			<td>名称</td>
-			<td>路径</td>
-			<td>排序</td>
-			<td>状态</td>
-			<td>操作</td>
-		</tr>
-	</thead>
-	<tbody>
-	<c:forEach items="${channels}" var="s" varStatus="vs">
-		<tr>
-			<td>${vs.index+1 }</td>
-			<td>${s.name }</td>
-			<td>${s.path }</td>
-			<td>${s.sort }</td>
-			<td><ec:dict catalog="state" code="${s.state }"/></td>
-			<td><a href="${_ctxPath}/channel/to_edit?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delChannel('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table> --%>
 <script type="text/javascript">
 $(function() {
 	$("#siteCombo").combobox({
@@ -74,11 +62,41 @@ $(function() {
 			location.href="${_ctxPath}/channel/view?siteId="+newVal;
 		}
 	});
+	$(".easyui-tree").tree({
+		onClick:function(node) {
+			showSubNodes(node.id);
+		}
+	});
 })
-function delChannel(id) {
-	if (confirm("确认删除栏目？")) {
-		location.href="${_ctxPath}/channel/remove?id="+id;
+function createSubChannel() {
+	location.href="${_ctxPath}/channel/to_add?pid="+$(".easyui-tree").tree("getSelected").id;
+}
+function editChannel() {
+	location.href="${_ctxPath}/channel/to_edit?id="+$("#tt").datagrid("getSelected").id;
+}
+function showSubNodes(id) {
+	$.getJSON("${_ctxPath}/channel/children_list_ajax?pid="+id,{},function(ret) {
+		if (ret.state=="0") {
+			$("#tt").datagrid("loadData", {rows:ret.data});
+		}
+	});
+}
+function delChannel() {
+	var selectedRow = $("#tt").datagrid("getSelected");
+	if (selectedRow==null) {
+		alert("当前没有选中的栏目");
+		return;
 	}
+	var id = selectedRow.id;
+	$.getJSON("${_ctxPath}/channel/has_children?id="+id,{},function(ret) {
+		if (ret.state=="1") {
+			alert(ret.msg);
+		} else {
+			if (confirm("确认删除栏目？")) {
+				location.href="${_ctxPath}/channel/remove?id="+id;
+			}
+		}
+	});
 }
 </script>
 </body>
