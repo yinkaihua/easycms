@@ -12,13 +12,8 @@
 	<%@ include file="/WEB-INF/jsp/include/common_js.jsp" %>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/site/site_selected.jsp" %>
 <div style="margin:20px">
-	站点选择：<select id="siteCombo" name="site" class="easyui-combobox" style="width:100px">
-		<c:forEach items="${sites}" var="s">
-		<option value="-1" <c:if test="${p.siteId==null}"> selected="selected"</c:if>>无</option>
-		<option value="${s.id }" <c:if test="${p.siteId==s.id}"> selected="selected"</c:if>>${s.name}</option>
-		</c:forEach>
-	</select>
 	<a href="${_ctxPath}/channel/to_add?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
 	<a href="javascript:createSubChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
 	<a href="javascript:editChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
@@ -57,17 +52,15 @@
 </div>
 <script type="text/javascript">
 $(function() {
-	$("#siteCombo").combobox({
-		onChange:function(newVal, oldVal) {
-			location.href="${_ctxPath}/channel/view?siteId="+newVal;
-		}
-	});
 	$(".easyui-tree").tree({
 		onClick:function(node) {
 			showSubNodes(node.id);
 		}
 	});
 })
+function siteChangeEvent(newVal, oldVal) {
+	location.href="${_ctxPath}/channel/view?siteId="+newVal;
+}
 function createSubChannel() {
 	location.href="${_ctxPath}/channel/to_add?pid="+$(".easyui-tree").tree("getSelected").id;
 }
