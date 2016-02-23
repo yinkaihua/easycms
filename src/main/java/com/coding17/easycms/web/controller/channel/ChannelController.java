@@ -12,17 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coding17.easycms.soa.entity.channel.TChannel;
+import com.coding17.easycms.soa.service.channel.TChannelService;
+import com.coding17.easycms.soa.service.site.TSiteService;
 import com.coding17.easycms.web.base.BaseController;
-import com.coding17.easycms.web.exception.CmsWebException;
 import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.SiteContext;
 import com.coding17.easycms.web.util.WebConst;
-import com.coding17.easycms.api.container.DictContainer;
-import com.coding17.easycms.soa.entity.channel.TChannel;
-import com.coding17.easycms.soa.entity.site.TSite;
-import com.coding17.easycms.soa.service.channel.TChannelService;
-import com.coding17.easycms.soa.service.site.TSiteService;
 import com.coding17.easycms.web.vo.channel.Channel;
 
  /**
@@ -38,35 +35,8 @@ public class ChannelController extends BaseController<Channel> {
 	@Autowired
 	private TChannelService tChannelService;
 	
-	@Autowired
-	private TSiteService tSiteService;
-	
 	@RequestMapping("/view")
 	public String view() {
-		/*TSite para = new TSite();
-		para.setState(DictContainer.State.getValidState());
-		List<TSite> sites = tSiteService.selectListByCondition(para);
-		request.setAttribute("sites", sites);
-		
-		Integer siteId = null;
-		if (p.getSiteId()!=null) {
-			siteId = p.getSiteId();
-		}
-		if (siteId == null && SiteContext.get(request.getSession())!=null) {
-			siteId = SiteContext.get(request.getSession()).getId();
-		}
-		
-		//已选择站点, siteId==-1表示用户自己不选择站点
-		if (siteId != null && siteId != -1) {
-			
-			
-			SiteContext.set(request.getSession(), siteId);
-			
-			p.setSiteId(siteId);
-			refreshP(p);
-		} else {
-			SiteContext.clear(request.getSession());
-		}*/
 		Integer sid = Integer.parseInt(request.getAttribute(WebConst.wc_a_req_sid).toString());
 		if (sid!=-1) {
 			TChannel c = new TChannel();
