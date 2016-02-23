@@ -13,6 +13,31 @@
     </resultMap>
     <!--通用表字段列表-->
     
+    <!-- 关联查询结果 -->
+    <resultMap id="ContentInfoMap" type="com.coding17.easycms.soa.entity.content.TContent">
+		<result column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="PUB_STATE" property="pubState" jdbcType="INTEGER"/>
+		<result column="STATE" property="state" jdbcType="INTEGER"/>
+		<association property="contentExt" javaType="com.coding17.easycms.soa.entity.contentext.TContentExt">
+			<result column="ID" property="contentId" jdbcType="INTEGER"/>
+			<result column="TXT" property="txt" jdbcType="VARCHAR"/>
+		</association>
+		<association property="channel" javaType="com.coding17.easycms.soa.entity.channel.TChannel">
+			<result column="CID" property="id" jdbcType="INTEGER"/>
+			<result column="PID" property="pid" jdbcType="INTEGER"/>
+			<result column="SITE_ID" property="siteId" jdbcType="INTEGER"/>
+			<result column="NAME" property="name" jdbcType="VARCHAR"/>
+			<result column="PATH" property="path" jdbcType="VARCHAR"/>
+			<result column="C_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+			<result column="LEVEL" property="level" jdbcType="INTEGER"/>
+			<result column="SORT" property="sort" jdbcType="INTEGER"/>
+			<result column="C_STATE" property="state" jdbcType="INTEGER"/>
+		</association>
+    </resultMap>
+    <!-- 关联查询结果 -->
+    
 	<!--user customize code start-->
 
 	<!--user customize code end  -->
@@ -38,11 +63,11 @@
 	
 	<!--查询字段列表拼装-->
 	<sql id="baseColumnList">
-			 `ID`	 
-			,`TITLE`
-			,`CREATE_TIME`
-			,`PUB_STATE`
-			,`STATE`
+			 c.`ID`	 
+			,c.`TITLE`
+			,c.`CREATE_TIME`
+			,c.`PUB_STATE`
+			,c.`STATE`
 	</sql>
 	
 	<!--
@@ -55,7 +80,7 @@
  		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-	 	INSERT  INTO  T_CONTENT
+	 	INSERT  INTO  T_CONTENT c
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 					<if test="id != null">
 					`ID`,
@@ -99,7 +124,7 @@
 	处理信息: 修改记录
 	-->
  	<update id="update" parameterType="com.coding17.easycms.soa.entity.content.TContent" >
-		UPDATE   T_CONTENT  	 
+		UPDATE   T_CONTENT  
 	  	<set> 
 				<if test="title != null">
 			 		`TITLE` = #{title,jdbcType=VARCHAR},
@@ -157,7 +182,7 @@
 	<select id="findByPriKey" parameterType="com.coding17.easycms.soa.entity.content.TContent"  resultMap="BaseResultMap">
 		SELECT   
 		   <include refid="baseColumnList"/>
-		FROM   T_CONTENT         
+		FROM   T_CONTENT c         
 		WHERE
 				`ID` = #{id,jdbcType=INTEGER}		 
 	</select>
@@ -173,7 +198,7 @@
 		<include refid="CommonEntity.paginationPrefix"/>
 		SELECT   
 	 		<include refid="baseColumnList"/>
-		FROM   T_CONTENT          
+		FROM   T_CONTENT c          
 		WHERE 1=1
 		 	<include refid="whereContation"/>
 		 	<if test="orderby != null">
@@ -213,5 +238,36 @@
 		limit 0,100
 	</select>
 	
+	<!-- 
+	关联查询，查询出内容及栏目信息，支持分页排序
+	 -->
+	<select id="selectListInfoByPagination" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
+	   <include refid="CommonEntity.paginationPrefix"/>
+	   SELECT   
+	   		<include refid="baseColumnList"/>, `TXT`, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
+	   FROM   T_CONTENT c,T_CONTENT_EXT e,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=e.`CONTENT_ID` AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
+		<include refid="whereContation"/>
+		<if test="channel.siteId != null">
+			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}  
+		</if>
+		<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		</if>
+		<include refid="CommonEntity.paginationSuffix"/>
+	</select>
 	
+	<!-- 
+	关联查询，查询出内容及栏目信息，支持分页排序
+	 -->
+	<select id="selectListInfoByPagination-count" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultType="int">
+	   SELECT   
+	   		COUNT(1)
+	   FROM   T_CONTENT c,T_CONTENT_EXT e,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=e.`CONTENT_ID` AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
+		<include refid="whereContation"/>
+		<if test="channel.siteId != null">
+			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}  
+		</if>
+	</select>
 </mapper>

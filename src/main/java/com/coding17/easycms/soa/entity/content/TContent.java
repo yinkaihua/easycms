@@ -2,6 +2,9 @@ package com.coding17.easycms.soa.entity.content;
 
 import java.util.Date;
 import com.coding17.easycms.soa.base.entity.BasicEntity;
+import com.coding17.easycms.soa.entity.channel.TChannel;
+import com.coding17.easycms.soa.entity.channelcontent.TChannelContent;
+import com.coding17.easycms.soa.entity.contentext.TContentExt;
 
 /**
  * 描述：</b><br>
@@ -31,7 +34,27 @@ public class TContent extends BasicEntity {
 	 *状态；1：正常，9：删除
 	 */
 	private Integer state;
+
+	private TContentExt contentExt;
 	
+	private TChannel channel;
+	
+	public TContentExt getContentExt() {
+		return contentExt;
+	}
+
+	public void setContentExt(TContentExt contentExt) {
+		this.contentExt = contentExt;
+	}
+
+	public TChannel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(TChannel channel) {
+		this.channel = channel;
+	}
+
 	/**
 	 *获取文章ID
 	 */
@@ -114,6 +137,8 @@ public class TContent extends BasicEntity {
     	tos.append("createTime=").append(this.createTime).append(",");
     	tos.append("pubState=").append(this.pubState).append(",");
     	tos.append("state=").append(this.state).append(",");
+    	tos.append("contentExt=").append(this.contentExt).append(",");
+    	tos.append("channel=").append(this.channel).append(",");
     	tos.append("]");
         return tos.toString();
     }

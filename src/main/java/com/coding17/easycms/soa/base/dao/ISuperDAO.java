@@ -2,6 +2,8 @@ package com.coding17.easycms.soa.base.dao;
 
 import java.util.List;
 
+import com.coding17.easycms.soa.base.entity.BasicEntity;
+
 /**
  * 所有dao的基类，提供基本的增删改查
  * @Title: ISuperDAO.java 
@@ -9,7 +11,7 @@ import java.util.List;
  * @author: yin.kh
  * @date: 2016年1月23日 下午10:27:41
  */
-public interface ISuperDAO<T> {
+public interface ISuperDAO<T extends BasicEntity> {
 
 	/**
 	 * 根据主键查询
@@ -73,4 +75,20 @@ public interface ISuperDAO<T> {
 	 * @return
 	 */
 	Integer selectCountByCondition(T t);
+	
+	/**
+	 * 自定义分页查询
+	 * @param statement
+	 * @param t
+	 * @return
+	 */
+	List<T> selectListByPagination(String statement, T t);
+	
+	/**
+	 * 自定义数量查询
+	 * @param statement
+	 * @param t
+	 * @return
+	 */
+	Integer selectCountByCondition(String statement, T t);
 }

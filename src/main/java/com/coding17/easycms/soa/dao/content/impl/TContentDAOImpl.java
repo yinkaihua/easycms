@@ -1,9 +1,13 @@
 package com.coding17.easycms.soa.dao.content.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.coding17.easycms.soa.base.dao.impl.SuperDAO;
+import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.dao.content.TContentDAO;
+import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.entity.content.TContent;
 
 /**
@@ -17,6 +21,16 @@ public class TContentDAOImpl extends SuperDAO<TContent> implements TContentDAO {
 	@Override
 	protected String getStatementPrefix() {
 		return TContent.class.getName();
+	}
+
+	@Override
+	public List<TContent> selectListInfoByPagination(TContent tContent) {
+		return selectListByPagination(getStatementPrefix() + ".selectListInfoByPagination", tContent);
+	}
+
+	@Override
+	public Integer selectListInfoCountByCondition(TContent tContent) {
+		return selectCountByCondition(getStatementPrefix() + ".selectListInfoByPagination-count", tContent);
 	}
 
 }

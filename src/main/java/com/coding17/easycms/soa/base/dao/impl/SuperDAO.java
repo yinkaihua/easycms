@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.coding17.easycms.soa.base.dao.ISuperDAO;
+import com.coding17.easycms.soa.base.entity.BasicEntity;
+import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 
 /**
@@ -17,7 +19,7 @@ import com.coding17.easycms.soa.entity.channel.TChannel;
  * @date: 2016年1月25日 下午11:13:53
  */
 /*@Repository*/
-public abstract class SuperDAO<T> implements ISuperDAO<T> {
+public abstract class SuperDAO<T extends BasicEntity> implements ISuperDAO<T> {
 
 	private static final String statement_selectByPrimaryKey = "findByPriKey";
 	
@@ -85,10 +87,31 @@ public abstract class SuperDAO<T> implements ISuperDAO<T> {
 		return (Integer) template.selectOne(getStatementPrefix() + "." + statement_selectCountByCondition, t);
 	}
 
+	@Override
+	public List<T> selectListByPagination(String statement, T t) {
+		if (t.getPageNum()==null || t.getPageNum()==0) {
+			t.setPageNum(Pagination.DEFAULT_PAGENUM);
+		}
+		if (t.getPageSize()==null || t.getPageSize()<=0 || t.getPageSize()>Pagination.MAX_PAGESIZE) {
+			t.setPageSize(Pagination.DEFAULT_PAGESIZE);
+		}
+		t.setOffset((t.getPageNum()-1)*t.getPageSize());
+		return template.selectList(statement, t);
+	}
+
+	@Override
+	public Integer selectCountByCondition(String statement, T t) {
+		return (Integer) template.selectOne(statement, t);
+	}
+
 	/**
 	 * 子类必须重写此方法
 	 * @return
 	 */
 	protected abstract String getStatementPrefix();
+	
+	public SqlSessionTemplate getTemplate() {
+		return template;
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.coding17.easycms.web.vo.contentext;
+package com.coding17.easycms.web.vo.content;
 
 import com.coding17.easycms.web.base.BaseVo;
 
@@ -7,7 +7,7 @@ import com.coding17.easycms.web.base.BaseVo;
  * @author：系统生成
  * @version:1.0
  */
-public class Contentext extends BaseVo {
+public class ContentExt extends BaseVo {
 	private static final long serialVersionUID = 1L;
 	
 	/**

@@ -2,6 +2,7 @@ package com.coding17.easycms.web.vo.content;
 
 import java.util.Date;
 import com.coding17.easycms.web.base.BaseVo;
+import com.coding17.easycms.web.vo.channel.Channel;
 
 /**
  * 描述：</b><br>
@@ -31,6 +32,10 @@ public class Content extends BaseVo {
 	 *状态；1：正常，9：删除
 	 */
 	private Integer state;
+	
+	private ContentExt contentExt;
+	
+	private Channel channel;
 	
 	/**
 	 *获取文章ID
@@ -101,9 +106,24 @@ public class Content extends BaseVo {
 	public void setState(Integer state){
 		this.state = state;
 	}
-	
     
-    /**
+    public ContentExt getContentExt() {
+		return contentExt;
+	}
+
+	public void setContentExt(ContentExt contentExt) {
+		this.contentExt = contentExt;
+	}
+
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
+	/**
      * 重写toString()
      */
 	@Override
@@ -114,6 +134,8 @@ public class Content extends BaseVo {
     	tos.append("createTime=").append(this.createTime).append(",");
     	tos.append("pubState=").append(this.pubState).append(",");
     	tos.append("state=").append(this.state).append(",");
+    	tos.append("contentExt=").append(this.contentExt).append(",");
+    	tos.append("channel=").append(this.channel).append(",");
     	tos.append("]");
         return tos.toString();
     }

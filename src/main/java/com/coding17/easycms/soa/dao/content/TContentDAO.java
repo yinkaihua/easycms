@@ -1,5 +1,7 @@
 package com.coding17.easycms.soa.dao.content;
 
+import java.util.List;
+
 import com.coding17.easycms.soa.base.dao.ISuperDAO;
 import com.coding17.easycms.soa.entity.content.TContent;
 
@@ -10,4 +12,18 @@ import com.coding17.easycms.soa.entity.content.TContent;
  */
 public interface TContentDAO extends ISuperDAO<TContent> {
 
+	/**
+	 * 关联查询，内容，栏目
+	 * @param tContent
+	 * @return
+	 */
+	public List<TContent> selectListInfoByPagination(TContent tContent);
+	
+	/**
+	 * 关联查询数量，用于分页
+	 * @param tContent
+	 * @return
+	 */
+	public Integer selectListInfoCountByCondition(TContent tContent);
+	
 }
