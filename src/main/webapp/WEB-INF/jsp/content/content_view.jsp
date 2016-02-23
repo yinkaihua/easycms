@@ -59,7 +59,7 @@ $(function() {
 	});
 })
 function siteChangeEvent(newVal, oldVal) {
-	location.href="${_ctxPath}/channel/view?wc_p_context_sid="+newVal;
+	location.href="${_ctxPath}/channel/view?siteId="+newVal;
 }
 function createSubChannel() {
 	location.href="${_ctxPath}/channel/to_add?pid="+$(".easyui-tree").tree("getSelected").id;

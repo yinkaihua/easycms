@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 功能模块:  -->
+<mapper namespace="com.coding17.easycms.soa.entity.contentext.TContentExt" >
+
+	<!--通用表字段列表-->
+	<resultMap id="BaseResultMap" type="com.coding17.easycms.soa.entity.contentext.TContentExt">
+		<result column="CONTENT_ID" property="contentId" jdbcType="INTEGER"/>
+		<result column="TXT" property="txt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--通用表字段列表-->
+    
+	<!--user customize code start-->
+
+	<!--user customize code end  -->
+    
+	<!--通用查询条件组装-->
+	<sql id="whereContation">
+			<if test="contentId != null">
+				AND  `CONTENT_ID`=#{contentId,jdbcType=INTEGER}  
+			</if>
+			<if test="txt != null">
+				AND  `TXT`=#{txt,jdbcType=VARCHAR}  
+			</if>
+	</sql>
+	
+	<!--查询字段列表拼装-->
+	<sql id="baseColumnList">
+			 `CONTENT_ID`	 
+			,`TXT`
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: TContentExtEntityMapper.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt" >
+ 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	 	INSERT  INTO  T_CONTENT_EXT
+	 		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="contentId != null">
+					`CONTENT_ID`,
+					</if>
+					<if test="txt != null">
+					`TXT`,
+					</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="contentId != null">
+					 #{contentId,jdbcType=INTEGER},
+					</if>
+					<if test="txt != null">
+					 #{txt,jdbcType=VARCHAR},
+					</if>
+			</trim>
+	</insert>
+	
+	<!--
+	方法名称: update
+	调用路径: TContentExtEntityMapper.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt" >
+		UPDATE   T_CONTENT_EXT  	 
+	  	<set> 
+				<if test="txt != null">
+			 		`TXT` = #{txt,jdbcType=VARCHAR},
+			 	</if>
+		</set>
+		WHERE  
+			`CONTENT_ID` = #{contentId,jdbcType=INTEGER}		 
+	</update>
+	
+	<!--
+	方法名称: updateBak
+	调用路径: TContentExtEntityMapper.updateBak
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="updateBak" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt" >
+		UPDATE   T_CONTENT_EXT  	 
+	  	<set> 
+			 		`TXT` = #{txt,jdbcType=VARCHAR},
+		</set>
+		WHERE  
+			`CONTENT_ID` = #{contentId,jdbcType=INTEGER}		 
+	</update>
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径:TContentExtEntityMapper.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt">
+		DELETE 	FROM T_CONTENT_EXT 	 
+		WHERE 
+			`CONTENT_ID` = #{contentId,jdbcType=INTEGER}		 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: TContentExtEntityMapper.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt"  resultMap="BaseResultMap">
+		SELECT   
+		   <include refid="baseColumnList"/>
+		FROM   T_CONTENT_EXT         
+		WHERE
+				`CONTENT_ID` = #{contentId,jdbcType=INTEGER}		 
+	</select>
+	
+	<!--
+	方法名称: selectListByPagination
+	调用路径: TContentExtEntityMapper.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="selectListByPagination" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt"  resultMap="BaseResultMap">
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationPrefix"/>
+		SELECT   
+	 		<include refid="baseColumnList"/>
+		FROM   T_CONTENT_EXT          
+		WHERE 1=1
+		 	<include refid="whereContation"/>
+		 	<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		 	</if>
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationSuffix"/>
+	</select>
+	
+	<!--
+	方法名称: selectCountByCondition
+	调用路径: TContentExtEntityMapper.getPagenationList-count
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="selectCountByCondition" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt" resultType="int">
+		SELECT count(1)  FROM  T_CONTENT_EXT     
+		 WHERE 1=1
+		<include refid="whereContation"/>
+	</select>
+	
+	<!--
+	方法名称: getList
+	调用路径: TContentExtEntityMapper.getList
+	开发信息: 
+	处理信息: 根据条件查询记录
+	-->
+	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt"  resultMap="BaseResultMap">
+	   SELECT   
+	   		<include refid="baseColumnList"/>
+	   FROM   T_CONTENT_EXT           
+	   WHERE 1=1
+		<include refid="whereContation"/>
+		<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		</if>
+		limit 0,100
+	</select>
+	
+	
+</mapper>

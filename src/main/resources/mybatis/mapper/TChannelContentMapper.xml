@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 功能模块:  -->
+<mapper namespace="com.coding17.easycms.soa.entity.channelcontent.TChannelContent" >
+
+	<!--通用表字段列表-->
+	<resultMap id="BaseResultMap" type="com.coding17.easycms.soa.entity.channelcontent.TChannelContent">
+		<result column="CHANNEL_ID" property="channelId" jdbcType="INTEGER"/>
+		<result column="CONTENT_ID" property="contentId" jdbcType="INTEGER"/>
+    </resultMap>
+    <!--通用表字段列表-->
+    
+	<!--user customize code start-->
+
+	<!--user customize code end  -->
+    
+	<!--通用查询条件组装-->
+	<sql id="whereContation">
+			<if test="channelId != null">
+				AND  `CHANNEL_ID`=#{channelId,jdbcType=INTEGER}  
+			</if>
+			<if test="contentId != null">
+				AND  `CONTENT_ID`=#{contentId,jdbcType=INTEGER}  
+			</if>
+	</sql>
+	
+	<!--查询字段列表拼装-->
+	<sql id="baseColumnList">
+			 `CHANNEL_ID`	 
+			,`CONTENT_ID`
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: TChannelContentEntityMapper.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent" >
+ 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	 	INSERT  INTO  T_CHANNEL_CONTENT
+	 		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="channelId != null">
+					`CHANNEL_ID`,
+					</if>
+					<if test="contentId != null">
+					`CONTENT_ID`,
+					</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="channelId != null">
+					 #{channelId,jdbcType=INTEGER},
+					</if>
+					<if test="contentId != null">
+					 #{contentId,jdbcType=INTEGER},
+					</if>
+			</trim>
+	</insert>
+	
+	<!--
+	方法名称: update
+	调用路径: TChannelContentEntityMapper.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent" >
+		UPDATE   T_CHANNEL_CONTENT  	 
+	  	<set> 
+				<if test="channelId != null">
+			 		`CHANNEL_ID` = #{channelId,jdbcType=INTEGER},
+			 	</if>
+				<if test="contentId != null">
+			 		`CONTENT_ID` = #{contentId,jdbcType=INTEGER},
+			 	</if>
+		</set>
+		WHERE  
+	</update>
+	
+	<!--
+	方法名称: updateBak
+	调用路径: TChannelContentEntityMapper.updateBak
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="updateBak" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent" >
+		UPDATE   T_CHANNEL_CONTENT  	 
+	  	<set> 
+			 		`CHANNEL_ID` = #{channelId,jdbcType=INTEGER},
+			 		`CONTENT_ID` = #{contentId,jdbcType=INTEGER},
+		</set>
+		WHERE  
+	</update>
+	
+	
+	
+	<!--
+	方法名称: selectListByPagination
+	调用路径: TChannelContentEntityMapper.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="selectListByPagination" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent"  resultMap="BaseResultMap">
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationPrefix"/>
+		SELECT   
+	 		<include refid="baseColumnList"/>
+		FROM   T_CHANNEL_CONTENT          
+		WHERE 1=1
+		 	<include refid="whereContation"/>
+		 	<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		 	</if>
+		<!-- 分页条 -->
+		<include refid="CommonEntity.paginationSuffix"/>
+	</select>
+	
+	<!--
+	方法名称: selectCountByCondition
+	调用路径: TChannelContentEntityMapper.getPagenationList-count
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="selectCountByCondition" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent" resultType="int">
+		SELECT count(1)  FROM  T_CHANNEL_CONTENT     
+		 WHERE 1=1
+		<include refid="whereContation"/>
+	</select>
+	
+	<!--
+	方法名称: getList
+	调用路径: TChannelContentEntityMapper.getList
+	开发信息: 
+	处理信息: 根据条件查询记录
+	-->
+	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent"  resultMap="BaseResultMap">
+	   SELECT   
+	   		<include refid="baseColumnList"/>
+	   FROM   T_CHANNEL_CONTENT           
+	   WHERE 1=1
+		<include refid="whereContation"/>
+		<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		</if>
+		limit 0,100
+	</select>
+	
+	
+</mapper>

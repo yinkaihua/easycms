@@ -22,6 +22,15 @@
 	<mvc:resources location="/res/" mapping="/res/**" />
 	<mvc:resources location="/tlds/" mapping="/tlds/**" />
 
+	<!-- 自定义拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/channel/**"/>
+			<mvc:mapping path="/content/**"/>
+			<bean class="com.coding17.easycms.web.interceptor.SiteContextInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- @ResponseBody注解支持-开始 -->
     <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">

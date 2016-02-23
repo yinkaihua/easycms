@@ -17,6 +17,7 @@ import com.coding17.easycms.web.exception.CmsWebException;
 import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.SiteContext;
+import com.coding17.easycms.web.util.WebConst;
 import com.coding17.easycms.api.container.DictContainer;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.entity.site.TSite;
@@ -42,7 +43,7 @@ public class ChannelController extends BaseController<Channel> {
 	
 	@RequestMapping("/view")
 	public String view() {
-		TSite para = new TSite();
+		/*TSite para = new TSite();
 		para.setState(DictContainer.State.getValidState());
 		List<TSite> sites = tSiteService.selectListByCondition(para);
 		request.setAttribute("sites", sites);
@@ -57,11 +58,7 @@ public class ChannelController extends BaseController<Channel> {
 		
 		//已选择站点, siteId==-1表示用户自己不选择站点
 		if (siteId != null && siteId != -1) {
-			TChannel c = new TChannel();
-			c.setSiteId(siteId);
-			List<TChannel> list = tChannelService.selectListByCondition(c);
-//			List<Channel> channels = BeanConverter.listC(list, Channel.class);
-			request.setAttribute("channels", buildChannels(0, list));
+			
 			
 			SiteContext.set(request.getSession(), siteId);
 			
@@ -69,6 +66,13 @@ public class ChannelController extends BaseController<Channel> {
 			refreshP(p);
 		} else {
 			SiteContext.clear(request.getSession());
+		}*/
+		Integer sid = Integer.parseInt(request.getAttribute(WebConst.wc_a_req_sid).toString());
+		if (sid!=-1) {
+			TChannel c = new TChannel();
+			c.setSiteId(sid);
+			List<TChannel> list = tChannelService.selectListByCondition(c);
+			request.setAttribute("channels", buildChannels(0, list));
 		}
 		
 		return "channel/channel_view";
@@ -94,7 +98,7 @@ public class ChannelController extends BaseController<Channel> {
 	
 	@RequestMapping("/to_add")
 	public String toAdd() {
-		checkSite();
+		SiteContext.check(request.getSession());
 		if (p.getPid()!=null && p.getPid()!=0) {
 			TChannel para = new TChannel();
 			para.setId(p.getPid());
@@ -106,7 +110,7 @@ public class ChannelController extends BaseController<Channel> {
 	
 	@RequestMapping("/to_edit")
 	public String toEdit() {
-		checkSite();
+		SiteContext.check(request.getSession());
 		TChannel para = new TChannel();
 		para.setId(p.getId());
 		TChannel tc = tChannelService.getByPriKey(para);
@@ -125,7 +129,7 @@ public class ChannelController extends BaseController<Channel> {
 	@RequestMapping("/save")
 	public String save() {
 		LOG.info("=====>保存栏目，{}", p);
-		checkSite();
+		SiteContext.check(request.getSession());
 		TChannel para = BeanConverter.objectC(p, TChannel.class);
 		if (p.getId()==null) {
 			try {
@@ -186,12 +190,6 @@ public class ChannelController extends BaseController<Channel> {
 			}
 		}
 		return menus;
-	}
-	
-	private void checkSite() {
-		if (SiteContext.get(request.getSession())==null) {
-			throw new CmsWebException("未选择站点");
-		}
 	}
 	
 }
