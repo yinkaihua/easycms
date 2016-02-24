@@ -145,10 +145,14 @@ public class Content extends BaseVo {
     
 	public static Content fromEntity(TContent entity) {
 		Content vo = BeanConverter.objectC(entity, Content.class);
-		Channel c = BeanConverter.objectC(entity.getChannel(), Channel.class);
-		ContentExt e = BeanConverter.objectC(entity.getContentExt(), ContentExt.class);
-		vo.setChannel(c);
-		vo.setContentExt(e);
+		if (entity.getChannel()!=null) {
+			Channel c = BeanConverter.objectC(entity.getChannel(), Channel.class);
+			vo.setChannel(c);
+		}
+		if (entity.getContentExt()!=null) {
+			ContentExt e = BeanConverter.objectC(entity.getContentExt(), ContentExt.class);
+			vo.setContentExt(e);
+		}
 		return vo;
 	}
 }

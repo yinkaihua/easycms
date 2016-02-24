@@ -19,33 +19,39 @@
 	<a href="javascript:delChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <hr>
-<div class="easyui-layout" style="width:700px;height:200px;margin:20px;">
+<div class="easyui-layout" style="width:80%;height:200px;margin:20px;">
 	<div region="west" split="false" title="栏目" style="width:200px;">
 		<ul class="easyui-tree" style="margin:10px"></ul>
 	</div>
-	<div id="content" region="center" title="编辑面板" style="padding:5px;">
-		<table id="tt" class="easyui-datagrid" singleSelect=true style="width:100%;height:auto;">
-		<thead>
-			<tr>
-				<th field="id" width="80">栏目ID</th>
-				<th field="name" width="80">名称</th>
-				<th field="path" width="80">路径</th>
-				<th field="state" width="80">状态</th>
-				<th field="sort" width="80">排序</th>
-			</tr>
-		</thead>                         
-	</table>
+	<div id="content" region="center" title="内容" style="padding:5px;">
+		<table class="table table-bordered table-hover" style="width:800px; margin:20px">
+			<thead>
+				<tr class="success">
+					<td>文章ID</td>
+					<td>标题</td>
+					<td>栏目</td>
+					<td>发布时间</td>
+					<td>发布状态</td>
+					<td>状态</td>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${dicts}" var="s">
+			
+			</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
 <script type="text/javascript">
 $(function() {
 	$(".easyui-tree").tree({
-		data:${treejson},
+		data:eval('${treejson}'),
 		onClick:function(node) {
 			showContents(node);
 		}
 	});
-})
+});
 function siteChangeEvent(newVal, oldVal) {
 	location.href="${_ctxPath}/content/view?wc_p_context_sid="+newVal;
 }
@@ -58,13 +64,13 @@ function editChannel() {
 function showContents(node) {
 	var data = {channel:{}};
 	if (node.attributes.level==1) {
-		data["channel.pid"]=node.id;
+		data["channel.id"]=node.id;
 	} else if (node.attributes.level==2) {
 		data["channel.id"]=node.id;
 	}
-	$.getJSON("${_ctxPath}/content/list_ajax",data,function(ret) {
+	$.getJSON("${_ctxPath}/content/content_list_ajax",data,function(ret) {
 		if (ret.state=="0") {
-			$("#tt").datagrid("loadData", {rows:ret.data});
+			$("#tt").datagrid("loadData", {rows:ret.data.datas});
 		}
 	});
 }

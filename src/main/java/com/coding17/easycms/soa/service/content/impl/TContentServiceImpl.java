@@ -37,10 +37,10 @@ public class TContentServiceImpl extends BaseServiceImpl<TContent> implements TC
 	@Override
 	public Pagination<TContent> selectListInfoByPagination(TContent tContent) {
 		//数据校验
-		if (tContent.getPageNum()<=0) {
+		if (tContent.getPageNum()==null || tContent.getPageNum()<=0) {
 			tContent.setPageNum(Pagination.DEFAULT_PAGENUM);
 		}
-		if (tContent.getPageSize()<=0 || tContent.getPageSize()>Pagination.MAX_PAGESIZE) {
+		if (tContent.getPageSize()==null || tContent.getPageSize()<=0 || tContent.getPageSize()>Pagination.MAX_PAGESIZE) {
 			tContent.setPageSize(Pagination.DEFAULT_PAGESIZE);
 		}
 		List<TContent> datas = tContentDao.selectListInfoByPagination(tContent);

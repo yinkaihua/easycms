@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.entity.content.TContent;
 import com.coding17.easycms.soa.service.channel.TChannelService;
@@ -18,6 +19,8 @@ import com.coding17.easycms.soa.service.content.TContentService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.controller.channel.ChannelController;
 import com.coding17.easycms.web.exception.CmsWebException;
+import com.coding17.easycms.web.util.BeanConverter;
+import com.coding17.easycms.web.util.JsonUtil;
 import com.coding17.easycms.web.util.SiteContext;
 import com.coding17.easycms.web.util.TreeBuilder;
 import com.coding17.easycms.web.util.WebConst;
@@ -57,7 +60,7 @@ public class ContentController extends BaseController<Content> {
 		List<Channel> channels = new ArrayList<Channel>();
 		if (sid!=-1) {
 			//已选择站点，查询站点下的所有文章
-			TChannel c = new TChannel();
+			TChannel c = BeanConverter.objectC(p.getChannel(), TChannel.class);
 			c.setSiteId(sid);
 			TContent p = new TContent();
 			p.setChannel(c);
@@ -71,7 +74,6 @@ public class ContentController extends BaseController<Content> {
 			List<TChannel> channelList = tChannelService.selectListByCondition(c);
 			channels = ChannelController.buildChannels(0, channelList);
 			List<TreeNode> tree = TreeBuilder.build(channels, Channel.class, new String[] {"id","name","","","","level","subChannel"});
-			request.setAttribute("tree", tree);
 			request.setAttribute("treejson", JSONArray.fromObject(tree).toString());
 		}
 		request.setAttribute("contents", cs);
@@ -82,9 +84,7 @@ public class ContentController extends BaseController<Content> {
 	
 	@RequestMapping("/to_add")
 	public String toAdd() {
-		if (!SiteContext.isSelected(request.getSession())) {
-			throw new CmsWebException("未选择站点");
-		}
+		SiteContext.check(request.getSession());
 		Site site = SiteContext.get(request.getSession());
 		TChannel para = new TChannel();
 		para.setSiteId(site.getId());
@@ -99,10 +99,17 @@ public class ContentController extends BaseController<Content> {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/list_ajax")
+	@RequestMapping("/content_list_ajax")
 	public Map<String, Object> listAjax() {
-		Map<String, Object> json = new HashMap<String, Object>();
-		System.out.println(p);
-		return json;
+		if (!SiteContext.isSelected(request.getSession())) {
+			return JsonUtil.getFailJsonResult("未选择站点");
+		}
+		TChannel c = BeanConverter.objectC(p.getChannel(), TChannel.class);
+		c.setSiteId(SiteContext.get(request.getSession()).getId());
+		TContent para = BeanConverter.objectC(p, TContent.class);
+		para.setChannel(c);
+		para.setOrderby("id desc");
+		Pagination<TContent> pager = tContentService.selectListInfoByPagination(para);
+		return JsonUtil.getSuccJsonResult(pager);
 	}
 }

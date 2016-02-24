@@ -23,7 +23,9 @@ public class BeanConverter {
 	public static <E, T> T objectC(E e, Class<T> clazz) {
 		try {
 			T t = clazz.newInstance();
-			BeanUtils.copyProperties(e, t);
+			if (e!=null) { 
+				BeanUtils.copyProperties(e, t);
+			}
 			return t;
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
