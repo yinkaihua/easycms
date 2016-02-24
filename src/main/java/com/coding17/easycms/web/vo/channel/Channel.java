@@ -3,7 +3,9 @@ package com.coding17.easycms.web.vo.channel;
 import java.util.Date;
 import java.util.List;
 
+import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.web.base.BaseVo;
+import com.coding17.easycms.web.util.BeanConverter;
 
 /**
  * 描述：</b><br>
@@ -191,7 +193,7 @@ public class Channel extends BaseVo {
      */
 	@Override
     public String toString() {
-    	StringBuffer tos = new StringBuffer("TChannel[");
+    	StringBuffer tos = new StringBuffer("Channel[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("pid=").append(this.pid).append(",");
     	tos.append("siteId=").append(this.siteId).append(",");
@@ -205,5 +207,9 @@ public class Channel extends BaseVo {
         return tos.toString();
     }
     
+	public static Channel fromEntity(TChannel entity) {
+		return BeanConverter.objectC(entity, Channel.class);
+	}
+	
 }
 

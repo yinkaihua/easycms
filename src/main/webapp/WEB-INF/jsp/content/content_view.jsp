@@ -14,27 +14,14 @@
 <body>
 <%@ include file="/WEB-INF/jsp/site/site_selected.jsp" %>
 <div style="margin:20px">
-	<a href="${_ctxPath}/channel/to_add?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
-	<a href="javascript:createSubChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
+	<a href="${_ctxPath}/content/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新文章</a>
 	<a href="javascript:editChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
 	<a href="javascript:delChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <hr>
-<div class="easyui-layout" style="width:700px;height:200px;margin:50px;">
+<div class="easyui-layout" style="width:700px;height:200px;margin:20px;">
 	<div region="west" split="false" title="栏目" style="width:200px;">
-		<ul class="easyui-tree" style="margin:10px">
-			<li id="0"><span>栏目</span>
-				<ul>
-				<c:forEach items="${channels}" var="c">
-					<li id="${c.id}"><span>${c.name}</span>
-						<ul>
-							<c:forEach items="${c.subChannel}" var="s"><li id="${s.id}"><span>${s.name }</span></li></c:forEach>
-						</ul>
-					</li>
-				</c:forEach>
-				</ul>
-			</li>
-		</ul>
+		<ul class="easyui-tree" style="margin:10px"></ul>
 	</div>
 	<div id="content" region="center" title="编辑面板" style="padding:5px;">
 		<table id="tt" class="easyui-datagrid" singleSelect=true style="width:100%;height:auto;">
@@ -53,13 +40,14 @@
 <script type="text/javascript">
 $(function() {
 	$(".easyui-tree").tree({
+		data:${treejson},
 		onClick:function(node) {
-			showSubNodes(node.id);
+			showContents(node);
 		}
 	});
 })
 function siteChangeEvent(newVal, oldVal) {
-	location.href="${_ctxPath}/channel/view?siteId="+newVal;
+	location.href="${_ctxPath}/content/view?wc_p_context_sid="+newVal;
 }
 function createSubChannel() {
 	location.href="${_ctxPath}/channel/to_add?pid="+$(".easyui-tree").tree("getSelected").id;
@@ -67,8 +55,14 @@ function createSubChannel() {
 function editChannel() {
 	location.href="${_ctxPath}/channel/to_edit?id="+$("#tt").datagrid("getSelected").id;
 }
-function showSubNodes(id) {
-	$.getJSON("${_ctxPath}/channel/children_list_ajax?pid="+id,{},function(ret) {
+function showContents(node) {
+	var data = {channel:{}};
+	if (node.attributes.level==1) {
+		data["channel.pid"]=node.id;
+	} else if (node.attributes.level==2) {
+		data["channel.id"]=node.id;
+	}
+	$.getJSON("${_ctxPath}/content/list_ajax",data,function(ret) {
 		if (ret.state=="0") {
 			$("#tt").datagrid("loadData", {rows:ret.data});
 		}

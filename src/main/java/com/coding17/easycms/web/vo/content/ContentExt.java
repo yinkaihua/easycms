@@ -53,7 +53,7 @@ public class ContentExt extends BaseVo {
      */
 	@Override
     public String toString() {
-    	StringBuffer tos = new StringBuffer("TContentExt[");
+    	StringBuffer tos = new StringBuffer("ContentExt[");
     	tos.append("contentId=").append(this.contentId).append(",");
     	tos.append("txt=").append(this.txt).append(",");
     	tos.append("]");

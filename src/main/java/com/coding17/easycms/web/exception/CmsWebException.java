@@ -17,5 +17,9 @@ public class CmsWebException extends RuntimeException {
 	public CmsWebException(String msg) {
 		super(msg);
 	}
+	
+	public CmsWebException(Throwable e) {
+		super(e);
+	}
 
 }

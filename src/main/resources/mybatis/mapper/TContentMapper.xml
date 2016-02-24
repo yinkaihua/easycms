@@ -229,7 +229,7 @@
 	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.content.TContent"  resultMap="BaseResultMap">
 	   SELECT   
 	   		<include refid="baseColumnList"/>
-	   FROM   T_CONTENT           
+	   FROM   T_CONTENT c          
 	   WHERE 1=1
 		<include refid="whereContation"/>
 		<if test="orderby != null">
@@ -249,7 +249,13 @@
 	   WHERE 1=1 AND c.`ID`=e.`CONTENT_ID` AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
 		<include refid="whereContation"/>
 		<if test="channel.siteId != null">
-			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}  
+			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
+		</if>
+		<if test="channel.id != null">
+			AND  h.`ID`=#{channel.id,jdbcType=INTEGER}
+		</if>
+		<if test="channel.pid != null">
+			AND  h.`PID`=#{channel.pid,jdbcType=INTEGER}
 		</if>
 		<if test="orderby != null">
 		 	ORDER BY ${orderby}
@@ -267,7 +273,13 @@
 	   WHERE 1=1 AND c.`ID`=e.`CONTENT_ID` AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
 		<include refid="whereContation"/>
 		<if test="channel.siteId != null">
-			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}  
+			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
+		</if>
+		<if test="channel.id != null">
+			AND  h.`ID`=#{channel.id,jdbcType=INTEGER}
+		</if>
+		<if test="channel.pid != null">
+			AND  h.`PID`=#{channel.pid,jdbcType=INTEGER}
 		</if>
 	</select>
 </mapper>

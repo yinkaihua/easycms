@@ -162,7 +162,7 @@ public class Site extends BaseVo {
      */
 	@Override
     public String toString() {
-    	StringBuffer tos = new StringBuffer("TSite[");
+    	StringBuffer tos = new StringBuffer("Site[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("domain=").append(this.domain).append(",");
     	tos.append("name=").append(this.name).append(",");

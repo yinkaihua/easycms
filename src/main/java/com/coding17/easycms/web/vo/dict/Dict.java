@@ -125,7 +125,7 @@ public class Dict extends BaseVo {
      */
 	@Override
     public String toString() {
-    	StringBuffer tos = new StringBuffer("TDict[");
+    	StringBuffer tos = new StringBuffer("Dict[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("catalogCode=").append(this.catalogCode).append(",");
     	tos.append("key=").append(this.key).append(",");

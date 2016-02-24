@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.service.channel.TChannelService;
-import com.coding17.easycms.soa.service.site.TSiteService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.util.DictProperties;

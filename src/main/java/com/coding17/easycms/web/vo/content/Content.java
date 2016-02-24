@@ -1,7 +1,10 @@
 package com.coding17.easycms.web.vo.content;
 
 import java.util.Date;
+
+import com.coding17.easycms.soa.entity.content.TContent;
 import com.coding17.easycms.web.base.BaseVo;
+import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.vo.channel.Channel;
 
 /**
@@ -128,7 +131,7 @@ public class Content extends BaseVo {
      */
 	@Override
     public String toString() {
-    	StringBuffer tos = new StringBuffer("TContent[");
+    	StringBuffer tos = new StringBuffer("Content[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("title=").append(this.title).append(",");
     	tos.append("createTime=").append(this.createTime).append(",");
@@ -140,5 +143,13 @@ public class Content extends BaseVo {
         return tos.toString();
     }
     
+	public static Content fromEntity(TContent entity) {
+		Content vo = BeanConverter.objectC(entity, Content.class);
+		Channel c = BeanConverter.objectC(entity.getChannel(), Channel.class);
+		ContentExt e = BeanConverter.objectC(entity.getContentExt(), ContentExt.class);
+		vo.setChannel(c);
+		vo.setContentExt(e);
+		return vo;
+	}
 }
 

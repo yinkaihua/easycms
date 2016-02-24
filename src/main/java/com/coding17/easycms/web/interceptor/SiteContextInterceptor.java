@@ -28,7 +28,7 @@ public class SiteContextInterceptor extends HandlerInterceptorAdapter {
 			}
 		} else {
 			Integer sid = Integer.parseInt(_c_sid.toString());
-			if (sid == 0) {
+			if (sid == -1) {
 				SiteContext.clear(request.getSession());
 			} else {
 				SiteContext.set(request.getSession(), sid);

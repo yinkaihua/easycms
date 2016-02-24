@@ -20,7 +20,7 @@
 	<a href="javascript:delChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <hr>
-<div class="easyui-layout" style="width:700px;height:200px;margin:50px;">
+<div class="easyui-layout" style="width:700px;height:200px;margin:20px;">
 	<div region="west" split="false" title="栏目" style="width:200px;">
 		<ul class="easyui-tree" style="margin:10px">
 			<li id="0"><span>栏目</span>

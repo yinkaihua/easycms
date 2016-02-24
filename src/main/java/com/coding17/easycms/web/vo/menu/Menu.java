@@ -155,7 +155,7 @@ public class Menu extends BaseVo {
      */
 	@Override
     public String toString() {
-    	StringBuffer tos = new StringBuffer("TMenu[");
+    	StringBuffer tos = new StringBuffer("Menu[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("pid=").append(this.pid).append(",");
     	tos.append("level=").append(this.level).append(",");
