@@ -14,9 +14,16 @@ import com.coding17.easycms.soa.entity.channelcontent.TChannelContent;
 @Repository("tChannelContentDAO")
 public class TChannelContentDAOImpl extends SuperDAO<TChannelContent> implements TChannelContentDAO {
 
+	private static final String statement_deleteByContentId = "deleteByContentId";
+	
 	@Override
 	protected String getStatementPrefix() {
 		return TChannelContent.class.getName();
+	}
+
+	@Override
+	public Integer deleteByContentId(TChannelContent para) {
+		return getTemplate().delete(getStatementPrefix()+"."+statement_deleteByContentId, para);
 	}
 
 }

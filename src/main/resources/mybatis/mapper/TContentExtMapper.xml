@@ -37,9 +37,9 @@
 	处理信息: 保存记录
 	-->
  	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.contentext.TContentExt" >
- 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+ 		<!-- <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
-		</selectKey>
+		</selectKey> -->
 	 	INSERT  INTO  T_CONTENT_EXT
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 					<if test="contentId != null">

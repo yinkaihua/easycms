@@ -20,6 +20,7 @@
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
+		<property name="defaultAutoCommit" value="false"/>
 		<property name="maxActive" value="10" />
 		<property name="minIdle" value="1" />
 		<property name="maxIdle" value="5" />
@@ -49,20 +50,18 @@
 
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="delete*" propagation="REQUIRED" read-only="false"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="insert*" propagation="REQUIRED" read-only="false"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="update*" propagation="REQUIRED" read-only="false"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="find*" propagation="SUPPORTS" />
-			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="create*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="find*"   propagation="SUPPORTS" />
+			<tx:method name="get*"    propagation="SUPPORTS" />
 			<tx:method name="select*" propagation="SUPPORTS" />
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut id="pc" expression="execution(public * com.coding17.soa.service.*.impl.*.*(..))" /> <!--把事务控制在Service层 -->
+		<aop:pointcut id="pc" expression="execution(public * com.coding17.easycms.soa.service.*.impl.*.*(..))" /> <!--把事务控制在Service层 -->
 		<aop:advisor pointcut-ref="pc" advice-ref="transactionAdvice" />
 	</aop:config>
 

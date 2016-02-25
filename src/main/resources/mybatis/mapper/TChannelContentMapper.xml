@@ -37,9 +37,9 @@
 	处理信息: 保存记录
 	-->
  	<insert id="insert" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent" >
- 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+ 		<!-- <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
-		</selectKey>
+		</selectKey> -->
 	 	INSERT  INTO  T_CHANNEL_CONTENT
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 					<if test="channelId != null">
@@ -93,7 +93,17 @@
 		WHERE  
 	</update>
 	
-	
+	<!--
+	方法名称: deleteByContentId
+	调用路径:TChannelContentEntityMapper.deleteByContentId
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByContentId" parameterType="com.coding17.easycms.soa.entity.channelcontent.TChannelContent">
+		DELETE 	FROM T_CHANNEL_CONTENT 	 
+		WHERE 
+			`CONTENT_ID` = #{contentId,jdbcType=INTEGER}		 
+	</delete>
 	
 	<!--
 	方法名称: selectListByPagination

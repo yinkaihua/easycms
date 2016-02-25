@@ -13,18 +13,13 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/site/site_selected.jsp" %>
-<div style="margin:20px">
-	<a href="${_ctxPath}/content/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新文章</a>
-	<a href="javascript:editChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
-	<a href="javascript:delChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
-</div>
-<hr>
-<div class="easyui-layout" style="width:80%;height:200px;margin:20px;">
+<div class="easyui-layout" style="width:90%;height:700px;margin:20px;">
 	<div region="west" split="false" title="栏目" style="width:200px;">
 		<ul class="easyui-tree" style="margin:10px"></ul>
 	</div>
 	<div id="content" region="center" title="内容" style="padding:5px;">
-		<table class="table table-bordered table-hover" style="width:800px; margin:20px">
+	<iframe name="contentIframe" style="border:0; width:100%; height:100%"></iframe>
+		<%-- <table class="table table-bordered table-hover" style="width:800px; margin:20px">
 			<thead>
 				<tr class="success">
 					<td>文章ID</td>
@@ -40,7 +35,7 @@
 			
 			</c:forEach>
 			</tbody>
-		</table>
+		</table> --%>
 	</div>
 </div>
 <script type="text/javascript">
@@ -62,17 +57,7 @@ function editChannel() {
 	location.href="${_ctxPath}/channel/to_edit?id="+$("#tt").datagrid("getSelected").id;
 }
 function showContents(node) {
-	var data = {channel:{}};
-	if (node.attributes.level==1) {
-		data["channel.id"]=node.id;
-	} else if (node.attributes.level==2) {
-		data["channel.id"]=node.id;
-	}
-	$.getJSON("${_ctxPath}/content/content_list_ajax",data,function(ret) {
-		if (ret.state=="0") {
-			$("#tt").datagrid("loadData", {rows:ret.data.datas});
-		}
-	});
+	$("iframe[name='contentIframe']").attr("src", "${_ctxPath}/content/list?cid="+node.id);
 }
 function delChannel() {
 	var selectedRow = $("#tt").datagrid("getSelected");

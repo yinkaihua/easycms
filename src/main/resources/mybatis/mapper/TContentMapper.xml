@@ -80,7 +80,7 @@
  		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-	 	INSERT  INTO  T_CONTENT c
+	 	INSERT  INTO  T_CONTENT
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 					<if test="id != null">
 					`ID`,
@@ -244,9 +244,9 @@
 	<select id="selectListInfoByPagination" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
 	   <include refid="CommonEntity.paginationPrefix"/>
 	   SELECT   
-	   		<include refid="baseColumnList"/>, `TXT`, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
-	   FROM   T_CONTENT c,T_CONTENT_EXT e,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
-	   WHERE 1=1 AND c.`ID`=e.`CONTENT_ID` AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
+	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
+	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
 		<include refid="whereContation"/>
 		<if test="channel.siteId != null">
 			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
@@ -269,8 +269,8 @@
 	<select id="selectListInfoByPagination-count" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultType="int">
 	   SELECT   
 	   		COUNT(1)
-	   FROM   T_CONTENT c,T_CONTENT_EXT e,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
-	   WHERE 1=1 AND c.`ID`=e.`CONTENT_ID` AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
+	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
 		<include refid="whereContation"/>
 		<if test="channel.siteId != null">
 			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}

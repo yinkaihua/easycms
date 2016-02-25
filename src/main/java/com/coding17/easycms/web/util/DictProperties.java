@@ -26,4 +26,20 @@ public class DictProperties {
 	public static String getFailJsonState() {
 		return DictContainer.getValByKey("jsonstate", "fail");
 	}
+	
+	/**
+	 * 已生成静态页状态
+	 * @return
+	 */
+	public static String getAlreadyPubState() {
+		return DictContainer.getValByKey("pubstate", "yes");
+	}
+	
+	/**
+	 * 未生成静态页状态
+	 * @return
+	 */
+	public static String getNoPubState() {
+		return DictContainer.getValByKey("pubstate", "no");
+	}
 }

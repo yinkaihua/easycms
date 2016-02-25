@@ -24,4 +24,9 @@ public class WebConst {
 	 */
 	public static final String wc_a_req_allsites = "wc_a_req_allsites";
 	
+	/**
+	 * request中保存的栏目ID
+	 */
+	public static final String wc_a_req_cid = "wc_a_req_cid";
+	
 }

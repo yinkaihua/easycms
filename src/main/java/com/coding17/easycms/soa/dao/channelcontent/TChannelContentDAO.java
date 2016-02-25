@@ -10,4 +10,6 @@ import com.coding17.easycms.soa.entity.channelcontent.TChannelContent;
  */
 public interface TChannelContentDAO extends ISuperDAO<TChannelContent> {
 
+	public Integer deleteByContentId(TChannelContent entity);
+	
 }

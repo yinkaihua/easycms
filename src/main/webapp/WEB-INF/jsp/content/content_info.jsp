@@ -16,25 +16,47 @@
     <script type="text/javascript" src="${_staticRes}/umeditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
-<div style="margin:20px">
-	栏目选择：<select name="channel" class="easyui-combobox" style="width:300px">
-		<option value="-1">无</option>
-		<c:forEach items="${channels}" var="s">
-		<option value="${s.id}">${s.name}</option>
-		</c:forEach>
+<div style="margin:20px;">
+	<label for="name">当前栏目：</label>${channel.name}
+</div>
+<form action="${_ctxPath}/content/save.htm" method="post" id="form">
+<input type="hidden" name="channel.id" value="${channel.id}">
+<input type="hidden" name="contentExt.txt" id="txt">
+<div style="margin:20px;">
+	<label for="name">标题</label>
+	<input name="title" type="text" class="form-control" id="title" placeholder="请输入标题" autocomplete="off"/>
+</div>
+<div style="margin:20px; display:none;">
+	<label for="name">状态</label>
+	<select name="state" class="easyui-combobox" style="width:100px">
+		<option value="1" selected="selected">是</option>
+		<option value="9">否</option>
 	</select>
 </div>
 <div style="margin:20px;">
-	<label for="name">标题</label>
-	<input type="text" class="form-control" id="name" placeholder="请输入标题"/>
+	<label for="name">内容</label>
+	<script type="text/plain" id="editor" style="width:100%;height:350px;"></script>
 </div>
 <div style="margin:20px;">
-	<label for="name">内容</label>
-	<script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
+	<a href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
 </div>
+</form>
 <script type="text/javascript">
 //实例化编辑器
-var um = UM.getEditor("myEditor");
+var um = UM.getEditor("editor");
+function submitContent() {
+	if ($("#title").val()=="") {
+		alert("标题不能为空");
+		return;
+	}
+	var txt = UM.getEditor("editor").getAllHtml();
+	if (txt=="") {
+		alert("内容不能为空");
+		return;
+	}
+	$("#txt").val(txt);
+	$("#form").submit();
+}
 </script>
 </body>
 </html>

@@ -20,6 +20,8 @@ public class BaseController<P extends BaseVo> {
 
 	protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 	
+	protected static final String ERROR_PAGE = "common/error";
+	
 	/**
 	 * 请求对象
 	 */
@@ -62,6 +64,11 @@ public class BaseController<P extends BaseVo> {
 			LOG.error("返回信息失败==>", e);
 		}
 		return null;
+	}
+	
+	protected String error(String errormsg) {
+		request.setAttribute("ex", errormsg);
+		return ERROR_PAGE;
 	}
 	
 }

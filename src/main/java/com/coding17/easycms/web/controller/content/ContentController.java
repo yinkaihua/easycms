@@ -1,32 +1,29 @@
 package com.coding17.easycms.web.controller.content;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.entity.content.TContent;
+import com.coding17.easycms.soa.entity.contentext.TContentExt;
 import com.coding17.easycms.soa.service.channel.TChannelService;
 import com.coding17.easycms.soa.service.content.TContentService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.controller.channel.ChannelController;
-import com.coding17.easycms.web.exception.CmsWebException;
 import com.coding17.easycms.web.util.BeanConverter;
-import com.coding17.easycms.web.util.JsonUtil;
+import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.SiteContext;
 import com.coding17.easycms.web.util.TreeBuilder;
 import com.coding17.easycms.web.util.WebConst;
 import com.coding17.easycms.web.vo.channel.Channel;
 import com.coding17.easycms.web.vo.content.Content;
-import com.coding17.easycms.web.vo.site.Site;
 import com.coding17.easycms.web.vo.tree.TreeNode;
 
 import net.sf.json.JSONArray;
@@ -83,33 +80,75 @@ public class ContentController extends BaseController<Content> {
 	}
 	
 	@RequestMapping("/to_add")
-	public String toAdd() {
+	public String toAdd(Integer cid) {
 		SiteContext.check(request.getSession());
-		Site site = SiteContext.get(request.getSession());
-		TChannel para = new TChannel();
-		para.setSiteId(site.getId());
-		para.setOrderby("sort asc");
-		List<TChannel> list = tChannelService.selectListByCondition(para);
-		List<Channel> channels = new ArrayList<Channel>();
-		for (TChannel c : list) {
-			channels.add(Channel.fromEntity(c));
+		if (cid == null) {
+			return error("未指定栏目");
 		}
-		request.setAttribute("channels", channels);
+		//查询当前栏目
+		TChannel para = new TChannel();
+		para.setId(cid);
+		TChannel t = tChannelService.getByPriKey(para);
+		Channel c = BeanConverter.objectC(t, Channel.class);
+		request.setAttribute("channel", c);
 		return "content/content_info";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/content_list_ajax")
-	public Map<String, Object> listAjax() {
-		if (!SiteContext.isSelected(request.getSession())) {
-			return JsonUtil.getFailJsonResult("未选择站点");
+	@RequestMapping("/save")
+	public String save() {
+		LOG.info("=====>发布文章{}", p);
+		//参数校验
+		if (p.getChannel().getId()==null) {
+			return error("参数错误：栏目ID为空");
 		}
-		TChannel c = BeanConverter.objectC(p.getChannel(), TChannel.class);
-		c.setSiteId(SiteContext.get(request.getSession()).getId());
-		TContent para = BeanConverter.objectC(p, TContent.class);
+		//保存文章
+		TContent content = BeanConverter.objectC(p, TContent.class);
+		TContentExt ext = BeanConverter.objectC(p.getContentExt(), TContentExt.class);
+		TChannel channel = BeanConverter.objectC(p.getChannel(), TChannel.class);
+		content.setContentExt(ext);
+		content.setChannel(channel);
+		content.setCreateTime(new Date());
+		content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
+		try {
+			content = tContentService.createContent(content);
+		} catch (Exception ex) {
+			LOG.error("=====>发布文章失败，{}", p, ex);
+		}
+		
+		return list(p.getChannel().getId());
+	}
+	
+	@RequestMapping("/list")
+	public String list(Integer cid) {
+		SiteContext.check(request.getSession());
+		TChannel c = new TChannel();
+		c.setId(cid);
+		TContent para = new TContent();
 		para.setChannel(c);
 		para.setOrderby("id desc");
-		Pagination<TContent> pager = tContentService.selectListInfoByPagination(para);
-		return JsonUtil.getSuccJsonResult(pager);
+		Pagination<TContent> pagination = tContentService.selectListInfoByPagination(para);	
+		List<TContent> tContents = pagination.getDatas();
+		
+		List<Content> contents = new ArrayList<Content>();
+		for (TContent tc : tContents) {
+			contents.add(Content.fromEntity(tc));
+		}
+		request.setAttribute("contents", contents);
+		request.setAttribute("cid", cid);
+		return "content/content_list";
+	}
+	
+	@RequestMapping("/remove")
+	public String remove(Integer cid) {
+		LOG.info("=====>删除文章{}", p);
+		SiteContext.check(request.getSession());
+		TContent para = new TContent();
+		para.setId(p.getId());
+		try {
+			tContentService.deleteContent(para);
+		} catch (Exception ex) {
+			LOG.info("=====>删除文章失败，{}", p, ex);
+		}
+		return list(cid);
 	}
 }

@@ -1,7 +1,5 @@
 package com.coding17.easycms.soa.service.content;
 
-import java.util.List;
-
 import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.base.service.BaseService;
 import com.coding17.easycms.soa.entity.content.TContent;
@@ -19,5 +17,19 @@ public interface TContentService extends BaseService<TContent> {
 	 * @return
 	 */
 	public Pagination<TContent> selectListInfoByPagination(TContent tContent);
+	
+	/**
+	 * 发布文章
+	 * @param content
+	 * @return
+	 */
+	public TContent createContent(TContent content);
+	
+	/**
+	 * 删除文章
+	 * @param content
+	 * @return
+	 */
+	public TContent deleteContent(TContent content);
 	
 }
