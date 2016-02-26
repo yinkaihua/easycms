@@ -43,7 +43,7 @@
 			<td><ec:dict catalog="state" code="${s.state }"/></td>
 			<td>
 				<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a>
-				<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化</a>
+				<a href="javascript:statiz(${s.id})" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化</a>
 				<a href="javascript:delContent(${s.id})" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 			</td>
 		</tr>
@@ -68,6 +68,11 @@ function delContent(id) {
 	if (confirm("确认删除文章？")) {
 		location.href="${_ctxPath}/content/remove.htm?cid=${cid}&id="+id;
 	}
+}
+function statiz(id) {
+	$.getJSON("${_ctxPath}/gen/statiz.htm", {ids:id}, function(ret) {
+		
+	});
 }
 </script>
 </body>

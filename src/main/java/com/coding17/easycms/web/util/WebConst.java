@@ -10,6 +10,11 @@ package com.coding17.easycms.web.util;
 public class WebConst {
 
 	/**
+	 * webapp 物理路径
+	 */
+	public static String wc_webapp_root_path = "";
+	
+	/**
 	 * 站点参数名称
 	 */
 	public static final String wc_p_context_sid = "wc_p_context_sid";

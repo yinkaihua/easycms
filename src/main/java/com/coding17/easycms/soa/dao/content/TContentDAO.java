@@ -26,4 +26,11 @@ public interface TContentDAO extends ISuperDAO<TContent> {
 	 */
 	public Integer selectListInfoCountByCondition(TContent tContent);
 	
+	/**
+	 * 关联查询，主键
+	 * @param tContent
+	 * @return
+	 */
+	public TContent findInfoByPriKey(TContent tContent);
+	
 }

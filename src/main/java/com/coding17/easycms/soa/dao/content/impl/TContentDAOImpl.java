@@ -33,4 +33,9 @@ public class TContentDAOImpl extends SuperDAO<TContent> implements TContentDAO {
 		return selectCountByCondition(getStatementPrefix() + ".selectListInfoByPagination-count", tContent);
 	}
 
+	@Override
+	public TContent findInfoByPriKey(TContent tContent) {
+		return getTemplate().selectOne(getStatementPrefix() + ".findInfoByPriKey", tContent);
+	}
+
 }

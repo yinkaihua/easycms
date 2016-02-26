@@ -32,4 +32,11 @@ public interface TContentService extends BaseService<TContent> {
 	 */
 	public TContent deleteContent(TContent content);
 	
+	/**
+	 * 关联查询，ID
+	 * @param content
+	 * @return
+	 */
+	public TContent findInfoByPriKey(TContent content);
+	
 }

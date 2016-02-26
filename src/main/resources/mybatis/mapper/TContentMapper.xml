@@ -188,6 +188,20 @@
 	</select>
 	
 	<!--
+	方法名称: findByPriKey
+	调用路径: TContentEntityMapper.findInfoByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findInfoByPriKey" parameterType="com.coding17.easycms.soa.entity.content.TContent"  resultMap="ContentInfoMap">
+		SELECT   
+	   		<include refid="baseColumnList"/>,e.`TXT`, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
+	   FROM   T_CONTENT c,T_CONTENT_EXT e, T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND c.`ID`=e.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
+			AND c.`ID` = #{id,jdbcType=INTEGER}		 
+	</select>
+	
+	<!--
 	方法名称: selectListByPagination
 	调用路径: TContentEntityMapper.getPagenationList
 	开发信息: 

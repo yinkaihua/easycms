@@ -34,7 +34,7 @@ public class DictContainer {
 		if (tDictService == null) {
 			tDictService = SpringBeanUtil.getBean("tDictService", TDictService.class);
 		}
-		LOG.info("==============>字典Container初始化");
+		LOG.info("=====>字典Container初始化");
 		Map<String, List<Dict>> dictTmp = new HashMap<String, List<Dict>>();
 		try {
 			TDict param = new TDict();
@@ -52,9 +52,9 @@ public class DictContainer {
 				dictTmp.put(d.getCatalogCode(), dictList);
 			}
 			dict = dictTmp;
-			LOG.info("==============>字典Container初始化成功，用时：{}，dict：{}", (System.currentTimeMillis() - now), dict);
+			LOG.info("=====>字典Container初始化成功，用时：{}，dict：{}", (System.currentTimeMillis() - now), dict);
 		} catch (Exception ex) {
-			LOG.error("==============>字典Container初始化失败", ex);
+			LOG.error("=====>字典Container初始化失败", ex);
 		}
 	}
 	

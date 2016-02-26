@@ -114,4 +114,9 @@ public class TContentServiceImpl extends BaseServiceImpl<TContent> implements TC
 		return content;
 	}
 
+	@Override
+	public TContent findInfoByPriKey(TContent content) {
+		return tContentDao.findInfoByPriKey(content);
+	}
+
 }

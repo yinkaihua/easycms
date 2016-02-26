@@ -44,7 +44,7 @@ public class TreeBuilder {
 	}
 	
 	/**
-     * 构造树形结果
+     * 构造树形结点
 	 * @param t    
 	 * @param clazz
 	 * @param fields 对应类，[0]id,[1]text,[2]iconCls,[3]state,[4]checked,[5]attributes(逗号分隔多个字段),[6]children
