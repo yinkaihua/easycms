@@ -26,6 +26,13 @@ public interface TContentService extends BaseService<TContent> {
 	public TContent createContent(TContent content);
 	
 	/**
+	 * 更新文章
+	 * @param content
+	 * @return
+	 */
+	public TContent updateContent(TContent content);
+	
+	/**
 	 * 删除文章
 	 * @param content
 	 * @return
@@ -37,6 +44,6 @@ public interface TContentService extends BaseService<TContent> {
 	 * @param content
 	 * @return
 	 */
-	public TContent findInfoByPriKey(TContent content);
+	public TContent getInfoByPriKey(TContent content);
 	
 }

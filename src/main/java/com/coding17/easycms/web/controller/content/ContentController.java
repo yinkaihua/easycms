@@ -47,12 +47,6 @@ public class ContentController extends BaseController<Content> {
 	@RequestMapping("/view")
 	public String view() {
 		Integer sid = Integer.parseInt(request.getAttribute(WebConst.wc_a_req_sid).toString());
-		/*if (sid!=-1) {
-			TChannel c = new TChannel();
-			c.setSiteId(sid);
-			List<TChannel> list = tChannelService.selectListByCondition(c);
-			request.setAttribute("channels", ChannelController.buildChannels(0, list));
-		}*/
 		List<Content> cs = new ArrayList<Content>();
 		List<Channel> channels = new ArrayList<Channel>();
 		if (sid!=-1) {
@@ -79,7 +73,7 @@ public class ContentController extends BaseController<Content> {
 		return "content/content_view";
 	}
 	
-	@RequestMapping("/to_add")
+	@RequestMapping("/to_add.htm")
 	public String toAdd(Integer cid) {
 		SiteContext.check(request.getSession());
 		if (cid == null) {
@@ -94,31 +88,59 @@ public class ContentController extends BaseController<Content> {
 		return "content/content_info";
 	}
 	
-	@RequestMapping("/save")
+	@RequestMapping("/save.htm")
 	public String save() {
 		LOG.info("=====>发布文章{}", p);
+		SiteContext.check(request.getSession());
 		//参数校验
 		if (p.getChannel().getId()==null) {
 			return error("参数错误：栏目ID为空");
 		}
-		//保存文章
-		TContent content = BeanConverter.objectC(p, TContent.class);
-		TContentExt ext = BeanConverter.objectC(p.getContentExt(), TContentExt.class);
-		TChannel channel = BeanConverter.objectC(p.getChannel(), TChannel.class);
-		content.setContentExt(ext);
-		content.setChannel(channel);
-		content.setCreateTime(new Date());
-		content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
-		try {
-			content = tContentService.createContent(content);
-		} catch (Exception ex) {
-			LOG.error("=====>发布文章失败，{}", p, ex);
+		if (p.getId()==null) {
+			//保存文章
+			TContent content = BeanConverter.objectC(p, TContent.class);
+			TContentExt ext = BeanConverter.objectC(p.getContentExt(), TContentExt.class);
+			TChannel channel = BeanConverter.objectC(p.getChannel(), TChannel.class);
+			content.setContentExt(ext);
+			content.setChannel(channel);
+			content.setCreateTime(new Date());
+			content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
+			try {
+				content = tContentService.createContent(content);
+			} catch (Exception ex) {
+				LOG.error("=====>发布文章失败，{}", p, ex);
+			}
+		} else {
+			//编辑文章
+			TContent content = BeanConverter.objectC(p, TContent.class);
+			TContentExt ext = BeanConverter.objectC(p.getContentExt(), TContentExt.class);
+			TChannel channel = BeanConverter.objectC(p.getChannel(), TChannel.class);
+			content.setContentExt(ext);
+			content.setChannel(channel);
+			try {
+				content = tContentService.updateContent(content);
+			} catch (Exception ex) {
+				LOG.error("=====>编辑文章失败，{}", p, ex);
+			}
 		}
-		
 		return list(p.getChannel().getId());
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping("/to_edit.htm")
+	public String toEdit() {
+		LOG.info("=====>编辑文章{}", p);
+		SiteContext.check(request.getSession());
+		TContent para = new TContent();
+		para.setId(p.getId());
+		TContent tContent = tContentService.getInfoByPriKey(para);
+		Content content = Content.fromEntity(tContent);
+		request.setAttribute("contents", content);
+		request.setAttribute("channel", content.getChannel());
+		request.setAttribute("isEdit", "yes");
+		return "content/content_info";
+	}
+	
+	@RequestMapping("/list.htm")
 	public String list(Integer cid) {
 		SiteContext.check(request.getSession());
 		TChannel c = new TChannel();

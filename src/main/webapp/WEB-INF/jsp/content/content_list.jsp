@@ -14,7 +14,7 @@
 </head>
 <body>
 <div style="margin:20px;">
-	<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
+	<a href="${_ctxPath}/content/to_add.htm?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
 	<a href="${_ctxPath}/content/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 	<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">页面静态化</a>
 </div>
@@ -42,7 +42,7 @@
 			<td><ec:dict catalog="pubstate" code="${s.pubState }"/></td>
 			<td><ec:dict catalog="state" code="${s.state }"/></td>
 			<td>
-				<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a>
+				<a href="${_ctxPath}/content/to_edit.htm?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a>
 				<a href="javascript:statiz(${s.id})" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化</a>
 				<a href="javascript:delContent(${s.id})" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 			</td>

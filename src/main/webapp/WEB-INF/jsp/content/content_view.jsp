@@ -50,31 +50,8 @@ $(function() {
 function siteChangeEvent(newVal, oldVal) {
 	location.href="${_ctxPath}/content/view?wc_p_context_sid="+newVal;
 }
-function createSubChannel() {
-	location.href="${_ctxPath}/channel/to_add?pid="+$(".easyui-tree").tree("getSelected").id;
-}
-function editChannel() {
-	location.href="${_ctxPath}/channel/to_edit?id="+$("#tt").datagrid("getSelected").id;
-}
 function showContents(node) {
-	$("iframe[name='contentIframe']").attr("src", "${_ctxPath}/content/list?cid="+node.id);
-}
-function delChannel() {
-	var selectedRow = $("#tt").datagrid("getSelected");
-	if (selectedRow==null) {
-		alert("当前没有选中的栏目");
-		return;
-	}
-	var id = selectedRow.id;
-	$.getJSON("${_ctxPath}/channel/has_children?id="+id,{},function(ret) {
-		if (ret.state=="1") {
-			alert(ret.msg);
-		} else {
-			if (confirm("确认删除栏目？")) {
-				location.href="${_ctxPath}/channel/remove?id="+id;
-			}
-		}
-	});
+	$("iframe[name='contentIframe']").attr("src", "${_ctxPath}/content/list.htm?cid="+node.id);
 }
 </script>
 </body>

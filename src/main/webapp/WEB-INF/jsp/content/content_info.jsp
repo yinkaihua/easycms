@@ -20,23 +20,24 @@
 	<label for="name">当前栏目：</label>${channel.name}
 </div>
 <form action="${_ctxPath}/content/save.htm" method="post" id="form">
+<input type="hidden" name="id" value="${contents.id}">
 <input type="hidden" name="channel.id" value="${channel.id}">
 <input type="hidden" name="contentExt.txt" id="txt">
 <div style="margin:20px;">
 	<label for="name">标题</label>
-	<input name="title" type="text" class="form-control" id="title" placeholder="请输入标题" autocomplete="off"/>
+	<input name="title" type="text" class="form-control" id="title" placeholder="请输入标题" autocomplete="off" value="${contents.title}"/>
 </div>
 <div style="margin:20px;">
 	<label for="name">SEO标题</label>
-	<input name="metaTitle" type="text" class="form-control" id="metaTitle" placeholder="请输入SEO标题" autocomplete="off"/>
+	<input name="metaTitle" type="text" class="form-control" id="metaTitle" placeholder="请输入SEO标题" autocomplete="off" value="${contents.metaTitle}"/>
 </div>
 <div style="margin:20px;">
 	<label for="name">SEO关键字</label>
-	<input name="metaKeywords" type="text" class="form-control" id="metaKeywords" placeholder="请输入SEO关键字" autocomplete="off"/>
+	<input name="metaKeywords" type="text" class="form-control" id="metaKeywords" placeholder="请输入SEO关键字" autocomplete="off" value="${contents.metaKeywords}"/>
 </div>
 <div style="margin:20px;">
 	<label for="name">SEO描述</label>
-	<input name="metaDescription" type="text" class="form-control" id="metaDescription" placeholder="请输入SEO描述" autocomplete="off"/>
+	<input name="metaDescription" type="text" class="form-control" id="metaDescription" placeholder="请输入SEO描述" autocomplete="off" value="${contents.metaDescription}"/>
 </div>
 <div style="margin:20px; display:none;">
 	<label for="name">状态</label>
@@ -47,7 +48,7 @@
 </div>
 <div style="margin:20px;">
 	<label for="name">内容</label>
-	<script type="text/plain" id="editor" style="width:100%;height:350px;"></script>
+	<script type="text/plain" id="editor" style="width:100%;height:350px;">${contents.contentExt.txt }</script>
 </div>
 <div style="margin:20px;">
 	<a href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
