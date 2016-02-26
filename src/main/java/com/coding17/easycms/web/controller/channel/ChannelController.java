@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.entity.channel.TChannel;
+import com.coding17.easycms.soa.entity.content.TContent;
 import com.coding17.easycms.soa.service.channel.TChannelService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.util.BeanConverter;
@@ -20,6 +22,7 @@ import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.SiteContext;
 import com.coding17.easycms.web.util.WebConst;
 import com.coding17.easycms.web.vo.channel.Channel;
+import com.coding17.easycms.web.vo.content.Content;
 
  /**
  * 描述：</b><br>
@@ -145,6 +148,17 @@ public class ChannelController extends BaseController<Channel> {
 			LOG.error("=====>删除栏目失败，{}", p, ex);
 		}
 		return view();
+	}
+	
+	@RequestMapping("/list.htm")
+	public String list() {
+		SiteContext.check(request.getSession());
+		TChannel c = new TChannel();
+		c.setPid(p.getPid());
+		List<TChannel> tChannels = tChannelService.selectListByCondition(c);
+		List<Channel> channels = BeanConverter.listC(tChannels, Channel.class);
+		request.setAttribute("channels", channels);
+		return "channel/channel_list";
 	}
 	
 	public static List<Channel> buildChannels(int pid, List<TChannel> tChannels) {

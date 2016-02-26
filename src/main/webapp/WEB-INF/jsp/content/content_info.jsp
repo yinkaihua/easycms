@@ -26,6 +26,18 @@
 	<label for="name">标题</label>
 	<input name="title" type="text" class="form-control" id="title" placeholder="请输入标题" autocomplete="off"/>
 </div>
+<div style="margin:20px;">
+	<label for="name">SEO标题</label>
+	<input name="metaTitle" type="text" class="form-control" id="metaTitle" placeholder="请输入SEO标题" autocomplete="off"/>
+</div>
+<div style="margin:20px;">
+	<label for="name">SEO关键字</label>
+	<input name="metaKeywords" type="text" class="form-control" id="metaKeywords" placeholder="请输入SEO关键字" autocomplete="off"/>
+</div>
+<div style="margin:20px;">
+	<label for="name">SEO描述</label>
+	<input name="metaDescription" type="text" class="form-control" id="metaDescription" placeholder="请输入SEO描述" autocomplete="off"/>
+</div>
 <div style="margin:20px; display:none;">
 	<label for="name">状态</label>
 	<select name="state" class="easyui-combobox" style="width:100px">
