@@ -71,7 +71,7 @@ function delContent(id) {
 }
 function statiz(id) {
 	$.getJSON("${_ctxPath}/gen/statiz.htm", {ids:id}, function(ret) {
-		
+		location.reload();
 	});
 }
 </script>

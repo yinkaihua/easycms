@@ -14,6 +14,7 @@ import com.coding17.easycms.soa.entity.content.TContent;
 import com.coding17.easycms.soa.service.content.TContentService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.util.BeanConverter;
+import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.FileUtil;
 import com.coding17.easycms.web.util.JsonUtil;
 import com.coding17.easycms.web.util.SiteContext;
@@ -60,6 +61,10 @@ public class StaticPageController extends BaseController<Content> {
 				FileUtil.write(getFilePath(SiteContext.get(request.getSession()),
 						BeanConverter.objectC(tContent.getChannel(), Channel.class),
 						BeanConverter.objectC(tContent, Content.class)), html);
+				para = new TContent();
+				para.setId(Integer.parseInt(id));
+				para.setPubState(Integer.parseInt(DictProperties.getAlreadyPubState()));
+				tContentService.update(para);
 			} catch (Exception ex) {
 				result.put(id, "生成失败，"+ex.getMessage());
 			}
