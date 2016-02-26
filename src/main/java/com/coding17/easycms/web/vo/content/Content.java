@@ -24,6 +24,18 @@ public class Content extends BaseVo {
 	 */
 	private String title;
 	/**
+	 *SEO标题
+	 */
+	private String metaTitle;
+	/**
+	 *SEO关键字
+	 */
+	private String metaKeywords;
+	/**
+	 *SEO描述
+	 */
+	private String metaDescription;
+	/**
 	 *创建时间
 	 */
 	private Date createTime;
@@ -66,6 +78,48 @@ public class Content extends BaseVo {
 	 */
 	public void setTitle(String title){
 		this.title = title;
+	}
+	
+	/**
+	 *获取SEO标题
+	 */
+	public String getMetaTitle(){
+		return this.metaTitle;
+	}
+	
+	/**
+	 *设置SEO标题
+	 */
+	public void setMetaTitle(String metaTitle){
+		this.metaTitle = metaTitle;
+	}
+	
+	/**
+	 *获取SEO关键字
+	 */
+	public String getMetaKeywords(){
+		return this.metaKeywords;
+	}
+	
+	/**
+	 *设置SEO关键字
+	 */
+	public void setMetaKeywords(String metaKeywords){
+		this.metaKeywords = metaKeywords;
+	}
+	
+	/**
+	 *获取SEO描述
+	 */
+	public String getMetaDescription(){
+		return this.metaDescription;
+	}
+	
+	/**
+	 *设置SEO描述
+	 */
+	public void setMetaDescription(String metaDescription){
+		this.metaDescription = metaDescription;
 	}
 	
 	/**
@@ -134,6 +188,9 @@ public class Content extends BaseVo {
     	StringBuffer tos = new StringBuffer("Content[");
     	tos.append("id=").append(this.id).append(",");
     	tos.append("title=").append(this.title).append(",");
+    	tos.append("metaTitle=").append(this.metaTitle).append(",");
+    	tos.append("metaKeywords=").append(this.metaKeywords).append(",");
+    	tos.append("metaDescription=").append(this.metaDescription).append(",");
     	tos.append("createTime=").append(this.createTime).append(",");
     	tos.append("pubState=").append(this.pubState).append(",");
     	tos.append("state=").append(this.state).append(",");

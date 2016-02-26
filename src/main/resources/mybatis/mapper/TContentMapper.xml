@@ -7,6 +7,9 @@
 	<resultMap id="BaseResultMap" type="com.coding17.easycms.soa.entity.content.TContent">
 		<result column="ID" property="id" jdbcType="INTEGER"/>
 		<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+		<result column="META_TITLE" property="metaTitle" jdbcType="VARCHAR"/>
+		<result column="META_KEYWORDS" property="metaKeywords" jdbcType="VARCHAR"/>
+		<result column="META_DESCRIPTION" property="metaDescription" jdbcType="VARCHAR"/>
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
 		<result column="PUB_STATE" property="pubState" jdbcType="INTEGER"/>
 		<result column="STATE" property="state" jdbcType="INTEGER"/>
@@ -17,6 +20,9 @@
     <resultMap id="ContentInfoMap" type="com.coding17.easycms.soa.entity.content.TContent">
 		<result column="ID" property="id" jdbcType="INTEGER"/>
 		<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+		<result column="META_TITLE" property="metaTitle" jdbcType="VARCHAR"/>
+		<result column="META_KEYWORDS" property="metaKeywords" jdbcType="VARCHAR"/>
+		<result column="META_DESCRIPTION" property="metaDescription" jdbcType="VARCHAR"/>
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
 		<result column="PUB_STATE" property="pubState" jdbcType="INTEGER"/>
 		<result column="STATE" property="state" jdbcType="INTEGER"/>
@@ -50,6 +56,15 @@
 			<if test="title != null">
 				AND  `TITLE`=#{title,jdbcType=VARCHAR}  
 			</if>
+			<if test="metaTitle != null">
+				AND  `META_TITLE`=#{metaTitle,jdbcType=VARCHAR}  
+			</if>
+			<if test="metaKeywords != null">
+				AND  `META_KEYWORDS`=#{metaKeywords,jdbcType=VARCHAR}  
+			</if>
+			<if test="metaDescription != null">
+				AND  `META_DESCRIPTION`=#{metaDescription,jdbcType=VARCHAR}  
+			</if>
 			<if test="createTime != null">
 				AND  `CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
 			</if>
@@ -65,6 +80,9 @@
 	<sql id="baseColumnList">
 			 c.`ID`	 
 			,c.`TITLE`
+			,c.`META_TITLE`
+			,c.`META_KEYWORDS`
+			,c.`META_DESCRIPTION`
 			,c.`CREATE_TIME`
 			,c.`PUB_STATE`
 			,c.`STATE`
@@ -88,6 +106,15 @@
 					<if test="title != null">
 					`TITLE`,
 					</if>
+					<if test="metaTitle != null">
+					`META_TITLE`,
+					</if>
+					<if test="metaKeywords != null">
+					`META_KEYWORDS`,
+					</if>
+					<if test="metaDescription != null">
+					`META_DESCRIPTION`,
+					</if>
 					<if test="createTime != null">
 					`CREATE_TIME`,
 					</if>
@@ -104,6 +131,15 @@
 					</if>
 					<if test="title != null">
 					 #{title,jdbcType=VARCHAR},
+					</if>
+					<if test="metaTitle != null">
+					 #{metaTitle,jdbcType=VARCHAR},
+					</if>
+					<if test="metaKeywords != null">
+					 #{metaKeywords,jdbcType=VARCHAR},
+					</if>
+					<if test="metaDescription != null">
+					 #{metaDescription,jdbcType=VARCHAR},
 					</if>
 					<if test="createTime != null">
 					 #{createTime,jdbcType=TIMESTAMP},
@@ -124,10 +160,19 @@
 	处理信息: 修改记录
 	-->
  	<update id="update" parameterType="com.coding17.easycms.soa.entity.content.TContent" >
-		UPDATE   T_CONTENT  
+		UPDATE   T_CONTENT  	 
 	  	<set> 
 				<if test="title != null">
 			 		`TITLE` = #{title,jdbcType=VARCHAR},
+			 	</if>
+				<if test="metaTitle != null">
+			 		`META_TITLE` = #{metaTitle,jdbcType=VARCHAR},
+			 	</if>
+				<if test="metaKeywords != null">
+			 		`META_KEYWORDS` = #{metaKeywords,jdbcType=VARCHAR},
+			 	</if>
+				<if test="metaDescription != null">
+			 		`META_DESCRIPTION` = #{metaDescription,jdbcType=VARCHAR},
 			 	</if>
 				<if test="createTime != null">
 			 		`CREATE_TIME` = #{createTime,jdbcType=TIMESTAMP},
@@ -153,6 +198,9 @@
 		UPDATE   T_CONTENT  	 
 	  	<set> 
 			 		`TITLE` = #{title,jdbcType=VARCHAR},
+			 		`META_TITLE` = #{metaTitle,jdbcType=VARCHAR},
+			 		`META_KEYWORDS` = #{metaKeywords,jdbcType=VARCHAR},
+			 		`META_DESCRIPTION` = #{metaDescription,jdbcType=VARCHAR},
 			 		`CREATE_TIME` = #{createTime,jdbcType=TIMESTAMP},
 			 		`PUB_STATE` = #{pubState,jdbcType=INTEGER},
 			 		`STATE` = #{state,jdbcType=INTEGER},
