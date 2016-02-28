@@ -42,7 +42,7 @@ public class StaticPageController extends BaseController<Content> {
 	@ResponseBody
 	@RequestMapping("/statiz.htm")
 	public Map<String, Object> staticContents(String ids) {
-		LOG.error("=====>生成静态页 {}", ids);
+		LOG.info("=====>生成静态页 {}", ids);
 		SiteContext.check(request.getSession());
 		Map<String, String> result = new HashMap<String, String>();
 		for (String id : ids.split(",")) {
