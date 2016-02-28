@@ -123,13 +123,13 @@ public class TContentServiceImpl extends BaseServiceImpl<TContent> implements TC
 	public TContent updateContent(TContent content) {
 		int r = 0;
 		//更新文章信息
-		r = tContentDao.update(content);
+		r = tContentDao.updateByPrimaryKeySelective(content);
 		if (r == 0) {
 			throw new CmsSoaExcpetion("更新文章信息失败");
 		}
 		TContentExt ext = content.getContentExt();
 		ext.setContentId(content.getId());
-		r = tContentExtDao.update(ext);
+		r = tContentExtDao.updateByPrimaryKeySelective(ext);
 		if (r == 0) {
 			throw new CmsSoaExcpetion("更新文章内容失败");
 		}

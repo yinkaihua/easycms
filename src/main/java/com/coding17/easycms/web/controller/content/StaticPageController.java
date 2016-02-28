@@ -54,8 +54,9 @@ public class StaticPageController extends BaseController<Content> {
 				continue;
 			}
 			Map<String, Object> context = new HashMap<String, Object>();
-			context.put("title", tContent.getTitle());
-			context.put("txt", tContent.getContentExt().getTxt());
+			context.put("content", Content.fromEntity(tContent));
+			/*context.put("title", tContent.getTitle());
+			context.put("txt", tContent.getContentExt().getTxt());*/
 			String html = VelocityUtil.genHtml(context, "content.vm");
 			try {
 				FileUtil.write(getFilePath(SiteContext.get(request.getSession()),

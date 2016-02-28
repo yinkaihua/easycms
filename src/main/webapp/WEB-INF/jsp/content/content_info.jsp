@@ -48,7 +48,7 @@
 </div>
 <div style="margin:20px;">
 	<label for="name">内容</label>
-	<script type="text/plain" id="editor" style="width:100%;height:350px;">${contents.contentExt.txt }</script>
+	<script type="text/plain" id="editor" style="width:100%;height:350px;"><p>${contents.contentExt.txt}</p></script>
 </div>
 <div style="margin:20px;">
 	<a href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
@@ -62,7 +62,7 @@ function submitContent() {
 		alert("标题不能为空");
 		return;
 	}
-	var txt = UM.getEditor("editor").getAllHtml();
+	var txt = UM.getEditor("editor").getContent();
 	if (txt=="") {
 		alert("内容不能为空");
 		return;

@@ -1,2 +1,21 @@
-$title<br>
-$txt
+<!Doctype html>
+<html xmlns=http://www.w3.org/1999/xhtml>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+	<title>${content.metaTitle}</title>
+	<meta name="keywords" content="${content.metaKeywords}">
+	<meta name="description" content="${content.metaDescription}">
+		
+	<link rel="shortcut icon" href="http://www.runoob.com/favicon.ico" mce_href="http://www.runoob.com/favicon.ico" type="image/x-icon" >
+	<link rel="stylesheet" href="http://www.runoob.com/wp-content/themes/runoob/style.css?v=1.02" type="text/css" media="all" />	
+	<link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css" media="all" />	
+  <script src="http://apps.bdimg.com/libs/jquery/1.8.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+     <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  <![endif]-->
+  <link rel="apple-touch-icon" href="http://static.runoob.com/images/icon/mobile-icon.png"/>
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+</head>
+<body></body>
+</html>

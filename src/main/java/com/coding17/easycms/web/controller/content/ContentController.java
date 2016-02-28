@@ -117,6 +117,7 @@ public class ContentController extends BaseController<Content> {
 			TChannel channel = BeanConverter.objectC(p.getChannel(), TChannel.class);
 			content.setContentExt(ext);
 			content.setChannel(channel);
+			content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
 			try {
 				content = tContentService.updateContent(content);
 			} catch (Exception ex) {
