@@ -7,9 +7,9 @@
 	<meta name="keywords" content="${content.metaKeywords}">
 	<meta name="description" content="${content.metaDescription}">
 
-	<link href="/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="/res/jquery/jquery-1.12.0.min.js"></script>
-	<script src="/res/bootstrap/js/bootstrap.min.js"></script>
+	<link href="http://localhost:8080/easycms/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://localhost:8080/easycms/res/jquery/jquery-1.12.0.min.js"></script>
+	<script src="http://localhost:8080/easycms/res/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	#include("./include/header.vm")

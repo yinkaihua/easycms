@@ -88,7 +88,7 @@ public class ContentController extends BaseController<Content> {
 		return "content/content_info";
 	}
 	
-	@RequestMapping("/save.htm")
+	@RequestMapping("/save.json")
 	public String save() {
 		LOG.info("=====>发布文章{}", p);
 		SiteContext.check(request.getSession());
