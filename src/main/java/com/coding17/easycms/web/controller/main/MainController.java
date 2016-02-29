@@ -14,6 +14,7 @@ import com.coding17.easycms.soa.service.menu.TMenuService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.base.BaseVo;
 import com.coding17.easycms.web.controller.menu.MenuController;
+import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.vo.menu.Menu;
 
 @Scope(value="prototype")
@@ -39,7 +40,7 @@ public class MainController extends BaseController<BaseVo> {
 	@RequestMapping("/left")
 	public String left() {
 		TMenu para = new TMenu();
-		para.setState(DictContainer.State.getValidState());
+		para.setState(Integer.parseInt(DictProperties.getValidState()));
 		List<TMenu> tMenus = tMenuService.selectListByCondition(para);
 		List<Menu> menus = null;
 		if (!CollectionUtils.isEmpty(tMenus)) {

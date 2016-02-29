@@ -12,6 +12,22 @@ import com.coding17.easycms.api.container.DictContainer;
 public class DictProperties {
 	
 	/**
+	 * 获取有效状态
+	 * @return
+	 */
+	public static String getValidState() {
+		return DictContainer.getValByKey("state", "valid");
+	}
+	
+	/**
+	 * 获取无效状态
+	 * @return
+	 */
+	public static String getInvalidState() {
+		return DictContainer.getValByKey("state", "invalid");
+	}
+	
+	/**
 	 * 获取json返回值成功状态
 	 * @return
 	 */
