@@ -1,5 +1,6 @@
 package com.coding17.easycms.web.controller.content;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,7 +76,7 @@ public class StaticPageController extends BaseController<Content> {
 	}
 	
 	private static String getFilePath(Site site, Channel channel, Content content) {
-		String path = WebConst.wc_webapp_root_path + site.getPath() + "\\" + channel.getPath() + "\\";
+		String path = WebConst.wc_webapp_root_path + site.getPath() + File.separator + channel.getPath() + File.separator;
 		path += DateFormatUtils.format(content.getCreateTime(), "yyyyMMdd")+content.getId()+".html";
 		return path;
 	}

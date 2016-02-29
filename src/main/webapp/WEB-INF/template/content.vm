@@ -6,16 +6,19 @@
 	<title>${content.metaTitle}</title>
 	<meta name="keywords" content="${content.metaKeywords}">
 	<meta name="description" content="${content.metaDescription}">
-		
-	<link rel="shortcut icon" href="http://www.runoob.com/favicon.ico" mce_href="http://www.runoob.com/favicon.ico" type="image/x-icon" >
-	<link rel="stylesheet" href="http://www.runoob.com/wp-content/themes/runoob/style.css?v=1.02" type="text/css" media="all" />	
-	<link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css" media="all" />	
-  <script src="http://apps.bdimg.com/libs/jquery/1.8.1/jquery.min.js"></script>
-  <!--[if lt IE 9]>
-     <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
-  <![endif]-->
-  <link rel="apple-touch-icon" href="http://static.runoob.com/images/icon/mobile-icon.png"/>
-  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+	<link href="/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script src="/res/jquery/jquery-1.12.0.min.js"></script>
+	<script src="/res/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body></body>
+<body>
+	#include("./include/header.vm")
+	<div style="max-width:1140px;width:100%;min-width:755px;margin:0 auto;overflow:hidden;margin-top:1%">
+		<div style="float:left;margin-right:1%">
+			#include("./include/channel.vm")
+		</div>
+		<div class="main-body">${content.contentExt.txt}</div>
+	</div>
+	#include("./include/footer.vm")
+</body>
 </html>

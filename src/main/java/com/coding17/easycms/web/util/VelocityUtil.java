@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
  */
 public class VelocityUtil {
 	
+	private static final String ENCODING = "utf-8";
+	
 	private static final Logger LOG = LoggerFactory.getLogger(VelocityUtil.class);
 	
 	private static VelocityEngine ve = null;
@@ -34,7 +36,7 @@ public class VelocityUtil {
 	}
 	
 	public static String genHtml(Map<String, Object> params, String templateName) {
-		Template template = ve.getTemplate(templateName);
+		Template template = ve.getTemplate(templateName, ENCODING);
 		VelocityContext context = new VelocityContext(params);
 		StringWriter out = new StringWriter();
 		template.merge(context, out);
