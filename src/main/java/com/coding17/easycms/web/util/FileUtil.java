@@ -1,8 +1,10 @@
 package com.coding17.easycms.web.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import com.coding17.easycms.web.exception.CmsWebException;
 
@@ -14,7 +16,7 @@ import com.coding17.easycms.web.exception.CmsWebException;
  * @date: 2016年2月26日 下午2:15:14
  */
 public class FileUtil {
-
+	
 	/**
 	 * 写文件
 	 * @param path
@@ -27,7 +29,7 @@ public class FileUtil {
 				file.getParentFile().mkdirs();
 			}
 			file.createNewFile();
-			FileWriter writer = new FileWriter(file);
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), WebConst.wc_encoding_utf8));
 			writer.write(content);
 			writer.close();
 		} catch (IOException ex) {

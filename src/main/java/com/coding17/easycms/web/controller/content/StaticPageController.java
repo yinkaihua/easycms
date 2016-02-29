@@ -41,7 +41,7 @@ public class StaticPageController extends BaseController<Content> {
 	private TContentService tContentService;
 	
 	@ResponseBody
-	@RequestMapping("/statiz.htm")
+	@RequestMapping("/statiz.shtm")
 	public Map<String, Object> staticContents(String ids) {
 		LOG.info("=====>生成静态页 {}", ids);
 		SiteContext.check(request.getSession());
@@ -56,8 +56,6 @@ public class StaticPageController extends BaseController<Content> {
 			}
 			Map<String, Object> context = new HashMap<String, Object>();
 			context.put("content", Content.fromEntity(tContent));
-			/*context.put("title", tContent.getTitle());
-			context.put("txt", tContent.getContentExt().getTxt());*/
 			String html = VelocityUtil.genHtml(context, "content.vm");
 			try {
 				FileUtil.write(getFilePath(SiteContext.get(request.getSession()),

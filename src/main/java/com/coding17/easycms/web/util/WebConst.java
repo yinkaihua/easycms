@@ -15,6 +15,11 @@ public class WebConst {
 	public static String wc_webapp_root_path = "";
 	
 	/**
+	 * UTF8编码
+	 */
+	public static final String wc_encoding_utf8 = "UTF-8";
+	
+	/**
 	 * 站点参数名称
 	 */
 	public static final String wc_p_context_sid = "wc_p_context_sid";

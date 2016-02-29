@@ -14,7 +14,7 @@
 </head>
 <body>
 <div style="margin:20px;">
-	<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
+	<a href="${_ctxPath}/content/to_add.htm?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
 	<a href="${_ctxPath}/content/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <table class="table table-bordered table-hover" style="width:95%;margin:20px">

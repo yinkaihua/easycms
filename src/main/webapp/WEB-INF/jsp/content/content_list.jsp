@@ -15,8 +15,8 @@
 <body>
 <div style="margin:20px;">
 	<a href="${_ctxPath}/content/to_add.htm?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
-	<a href="${_ctxPath}/content/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
-	<a href="${_ctxPath}/content/to_add?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">页面静态化</a>
+	<a href="${_ctxPath}/content/to_add.htm" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+	<a href="${_ctxPath}/content/to_add.htm?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">页面静态化</a>
 </div>
 <table class="table table-bordered table-hover" style="width:95%;margin:20px">
 	<thead>
@@ -70,8 +70,8 @@ function delContent(id) {
 	}
 }
 function statiz(id) {
-	$.getJSON("${_ctxPath}/gen/statiz.htm", {ids:id}, function(ret) {
-		alert(ret);
+	$.getJSON("${_ctxPath}/gen/statiz.shtm", {ids:id}, function(ret) {
+		alert(ret.state);
 		location.reload();
 	});
 }

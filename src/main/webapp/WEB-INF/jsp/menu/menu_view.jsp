@@ -47,13 +47,13 @@
 			iconCls:'icon-ok',
 			handler:function(){
 				$('#addLvlOneForm').form('submit',{
-					url:'${_ctxPath}/menu/add',
+					url:'${_ctxPath}/menu/add.htm',
 					method:'post',
 					onSubmit:function(none) {
 						$(this).form('validate');
 					},
 					success:function() {
-						location.href='${_ctxPath}/menu/view';
+						location.href='${_ctxPath}/menu/view.htm';
 					}
 				});
 			}
@@ -81,7 +81,7 @@
 		</select>
 	</div>
 	</form>
-	<form id="delForm" method="post" action="${_ctxPath}/menu/remove"><input type="hidden" name="id"></form>
+	<form id="delForm" method="post" action="${_ctxPath}/menu/remove.htm"><input type="hidden" name="id"></form>
 </div>
 <div id="addSubMenu" class="easyui-dialog" title="添加子菜单" style="top:100px;left:100px;width:200px;padding:10px"
 	data-options="
@@ -93,13 +93,13 @@
 			iconCls:'icon-ok',
 			handler:function(){
 				$('#addLvlTwoForm').form('submit',{
-					url:'${_ctxPath}/menu/add',
+					url:'${_ctxPath}/menu/add.htm',
 					method:'post',
 					onSubmit:function(none) {
 						$(this).form('validate');
 					},
 					success:function() {
-						location.href='${_ctxPath}/menu/view';
+						location.href='${_ctxPath}/menu/view.htm';
 					}
 				});
 			}
@@ -129,7 +129,7 @@
 		</select>
 	</div>
 	</form>
-	<form id="delForm" method="post" action="${_ctxPath}/menu/remove"><input type="hidden" name="id"></form>
+	<form id="delForm" method="post" action="${_ctxPath}/menu/remove.htm"><input type="hidden" name="id"></form>
 </div>
 <input type="hidden" id="selectedSubMenu">
 <script type="text/javascript">

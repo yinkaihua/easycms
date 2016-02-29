@@ -37,7 +37,7 @@ public class ChannelController extends BaseController<Channel> {
 	@Autowired
 	private TChannelService tChannelService;
 	
-	@RequestMapping("/view")
+	@RequestMapping("/view.htm")
 	public String view() {
 		Integer sid = Integer.parseInt(request.getAttribute(WebConst.wc_a_req_sid).toString());
 		if (sid!=-1) {
@@ -51,7 +51,7 @@ public class ChannelController extends BaseController<Channel> {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/children_list_ajax")
+	@RequestMapping("/children_list_ajax.htm")
 	public Map<String, Object> getListByPid() {
 		Map<String, Object> json = new HashMap<String, Object>();
 		TChannel para = new TChannel();
@@ -68,7 +68,7 @@ public class ChannelController extends BaseController<Channel> {
 		return json;
 	}
 	
-	@RequestMapping("/to_add")
+	@RequestMapping("/to_add.htm")
 	public String toAdd() {
 		SiteContext.check(request.getSession());
 		if (p.getPid()!=null && p.getPid()!=0) {
@@ -80,7 +80,7 @@ public class ChannelController extends BaseController<Channel> {
 		return "channel/channel_info";
 	}
 	
-	@RequestMapping("/to_edit")
+	@RequestMapping("/to_edit.htm")
 	public String toEdit() {
 		SiteContext.check(request.getSession());
 		TChannel para = new TChannel();
@@ -98,7 +98,7 @@ public class ChannelController extends BaseController<Channel> {
 		return "channel/channel_info";
 	}
 	
-	@RequestMapping("/save")
+	@RequestMapping("/save.htm")
 	public String save() {
 		LOG.info("=====>保存栏目，{}", p);
 		SiteContext.check(request.getSession());
@@ -122,7 +122,7 @@ public class ChannelController extends BaseController<Channel> {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/has_children")
+	@RequestMapping("/has_children.htm")
 	public Map<String, Object> hasChildren() {
 		Map<String, Object> json = new HashMap<String, Object>();
 		TChannel para = new TChannel();
@@ -137,7 +137,7 @@ public class ChannelController extends BaseController<Channel> {
 		return json;
 	}
 	
-	@RequestMapping("/remove")
+	@RequestMapping("/remove.htm")
 	public String remove() {
 		LOG.info("=====>删除栏目，{}", p);
 		TChannel para = new TChannel();

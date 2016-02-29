@@ -13,7 +13,7 @@
 </head>
 <body>
 <div style="margin:20px;">
-	<a href="${_ctxPath}/dict/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建字典条目</a>
+	<a href="${_ctxPath}/dict/to_add.htm" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建字典条目</a>
 	<a href="javascript:refresh()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">刷新字典缓存</a>
 </div>
 <table class="table table-bordered table-hover" style="width:800px; margin:20px">
@@ -35,7 +35,7 @@
 			<td>${s.value }</td>
 			<td>${s.desc }</td>
 			<td>${s.sort }</td>
-			<td><a href="${_ctxPath}/dict/to_edit?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delDict('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
+			<td><a href="${_ctxPath}/dict/to_edit.htm?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delDict('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -46,11 +46,11 @@ $(function() {
 })
 function delDict(id) {
 	if (confirm("确认删除字典条目？")) {
-		location.href="${_ctxPath}/dict/remove?id="+id;
+		location.href="${_ctxPath}/dict/remove.htm?id="+id;
 	}
 }
 function refresh() {
-	$.getJSON("${_ctxPath}/dict/refresh", function(ret) {
+	$.getJSON("${_ctxPath}/dict/refresh.htm", function(ret) {
 		alert("刷新成功");
 	});
 }

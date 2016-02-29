@@ -19,8 +19,8 @@
 	<mvc:annotation-driven/>
 	
 	<!-- 不拦截静态资源 -->
-	<mvc:resources location="/res/" mapping="/res/**" />
-	<mvc:resources location="/tlds/" mapping="/tlds/**" />
+	<!-- <mvc:resources location="/res/" mapping="/res/**" />
+	<mvc:resources location="/tlds/" mapping="/tlds/**" /> -->
 
 	<!-- 自定义拦截器 -->
 	<mvc:interceptors>
@@ -36,7 +36,7 @@
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
-                <value>application/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
             </list>
         </property>
     </bean>

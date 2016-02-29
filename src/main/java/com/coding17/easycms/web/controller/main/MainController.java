@@ -25,19 +25,19 @@ public class MainController extends BaseController<BaseVo> {
 	@Autowired
 	private TMenuService tMenuService;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/index.htm")
 	public String index() {
 		//Integer.parseInt("aa");
 		return "main/main";
 	}
 	
-	@RequestMapping("/center")
+	@RequestMapping("/center.htm")
 	public String center() {
 		respContent = "Hello,This is Center Area.";
 		return writeResponse();
 	}
 	
-	@RequestMapping("/left")
+	@RequestMapping("/left.htm")
 	public String left() {
 		TMenu para = new TMenu();
 		para.setState(Integer.parseInt(DictProperties.getValidState()));

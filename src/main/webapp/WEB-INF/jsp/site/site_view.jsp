@@ -13,7 +13,7 @@
 </head>
 <body>
 <div style="margin:20px;">
-	<a href="${_ctxPath}/site/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建网站</a>
+	<a href="${_ctxPath}/site/to_add.htm" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建网站</a>
 </div>
 <table class="table table-bordered table-hover" style="width:800px; margin:20px">
 	<thead>
@@ -36,7 +36,7 @@
 			<td><fmt:formatDate value="${s.createTime }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			<td><ec:dict catalog="state" code="${s.state }"/></td>
 			<td>${s.accountName }</td>
-			<td><a href="${_ctxPath}/site/to_edit?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delSite('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
+			<td><a href="${_ctxPath}/site/to_edit.htm?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a><a href="javascript:delSite('${s.id }');" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a></td>
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -47,7 +47,7 @@ $(function() {
 })
 function delSite(id) {
 	if (confirm("确认删除站点？")) {
-		location.href="${_ctxPath}/site/remove?id="+id;
+		location.href="${_ctxPath}/site/remove.htm?id="+id;
 	}
 }
 </script>

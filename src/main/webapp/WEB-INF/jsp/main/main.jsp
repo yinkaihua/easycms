@@ -11,7 +11,7 @@
 	<%@ include file="/WEB-INF/jsp/include/common_js.jsp" %>
 </head>
 <frameset cols="210,*">
-	<frame src="${_ctxPath}/main/left" name="leftFrame" noresize="noresize" />
+	<frame src="${_ctxPath}/main/left.htm" name="leftFrame" noresize="noresize" />
 	<frame name="rightFrame" />
 </frameset>
 </html>

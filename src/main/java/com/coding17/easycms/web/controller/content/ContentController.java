@@ -44,7 +44,7 @@ public class ContentController extends BaseController<Content> {
 	@Autowired
 	private TChannelService tChannelService;
 	
-	@RequestMapping("/view")
+	@RequestMapping("/view.htm")
 	public String view() {
 		Integer sid = Integer.parseInt(request.getAttribute(WebConst.wc_a_req_sid).toString());
 		List<Content> cs = new ArrayList<Content>();
@@ -88,7 +88,7 @@ public class ContentController extends BaseController<Content> {
 		return "content/content_info";
 	}
 	
-	@RequestMapping("/save.json")
+	@RequestMapping("/save.htm")
 	public String save() {
 		LOG.info("=====>发布文章{}", p);
 		SiteContext.check(request.getSession());
@@ -161,7 +161,7 @@ public class ContentController extends BaseController<Content> {
 		return "content/content_list";
 	}
 	
-	@RequestMapping("/remove")
+	@RequestMapping("/remove.htm")
 	public String remove(Integer cid) {
 		LOG.info("=====>删除文章{}", p);
 		SiteContext.check(request.getSession());

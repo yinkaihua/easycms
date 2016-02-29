@@ -14,7 +14,7 @@
 <body>
 <%@ include file="/WEB-INF/jsp/site/site_selected.jsp" %>
 <div style="margin:20px">
-	<a href="${_ctxPath}/channel/to_add?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
+	<a href="${_ctxPath}/channel/to_add.htm?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
 	<a href="javascript:createSubChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
 </div>
 <hr>
@@ -48,13 +48,13 @@ $(function() {
 	});
 })
 function siteChangeEvent(newVal, oldVal) {
-	location.href="${_ctxPath}/channel/view?wc_p_context_sid="+newVal;
+	location.href="${_ctxPath}/channel/view.htm?wc_p_context_sid="+newVal;
 }
 function createSubChannel() {
-	location.href="${_ctxPath}/channel/to_add?pid="+$(".easyui-tree").tree("getSelected").id;
+	location.href="${_ctxPath}/channel/to_add.htm?pid="+$(".easyui-tree").tree("getSelected").id;
 }
 function editChannel() {
-	location.href="${_ctxPath}/channel/to_edit?id="+$("#tt").datagrid("getSelected").id;
+	location.href="${_ctxPath}/channel/to_edit.htm?id="+$("#tt").datagrid("getSelected").id;
 }
 function showSubNodes(node) {
 	$("iframe[name='channelIframe']").attr("src", "${_ctxPath}/channel/list.htm?pid="+node.id);
@@ -66,12 +66,12 @@ function delChannel() {
 		return;
 	}
 	var id = selectedRow.id;
-	$.getJSON("${_ctxPath}/channel/has_children?id="+id,{},function(ret) {
+	$.getJSON("${_ctxPath}/channel/has_children.htm?id="+id,{},function(ret) {
 		if (ret.state=="1") {
 			alert(ret.msg);
 		} else {
 			if (confirm("确认删除栏目？")) {
-				location.href="${_ctxPath}/channel/remove?id="+id;
+				location.href="${_ctxPath}/channel/remove.htm?id="+id;
 			}
 		}
 	});

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coding17.easycms.api.container.DictContainer;
 import com.coding17.easycms.soa.entity.dict.TDict;
-import com.coding17.easycms.soa.entity.site.TSite;
 import com.coding17.easycms.soa.service.dict.TDictService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.vo.dict.Dict;
@@ -32,7 +31,7 @@ public class DictController extends BaseController<Dict> {
 	@Autowired
 	private TDictService tDictService;
 	
-	@RequestMapping("/view")
+	@RequestMapping("/view.htm")
 	public String view() {
 		TDict para = new TDict();
 		List<TDict> allDict = tDictService.selectListByCondition(para);
@@ -46,7 +45,7 @@ public class DictController extends BaseController<Dict> {
 		return "dict/dict_view";
 	}
 	
-	@RequestMapping("/save")
+	@RequestMapping("/save.htm")
 	public String save() {
 		LOG.info("=====>保存字典条目，{}", p);
 		TDict para = new TDict();
@@ -67,7 +66,7 @@ public class DictController extends BaseController<Dict> {
 		return view();
 	}
 	
-	@RequestMapping("/to_edit")
+	@RequestMapping("/to_edit.htm")
 	public String toEdit() {
 		TDict para = new TDict();
 		para.setId(p.getId());
@@ -79,12 +78,12 @@ public class DictController extends BaseController<Dict> {
 		return "dict/dict_info";
 	}
 	
-	@RequestMapping("/to_add")
+	@RequestMapping("/to_add.htm")
 	public String toAdd() {
 		return "dict/dict_info";
 	}
 	
-	@RequestMapping("/remove")
+	@RequestMapping("/remove.htm")
 	public String remove() {
 		LOG.info("=====>删除字典条目，{}", p);
 		TDict para = new TDict();
@@ -98,7 +97,7 @@ public class DictController extends BaseController<Dict> {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/refresh")
+	@RequestMapping(value="/refresh.shtm")
 	public Map<String, String> refresh() {
 		Map<String, String> json = new HashMap<String, String>();
 		DictContainer.refresh();

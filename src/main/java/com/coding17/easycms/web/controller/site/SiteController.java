@@ -29,7 +29,7 @@ public class SiteController extends BaseController<Site> {
 	@Autowired
 	private TSiteService tSiteService;
 	
-	@RequestMapping("/view")
+	@RequestMapping("/view.htm")
 	public String view() {
 		TSite para = new TSite();
 //		para.setState(DictContainer.State.getValidState());
@@ -44,12 +44,12 @@ public class SiteController extends BaseController<Site> {
 		return "site/site_view";
 	}
 	
-	@RequestMapping("/to_add")
+	@RequestMapping("/to_add.htm")
 	public String toAdd() {
 		return "site/site_info";
 	}
 	
-	@RequestMapping("/save")
+	@RequestMapping("/save.htm")
 	public String save() {
 		LOG.info("=====>保存站点，{}", p);
 		TSite para = new TSite();
@@ -73,7 +73,7 @@ public class SiteController extends BaseController<Site> {
 		return view();
 	}
 	
-	@RequestMapping("/to_edit")
+	@RequestMapping("/to_edit.htm")
 	public String toEdit() {
 		TSite para = new TSite();
 		para.setId(p.getId());
@@ -85,7 +85,7 @@ public class SiteController extends BaseController<Site> {
 		return "site/site_info";
 	}
 	
-	@RequestMapping("/remove")
+	@RequestMapping("/remove.htm")
 	public String remove() {
 		LOG.info("=====>删除站点，{}", p);
 		TSite para = new TSite();

@@ -55,13 +55,13 @@ $("#ff").form("load", {
 </c:if>
 function submitForm(){
 	$('#ff').form('submit',{
-		url:'${_ctxPath}/site/save',
+		url:'${_ctxPath}/site/save.htm',
 		method:'post',
 		onSubmit:function(){
 			return $(this).form('validate');
 		},
 		success:function() {
-			location.href="${_ctxPath}/site/view";
+			location.href="${_ctxPath}/site/view.htm";
 		}
 	});
 }

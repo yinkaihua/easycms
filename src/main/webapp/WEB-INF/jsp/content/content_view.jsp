@@ -48,7 +48,7 @@ $(function() {
 	});
 });
 function siteChangeEvent(newVal, oldVal) {
-	location.href="${_ctxPath}/content/view?wc_p_context_sid="+newVal;
+	location.href="${_ctxPath}/content/view.htm?wc_p_context_sid="+newVal;
 }
 function showContents(node) {
 	$("iframe[name='contentIframe']").attr("src", "${_ctxPath}/content/list.htm?cid="+node.id);

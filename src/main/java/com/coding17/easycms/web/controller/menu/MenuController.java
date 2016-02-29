@@ -29,7 +29,7 @@ public class MenuController extends BaseController<Menu> {
 	@Autowired
 	private TMenuService tMenuService;
 	
-	@RequestMapping("/view")
+	@RequestMapping("/view.htm")
 	public String view() {
 		TMenu para = new TMenu();
 		para.setState(DictContainer.State.getValidState());
@@ -43,7 +43,7 @@ public class MenuController extends BaseController<Menu> {
 		return "menu/menu_view";
 	}
 	
-	@RequestMapping("/add")
+	@RequestMapping("/add.htm")
 	public String add() {
 		LOG.info("=====>添加菜单，{}", p);
 		TMenu tMenu = new TMenu();
@@ -52,7 +52,7 @@ public class MenuController extends BaseController<Menu> {
 		return view();
 	}
 	
-	@RequestMapping("/remove")
+	@RequestMapping("/remove.htm")
 	public String remove() {
 		LOG.info("=====>删除菜单，{}", p);
 		TMenu tMenu = new TMenu();
