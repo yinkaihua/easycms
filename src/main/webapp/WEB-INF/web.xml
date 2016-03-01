@@ -66,6 +66,6 @@
 	</taglib>
 
 	<welcome-file-list>
-		<welcome-file>/main/index</welcome-file>
+		<welcome-file>/main/index.htm</welcome-file>
 	</welcome-file-list>
 </web-app>
