@@ -5,10 +5,10 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.dao.channel.TChannelDAO;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.service.channel.TChannelService;
@@ -57,6 +57,15 @@ public class ChannelTest {
 		TChannel c = new TChannel();
 		c.setId(2);
 		System.out.println(tChannelService.getByPriKey(c));
+	}
+	
+	@Test
+	public void selectInfoPagination() {
+		TChannel c = new TChannel();
+		c.setId(11);
+		c.setOrderby("h.`SORT` asc, c.`ID` asc");
+		Pagination<TChannel> page = tChannelService.selectListInfoByPagination(c);
+		System.out.println(page);
 	}
 	
 }

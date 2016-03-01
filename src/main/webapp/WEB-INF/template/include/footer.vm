@@ -1,0 +1,19 @@
+<div class="footer">
+	<div class="w3cschoolcc-block">
+	<div class="w3cschoolcc cf">
+		<dl>
+			<dt>字符集&amp;工具</dt>
+	      	<dd>· <a href="/charsets/html-charsets.html">HTML 字符集设置</a></dd>
+	      	<dd>· <a href="/tags/html-ascii.html">HTML ASCII 字符集</a></dd>
+	     	<dd>· <a href="/tags/ref-entities.html">HTML ISO-8859-1</a></dd> 
+	      	<dd>· <a href="/tags/ref-symbols.html">HTML 实体符号</a></dd>
+	      	<dd>· <a href="/tags/html-colorpicker.html">HTML 拾色器</a></dd>
+	      	<dd>· <a href="/jsontool">JSON 格式化工具</a></dd>
+   		</dl>
+		<dl>
+      		<dt>网站导航</dt>
+       		<dd>· <a title="Bootstrap 教程" href="http://www.runoob.com/w3cnote/java-swing-demo-intro.html">Bootstrap 教程</a></dd>
+       	</dl>
+		</div>
+	</div>
+</div>

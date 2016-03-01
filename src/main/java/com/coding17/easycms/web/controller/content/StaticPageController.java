@@ -2,6 +2,7 @@ package com.coding17.easycms.web.controller.content;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coding17.easycms.soa.base.pager.Pagination;
+import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.entity.content.TContent;
+import com.coding17.easycms.soa.service.channel.TChannelService;
 import com.coding17.easycms.soa.service.content.TContentService;
 import com.coding17.easycms.web.base.BaseController;
 import com.coding17.easycms.web.util.BeanConverter;
@@ -40,11 +44,26 @@ public class StaticPageController extends BaseController<Content> {
 	@Autowired
 	private TContentService tContentService;
 	
+	@Autowired
+	private TChannelService tChannelService;
+	
 	@ResponseBody
 	@RequestMapping("/statiz.shtm")
 	public Map<String, Object> staticContents(String ids) {
 		LOG.info("=====>生成静态页 {}", ids);
 		SiteContext.check(request.getSession());
+		
+		//查询全部栏目
+		int siteId = SiteContext.get(request.getSession()).getId();
+		TChannel channelPara = new TChannel();
+		channelPara.setSiteId(siteId);
+		channelPara.setState(Integer.parseInt(DictProperties.getValidState()));
+		channelPara.setPageNum(0);
+		channelPara.setPageSize(100);
+		channelPara.setOrderby("h.`SORT` asc, c.`ID` asc");
+		Pagination<TChannel> pagination = tChannelService.selectListInfoByPagination(channelPara);
+		
+		
 		Map<String, String> result = new HashMap<String, String>();
 		for (String id : ids.split(",")) {
 			TContent para = new TContent();

@@ -12,13 +12,12 @@
 	<script src="http://localhost:8080/easycms/res/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	#include("./include/header.vm")
-	<div style="max-width:1140px;width:100%;min-width:755px;margin:0 auto;overflow:hidden;margin-top:1%">
-		<div style="float:left;margin-right:1%">
-			#include("./include/channel.vm")
-		</div>
-		<div class="main-body">${content.contentExt.txt}</div>
-	</div>
-	#include("./include/footer.vm")
+#include("./include/header.vm")
+<div class="main">
+#include("./include/left.vm")
+#include("./include/center.vm")
+#include("./include/footer.vm")
+</div>
+<div class="fixed-btn"><a title="返回顶部" href="#" class="go-top" style="display: inline-block;"><i class="fa fa-angle-up">顶部</i></a></div>
 </body>
 </html>

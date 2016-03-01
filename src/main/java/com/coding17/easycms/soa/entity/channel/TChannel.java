@@ -1,7 +1,11 @@
 package com.coding17.easycms.soa.entity.channel;
 
 import java.util.Date;
+import java.util.List;
+
 import com.coding17.easycms.soa.base.entity.BasicEntity;
+import com.coding17.easycms.soa.entity.content.TContent;
+import com.coding17.easycms.web.vo.content.Content;
 
 /**
  * 描述：</b><br>
@@ -48,6 +52,16 @@ public class TChannel extends BasicEntity {
 	 */
 	private Integer state;
 	
+	private List<TContent> contents;
+	
+	public List<TContent> getContents() {
+		return contents;
+	}
+
+	public void setContents(List<TContent> contents) {
+		this.contents = contents;
+	}
+
 	/**
 	 *获取
 	 */
@@ -190,6 +204,7 @@ public class TChannel extends BasicEntity {
     	tos.append("level=").append(this.level).append(",");
     	tos.append("sort=").append(this.sort).append(",");
     	tos.append("state=").append(this.state).append(",");
+    	tos.append("contents=").append(this.contents).append(",");
     	tos.append("]");
         return tos.toString();
     }

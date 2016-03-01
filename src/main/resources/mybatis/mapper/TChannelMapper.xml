@@ -17,6 +17,23 @@
     </resultMap>
     <!--通用表字段列表-->
     
+    <!-- ChannelInfo -->
+    <resultMap id="ChannelInfoResultMap" type="com.coding17.easycms.soa.entity.channel.TChannel">
+		<result column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="PID" property="pid" jdbcType="INTEGER"/>
+		<result column="SITE_ID" property="siteId" jdbcType="INTEGER"/>
+		<result column="NAME" property="name" jdbcType="VARCHAR"/>
+		<result column="PATH" property="path" jdbcType="VARCHAR"/>
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="LEVEL" property="level" jdbcType="INTEGER"/>
+		<result column="SORT" property="sort" jdbcType="INTEGER"/>
+		<result column="STATE" property="state" jdbcType="INTEGER"/>
+		<collection property="contents" ofType="com.coding17.easycms.soa.entity.content.TContent">
+			<result column="CID" property="id" jdbcType="INTEGER"/>
+			<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+		</collection>
+    </resultMap>
+    
 	<!--user customize code start-->
 
 	<!--user customize code end  -->
@@ -24,45 +41,45 @@
 	<!--通用查询条件组装-->
 	<sql id="whereContation">
 			<if test="id != null">
-				AND  `ID`=#{id,jdbcType=INTEGER}  
+				AND  h.`ID`=#{id,jdbcType=INTEGER}  
 			</if>
 			<if test="pid != null">
-				AND  `PID`=#{pid,jdbcType=INTEGER}  
+				AND  h.`PID`=#{pid,jdbcType=INTEGER}  
 			</if>
 			<if test="siteId != null">
-				AND  `SITE_ID`=#{siteId,jdbcType=INTEGER}  
+				AND  h.`SITE_ID`=#{siteId,jdbcType=INTEGER}  
 			</if>
 			<if test="name != null">
-				AND  `NAME`=#{name,jdbcType=VARCHAR}  
+				AND  h.`NAME`=#{name,jdbcType=VARCHAR}  
 			</if>
 			<if test="path != null">
-				AND  `PATH`=#{path,jdbcType=VARCHAR}  
+				AND  h.`PATH`=#{path,jdbcType=VARCHAR}  
 			</if>
 			<if test="createTime != null">
-				AND  `CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
+				AND  h.`CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
 			</if>
 			<if test="level != null">
-				AND  `LEVEL`=#{level,jdbcType=INTEGER}  
+				AND  h.`LEVEL`=#{level,jdbcType=INTEGER}  
 			</if>
 			<if test="sort != null">
-				AND  `SORT`=#{sort,jdbcType=INTEGER}  
+				AND  h.`SORT`=#{sort,jdbcType=INTEGER}  
 			</if>
 			<if test="state != null">
-				AND  `STATE`=#{state,jdbcType=INTEGER}  
+				AND  h.`STATE`=#{state,jdbcType=INTEGER}  
 			</if>
 	</sql>
 	
 	<!--查询字段列表拼装-->
 	<sql id="baseColumnList">
-			 `ID`	 
-			,`PID`
-			,`SITE_ID`
-			,`NAME`
-			,`PATH`
-			,`CREATE_TIME`
-			,`LEVEL`
-			,`SORT`
-			,`STATE`
+			 h.`ID`	 
+			,h.`PID`
+			,h.`SITE_ID`
+			,h.`NAME`
+			,h.`PATH`
+			,h.`CREATE_TIME`
+			,h.`LEVEL`
+			,h.`SORT`
+			,h.`STATE`
 	</sql>
 	
 	<!--
@@ -217,7 +234,7 @@
 	<select id="findByPriKey" parameterType="com.coding17.easycms.soa.entity.channel.TChannel"  resultMap="BaseResultMap">
 		SELECT   
 		   <include refid="baseColumnList"/>
-		FROM   T_CHANNEL         
+		FROM   T_CHANNEL h        
 		WHERE
 				`ID` = #{id,jdbcType=INTEGER}		 
 	</select>
@@ -233,7 +250,7 @@
 		<include refid="CommonEntity.paginationPrefix"/>
 		SELECT   
 	 		<include refid="baseColumnList"/>
-		FROM   T_CHANNEL          
+		FROM   T_CHANNEL h         
 		WHERE 1=1
 		 	<include refid="whereContation"/>
 		 	<if test="orderby != null">
@@ -264,7 +281,7 @@
 	<select id="selectListByCondition" parameterType="com.coding17.easycms.soa.entity.channel.TChannel"  resultMap="BaseResultMap">
 	   SELECT   
 	   		<include refid="baseColumnList"/>
-	   FROM   T_CHANNEL           
+	   FROM   T_CHANNEL h          
 	   WHERE 1=1
 		<include refid="whereContation"/>
 		<if test="orderby != null">
@@ -273,5 +290,30 @@
 		limit 0,100
 	</select>
 	
+	<!-- 
+	关联查询，查询出栏目及内容信息，支持分页排序
+	 -->
+	<select id="selectListInfoByPagination" parameterType="com.coding17.easycms.soa.entity.channel.TChannel" resultMap="ChannelInfoResultMap">
+	   <include refid="CommonEntity.paginationPrefix"/>
+	   SELECT   
+	   		<include refid="baseColumnList"/>, c.`ID` as `CID`, c.`TITLE` as `TITLE`
+	   FROM  T_CHANNEL h,T_CHANNEL_CONTENT j,T_CONTENT c
+	   WHERE 1=1 AND h.`ID`=j.`CHANNEL_ID` AND j.`CONTENT_ID`=c.`ID`
+		<include refid="whereContation"/>
+		<if test="orderby != null">
+		 	ORDER BY ${orderby}
+		</if>
+		<include refid="CommonEntity.paginationSuffix"/>
+	</select>
 	
+	<!-- 
+	关联查询数量，查询出栏目及内容信息，支持分页排序
+	 -->
+	<select id="selectListInfoByPagination-count" parameterType="com.coding17.easycms.soa.entity.channel.TChannel" resultType="int">
+	   SELECT   
+	   		COUNT(1)
+	   FROM  T_CHANNEL h,T_CHANNEL_CONTENT j,T_CONTENT c
+	   WHERE 1=1 AND h.`ID`=j.`CHANNEL_ID` AND j.`CONTENT_ID`=c.`ID`
+	   <include refid="whereContation"/>
+	</select>
 </mapper>
