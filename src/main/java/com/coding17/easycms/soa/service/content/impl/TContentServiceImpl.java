@@ -136,4 +136,20 @@ public class TContentServiceImpl extends BaseServiceImpl<TContent> implements TC
 		return content;
 	}
 
+	@Override
+	public TContent selectOneInfoPre(TContent content) {
+		if (content.getId() == null) {
+			throw new CmsSoaExcpetion("参数错误，ID不能为空");
+		}
+		return tContentDao.selectOneInfoPre(content);
+	}
+
+	@Override
+	public TContent selectOneInfoNext(TContent content) {
+		if (content.getId() == null) {
+			throw new CmsSoaExcpetion("参数错误，ID不能为空");
+		}
+		return tContentDao.selectOneInfoNext(content);
+	}
+
 }

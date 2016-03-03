@@ -6,6 +6,7 @@ import java.util.List;
 import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.web.base.BaseVo;
 import com.coding17.easycms.web.util.BeanConverter;
+import com.coding17.easycms.web.vo.content.Content;
 
 /**
  * 描述：</b><br>
@@ -54,6 +55,16 @@ public class Channel extends BaseVo {
 	
 	private List<Channel> subChannel;
 	
+	private List<Content> contents;
+	
+	public List<Content> getContents() {
+		return contents;
+	}
+
+	public void setContents(List<Content> contents) {
+		this.contents = contents;
+	}
+
 	public List<Channel> getSubChannel() {
 		return subChannel;
 	}
@@ -208,7 +219,11 @@ public class Channel extends BaseVo {
     }
     
 	public static Channel fromEntity(TChannel entity) {
-		return BeanConverter.objectC(entity, Channel.class);
+		Channel c = BeanConverter.objectC(entity, Channel.class);
+		if (entity.getContents()!=null) {
+			c.setContents(BeanConverter.listC(entity.getContents(), Content.class));
+		}
+		return c;
 	}
 	
 }

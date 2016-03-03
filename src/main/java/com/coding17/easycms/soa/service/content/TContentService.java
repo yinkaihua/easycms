@@ -46,4 +46,18 @@ public interface TContentService extends BaseService<TContent> {
 	 */
 	public TContent getInfoByPriKey(TContent content);
 	
+	/**
+	 * 查询当前记录上一条
+	 * @param content
+	 * @return
+	 */
+	public TContent selectOneInfoPre(TContent content);
+	
+	/**
+	 * 查询当前记录下一条
+	 * @param content
+	 * @return
+	 */
+	public TContent selectOneInfoNext(TContent content);
+	
 }

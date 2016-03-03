@@ -41,7 +41,7 @@ private BeanFactory factory;
 	public void selectListInfoByCondition() {
 		TContent para = new TContent();
 		TChannel channel = new TChannel();
-		channel.setSiteId(7);
+		//channel.setSiteId(7);
 		para.setChannel(channel);
 		para.setPageNum(1);
 		para.setPageSize(5);
@@ -87,5 +87,17 @@ private BeanFactory factory;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void findNear() {
+		TContent c = new TContent();
+		//c.setChannel(new TChannel());
+		c.setId(22);
+		TContent r = service.selectOneInfoNext(c);
+		System.out.println("====================" + r);
+		r = service.selectOneInfoPre(c);
+		System.out.println("====================" + r);
+		Assert.assertTrue(r!=null);
 	}
 }

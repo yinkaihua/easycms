@@ -1,6 +1,7 @@
 package com.coding17.easycms.web.controller.content;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,12 @@ public class StaticPageController extends BaseController<Content> {
 		channelPara.setPageSize(100);
 		channelPara.setOrderby("h.`SORT` asc, c.`ID` asc");
 		Pagination<TChannel> pagination = tChannelService.selectListInfoByPagination(channelPara);
-		
+		List<TChannel> tChannels = pagination.getDatas();
+		List<Channel> channels = new ArrayList<Channel>();
+		for (TChannel tc : tChannels) {
+			channels.add(Channel.fromEntity(tc));
+		}
+		//request.setAttribute("allChannels", channels);
 		
 		Map<String, String> result = new HashMap<String, String>();
 		for (String id : ids.split(",")) {
@@ -75,6 +81,9 @@ public class StaticPageController extends BaseController<Content> {
 			}
 			Map<String, Object> context = new HashMap<String, Object>();
 			context.put("content", Content.fromEntity(tContent));
+			context.put("allChannels", channels);
+			context.put("pre", tContentService.selectOneInfoPre(para));
+			context.put("next", tContentService.selectOneInfoNext(para));
 			String html = VelocityUtil.genHtml(context, "content.vm");
 			try {
 				FileUtil.write(getFilePath(SiteContext.get(request.getSession()),
@@ -88,7 +97,6 @@ public class StaticPageController extends BaseController<Content> {
 				result.put(id, "生成失败，"+ex.getMessage());
 			}
 		}
-		
 		return JsonUtil.getSuccJsonResult(result);
 	}
 	

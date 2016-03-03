@@ -33,4 +33,18 @@ public interface TContentDAO extends ISuperDAO<TContent> {
 	 */
 	public TContent findInfoByPriKey(TContent tContent);
 	
+	/**
+	 * 查询当前记录上一条
+	 * @param tContent
+	 * @return
+	 */
+	public TContent selectOneInfoPre(TContent tContent);
+	
+	/**
+	 * 查询当前记录下一条
+	 * @param tContent
+	 * @return
+	 */
+	public TContent selectOneInfoNext(TContent tContent);
+	
 }

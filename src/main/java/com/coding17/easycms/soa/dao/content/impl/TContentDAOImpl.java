@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.coding17.easycms.soa.base.dao.impl.SuperDAO;
-import com.coding17.easycms.soa.base.pager.Pagination;
 import com.coding17.easycms.soa.dao.content.TContentDAO;
-import com.coding17.easycms.soa.entity.channel.TChannel;
 import com.coding17.easycms.soa.entity.content.TContent;
 
 /**
@@ -36,6 +34,16 @@ public class TContentDAOImpl extends SuperDAO<TContent> implements TContentDAO {
 	@Override
 	public TContent findInfoByPriKey(TContent tContent) {
 		return getTemplate().selectOne(getStatementPrefix() + ".findInfoByPriKey", tContent);
+	}
+
+	@Override
+	public TContent selectOneInfoPre(TContent tContent) {
+		return getTemplate().selectOne(getStatementPrefix() + ".selectOneInfoPre", tContent);
+	}
+
+	@Override
+	public TContent selectOneInfoNext(TContent tContent) {
+		return getTemplate().selectOne(getStatementPrefix() + ".selectOneInfoNext", tContent);
 	}
 
 }

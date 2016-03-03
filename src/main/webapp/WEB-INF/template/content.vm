@@ -8,16 +8,17 @@
 	<meta name="description" content="${content.metaDescription}">
 
 	<link href="http://localhost:8080/easycms/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://localhost:8080/easycms/res/css/style.css" rel="stylesheet">
 	<script src="http://localhost:8080/easycms/res/jquery/jquery-1.12.0.min.js"></script>
 	<script src="http://localhost:8080/easycms/res/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-#include("./include/header.vm")
+#parse("./include/header.vm")
 <div class="main">
-#include("./include/left.vm")
-#include("./include/center.vm")
-#include("./include/footer.vm")
+#parse("./include/left.vm")
+#parse("./include/center.vm")
 </div>
+#parse("./include/footer.vm")
 <div class="fixed-btn"><a title="返回顶部" href="#" class="go-top" style="display: inline-block;"><i class="fa fa-angle-up">顶部</i></a></div>
 </body>
 </html>

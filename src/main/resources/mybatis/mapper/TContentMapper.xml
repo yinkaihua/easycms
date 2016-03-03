@@ -51,28 +51,28 @@
 	<!--通用查询条件组装-->
 	<sql id="whereContation">
 			<if test="id != null">
-				AND  `ID`=#{id,jdbcType=INTEGER}  
+				AND  c.`ID`=#{id,jdbcType=INTEGER}  
 			</if>
 			<if test="title != null">
-				AND  `TITLE`=#{title,jdbcType=VARCHAR}  
+				AND  c.`TITLE`=#{title,jdbcType=VARCHAR}  
 			</if>
 			<if test="metaTitle != null">
-				AND  `META_TITLE`=#{metaTitle,jdbcType=VARCHAR}  
+				AND  c.`META_TITLE`=#{metaTitle,jdbcType=VARCHAR}  
 			</if>
 			<if test="metaKeywords != null">
-				AND  `META_KEYWORDS`=#{metaKeywords,jdbcType=VARCHAR}  
+				AND  c.`META_KEYWORDS`=#{metaKeywords,jdbcType=VARCHAR}  
 			</if>
 			<if test="metaDescription != null">
-				AND  `META_DESCRIPTION`=#{metaDescription,jdbcType=VARCHAR}  
+				AND  c.`META_DESCRIPTION`=#{metaDescription,jdbcType=VARCHAR}  
 			</if>
 			<if test="createTime != null">
-				AND  `CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
+				AND  c.`CREATE_TIME`=#{createTime,jdbcType=TIMESTAMP}  
 			</if>
 			<if test="pubState != null">
-				AND  `PUB_STATE`=#{pubState,jdbcType=INTEGER}  
+				AND  c.`PUB_STATE`=#{pubState,jdbcType=INTEGER}  
 			</if>
 			<if test="state != null">
-				AND  `STATE`=#{state,jdbcType=INTEGER}  
+				AND  c.`STATE`=#{state,jdbcType=INTEGER}  
 			</if>
 	</sql>
 	
@@ -310,14 +310,16 @@
 	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
 	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
 		<include refid="whereContation"/>
-		<if test="channel.siteId != null">
-			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
-		</if>
-		<if test="channel.id != null">
-			AND  h.`ID`=#{channel.id,jdbcType=INTEGER}
-		</if>
-		<if test="channel.pid != null">
-			AND  h.`PID`=#{channel.pid,jdbcType=INTEGER}
+		<if test="channel != null">
+			<if test="channel.siteId != null">
+				AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
+			</if>
+			<if test="channel.id != null">
+				AND  h.`ID`=#{channel.id,jdbcType=INTEGER}
+			</if>
+			<if test="channel.pid != null">
+				AND  h.`PID`=#{channel.pid,jdbcType=INTEGER}
+			</if>
 		</if>
 		<if test="orderby != null">
 		 	ORDER BY ${orderby}
@@ -334,14 +336,37 @@
 	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
 	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
 		<include refid="whereContation"/>
-		<if test="channel.siteId != null">
-			AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
-		</if>
-		<if test="channel.id != null">
-			AND  h.`ID`=#{channel.id,jdbcType=INTEGER}
-		</if>
-		<if test="channel.pid != null">
-			AND  h.`PID`=#{channel.pid,jdbcType=INTEGER}
+		<if test="channel != null">
+			<if test="channel.siteId != null">
+				AND  h.`SITE_ID`=#{channel.siteId,jdbcType=INTEGER}
+			</if>
+			<if test="channel.id != null">
+				AND  h.`ID`=#{channel.id,jdbcType=INTEGER}
+			</if>
+			<if test="channel.pid != null">
+				AND  h.`PID`=#{channel.pid,jdbcType=INTEGER}
+			</if>
 		</if>
 	</select>
+	
+	<!-- 查询上一条记录 -->
+	<select id="selectOneInfoPre" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
+	   SELECT   
+	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
+	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` AND c.`ID`&lt;#{id, jdbcType=INTEGER}
+	   ORDER BY c.`ID` DESC
+		limit 1
+	</select>
+	
+	<!-- 查询下一条记录 -->
+	<select id="selectOneInfoNext" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
+	   SELECT   
+	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
+	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
+	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` AND c.`ID`>#{id, jdbcType=INTEGER}
+	   ORDER BY c.`ID` ASC
+		limit 1
+	</select>
+	
 </mapper>
