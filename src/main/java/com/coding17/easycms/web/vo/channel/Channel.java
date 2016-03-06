@@ -1,9 +1,11 @@
 package com.coding17.easycms.web.vo.channel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.coding17.easycms.soa.entity.channel.TChannel;
+import com.coding17.easycms.soa.entity.content.TContent;
 import com.coding17.easycms.web.base.BaseVo;
 import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.vo.content.Content;
@@ -221,7 +223,13 @@ public class Channel extends BaseVo {
 	public static Channel fromEntity(TChannel entity) {
 		Channel c = BeanConverter.objectC(entity, Channel.class);
 		if (entity.getContents()!=null) {
-			c.setContents(BeanConverter.listC(entity.getContents(), Content.class));
+			List<Content> contents = new ArrayList<Content>();
+			for (TContent tc : entity.getContents()) {
+				tc.setChannel(entity);
+				Content con = Content.fromEntity(tc);
+				contents.add(con);
+			}
+			c.setContents(contents);
 		}
 		return c;
 	}

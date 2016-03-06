@@ -82,8 +82,8 @@ public class StaticPageController extends BaseController<Content> {
 			Map<String, Object> context = new HashMap<String, Object>();
 			context.put("content", Content.fromEntity(tContent));
 			context.put("allChannels", channels);
-			context.put("pre", tContentService.selectOneInfoPre(para));
-			context.put("next", tContentService.selectOneInfoNext(para));
+			context.put("pre", Content.fromEntity(tContentService.selectOneInfoPre(para)));
+			context.put("next", Content.fromEntity(tContentService.selectOneInfoNext(para)));
 			String html = VelocityUtil.genHtml(context, "content.vm");
 			try {
 				FileUtil.write(getFilePath(SiteContext.get(request.getSession()),

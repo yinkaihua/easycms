@@ -52,7 +52,7 @@
 </table>
 <script type="text/javascript">
 $(function() {
-	/* $("#selectAll").click(function() {
+	$("#selectAll").click(function() {
 		if ($(this).is(":checked")) {
 			$("input[name='contentCheckbox']").each(function() {
 				$(this).attr("checked", "checked");
@@ -62,7 +62,7 @@ $(function() {
 				$(this).attr("checked", false);
 			});
 		}
-	}); */
+	});
 })
 function delContent(id) {
 	if (confirm("确认删除文章？")) {

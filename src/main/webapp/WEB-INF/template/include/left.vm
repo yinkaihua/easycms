@@ -3,8 +3,8 @@
 	<h3>${elem.name}</h3>
 	<div class="list-group">
 	#foreach( $ec in $elem.contents)
-	<a href="#" class="list-group-item">
-      <p class="list-group-item-heading">${ec.title}</p>
+	<a href="http://www.coding17.com/${ec.url}" class="list-group-item #if(${ec.url}==${content.url})active #end">
+		<p class="list-group-item-heading">${ec.title}</p>
  	</a>
 	#end
 	</div>

@@ -52,6 +52,9 @@ public class ContentController extends BaseController<Content> {
 		if (sid!=-1) {
 			//已选择站点，查询站点下的所有文章
 			TChannel c = BeanConverter.objectC(p.getChannel(), TChannel.class);
+			if (c == null) {
+				c = new TChannel();
+			}
 			c.setSiteId(sid);
 			TContent p = new TContent();
 			p.setChannel(c);

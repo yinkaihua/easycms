@@ -17,7 +17,7 @@
 </head>
 <body>
 <div style="margin:20px;">
-	<label for="name">当前栏目：</label>${channel.name}
+	<label for="name">当前栏目：</label>${channel.name}<a style="float:right;" href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
 </div>
 <form action="${_ctxPath}/content/save.htm" method="post" id="form">
 <input type="hidden" name="id" value="${contents.id}">

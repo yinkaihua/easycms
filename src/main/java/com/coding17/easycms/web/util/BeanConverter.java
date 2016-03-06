@@ -21,6 +21,9 @@ public class BeanConverter {
 	 * @return
 	 */
 	public static <E, T> T objectC(E e, Class<T> clazz) {
+		if (e == null) {
+			return null;
+		}
 		try {
 			T t = clazz.newInstance();
 			if (e!=null) { 

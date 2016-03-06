@@ -2,8 +2,11 @@ package com.coding17.easycms.web.vo.content;
 
 import java.util.Date;
 
+import org.apache.commons.lang.time.DateFormatUtils;
+
 import com.coding17.easycms.soa.entity.content.TContent;
 import com.coding17.easycms.web.base.BaseVo;
+import com.coding17.easycms.web.exception.CmsWebException;
 import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.vo.channel.Channel;
 
@@ -180,6 +183,13 @@ public class Content extends BaseVo {
 		this.channel = channel;
 	}
 
+	public String getUrl() {
+		if (channel == null) {
+			throw new CmsWebException("栏目为空");
+		}
+		return channel.getPath() + "/" + DateFormatUtils.format(getCreateTime(), "yyyyMMdd")+getId()+".html";
+	}
+	
 	/**
      * 重写toString()
      */
@@ -201,6 +211,9 @@ public class Content extends BaseVo {
     }
     
 	public static Content fromEntity(TContent entity) {
+		if (entity == null) {
+			return null;
+		}
 		Content vo = BeanConverter.objectC(entity, Content.class);
 		if (entity.getChannel()!=null) {
 			Channel c = BeanConverter.objectC(entity.getChannel(), Channel.class);

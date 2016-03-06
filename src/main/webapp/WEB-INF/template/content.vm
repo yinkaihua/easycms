@@ -4,13 +4,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />  
 	<title>${content.metaTitle}</title>
-	<meta name="keywords" content="${content.metaKeywords}">
-	<meta name="description" content="${content.metaDescription}">
+	<meta name="keywords" content="程序员手册，${content.metaKeywords}">
+	<meta name="description" content="程序员手册，${content.metaDescription}">
 
-	<link href="http://localhost:8080/easycms/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="http://localhost:8080/easycms/res/css/style.css" rel="stylesheet">
-	<script src="http://localhost:8080/easycms/res/jquery/jquery-1.12.0.min.js"></script>
-	<script src="http://localhost:8080/easycms/res/bootstrap/js/bootstrap.min.js"></script>
+	<link href="http://www.coding17.com/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://www.coding17.com/res/css/style.css" rel="stylesheet">
+	<link href="http://www.coding17.com/res/prettify/prettify.css" rel="stylesheet">
+	<script src="http://www.coding17.com/res/jquery/jquery-1.12.0.min.js"></script>
+	<script src="http://www.coding17.com/res/bootstrap/js/bootstrap.min.js"></script>
+	<script src="http://www.coding17.com/res/prettify/run_prettify.js"></script>
+	#include("./include/statistic.vm")
 </head>
 <body>
 #parse("./include/header.vm")

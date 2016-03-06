@@ -31,6 +31,7 @@
 		<collection property="contents" ofType="com.coding17.easycms.soa.entity.content.TContent">
 			<result column="CID" property="id" jdbcType="INTEGER"/>
 			<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+			<result column="C_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
 		</collection>
     </resultMap>
     
@@ -296,7 +297,7 @@
 	<select id="selectListInfoByPagination" parameterType="com.coding17.easycms.soa.entity.channel.TChannel" resultMap="ChannelInfoResultMap">
 	   <include refid="CommonEntity.paginationPrefix"/>
 	   SELECT   
-	   		<include refid="baseColumnList"/>, c.`ID` as `CID`, c.`TITLE` as `TITLE`
+	   		<include refid="baseColumnList"/>, c.`ID` as `CID`, c.`TITLE` as `TITLE`, c.`CREATE_TIME` as `C_CREATE_TIME`
 	   FROM  T_CHANNEL h,T_CHANNEL_CONTENT j,T_CONTENT c
 	   WHERE 1=1 AND h.`ID`=j.`CHANNEL_ID` AND j.`CONTENT_ID`=c.`ID`
 		<include refid="whereContation"/>
