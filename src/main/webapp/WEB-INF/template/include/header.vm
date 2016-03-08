@@ -4,7 +4,17 @@
    </div>
    <div>
       <ul class="nav navbar-nav" style="margin-left:20px;">
-         <li class="active"><a href="http://www.coding17.com/bootstrap/css/2016022519.html">Bootstrap</a></li>
+         <li id="bootstrapbook"><a href="http://www.coding17.com/bootstrap/css/2016022519.html" title="Bootstrap教程，Bootstrap入门，进阶">Bootstrap</a></li>
+         <li id="seobook" ><a href="http://www.coding17.com/seo/friendly/2016030859.html" title="seo教程，网站建设，页面结构，页面内容优化">seo</a></li>
       </ul>
    </div>
 </nav>
+<script type="text/javascript">
+$(function() {
+	if (location.href.indexOf("seo")!=-1) {
+		$("#seobook").attr("class","active");
+	} else if (location.href.indexOf("bootstrap")!=-1) {
+		$("#bootstrapbook").attr("class","active");
+	}
+})
+</script>
