@@ -16,6 +16,8 @@
 <div style="margin:20px">
 	<a href="${_ctxPath}/channel/to_add.htm?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
 	<a href="javascript:createSubChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
+	<a href="javascript:editChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
+	<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <hr>
 <div class="easyui-layout" style="width:90%;height:700px;margin:20px;">
@@ -75,6 +77,14 @@ function delChannel() {
 			}
 		}
 	});
+}
+function editChannel() {
+	var node = $(".easyui-tree").tree("getSelected");
+	if (!node) {
+		alert("未选择栏目");
+		return;
+	}
+	location.href = "${_ctxPath}/channel/to_edit.htm?id="+node.id;
 }
 </script>
 </body>

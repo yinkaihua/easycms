@@ -351,22 +351,34 @@
 	
 	<!-- 查询上一条记录 -->
 	<select id="selectOneInfoPre" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
-	   SELECT   
-	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
-	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
-	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` AND c.`ID`&lt;#{id, jdbcType=INTEGER}
-	   ORDER BY c.`ID` DESC
-		limit 1
+	   SELECT * FROM (SELECT (@row_num:=@row_num+1) AS row_no, t1.* FROM (
+			SELECT c.`ID` ,c.`TITLE` ,c.`META_TITLE` ,c.`META_KEYWORDS` ,c.`META_DESCRIPTION` ,c.`CREATE_TIME` ,c.`PUB_STATE` ,c.`STATE` , h.`ID` AS `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` AS `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` AS `C_STATE`
+				FROM T_CHANNEL_CONTENT j, T_CONTENT c, T_CHANNEL h,T_SITE s
+				WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` 
+				ORDER BY j.`channel_id` ASC, j.`content_id` ASC ) t1 ,(SELECT(@row_num:=0)) rn 
+		) t3 WHERE t3.row_no=(
+			SELECT t2.row_no FROM (SELECT (@row_num:=@row_num+1) AS row_no, t1.* FROM (
+				SELECT c.`ID`
+					FROM T_CHANNEL_CONTENT j, T_CONTENT c, T_CHANNEL h,T_SITE s		
+					WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` 		
+					ORDER BY j.`channel_id` ASC, j.`content_id` ASC ) t1 ,(SELECT(@row_num:=0)) rn 	
+			) t2 WHERE t2.id=#{id, jdbcType=INTEGER})-1
 	</select>
 	
 	<!-- 查询下一条记录 -->
 	<select id="selectOneInfoNext" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
-	   SELECT   
-	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
-	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
-	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` AND c.`ID`>#{id, jdbcType=INTEGER}
-	   ORDER BY c.`ID` ASC
-		limit 1
+	   SELECT * FROM (SELECT (@row_num:=@row_num+1) AS row_no, t1.* FROM (
+			SELECT c.`ID` ,c.`TITLE` ,c.`META_TITLE` ,c.`META_KEYWORDS` ,c.`META_DESCRIPTION` ,c.`CREATE_TIME` ,c.`PUB_STATE` ,c.`STATE` , h.`ID` AS `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` AS `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` AS `C_STATE`
+				FROM T_CHANNEL_CONTENT j, T_CONTENT c, T_CHANNEL h,T_SITE s
+				WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` 
+				ORDER BY j.`channel_id` ASC, j.`content_id` ASC ) t1 ,(SELECT(@row_num:=0)) rn 
+		) t3 WHERE t3.row_no=(
+			SELECT t2.row_no FROM (SELECT (@row_num:=@row_num+1) AS row_no, t1.* FROM (
+				SELECT c.`ID`
+					FROM T_CHANNEL_CONTENT j, T_CONTENT c, T_CHANNEL h,T_SITE s		
+					WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` 		
+					ORDER BY j.`channel_id` ASC, j.`content_id` ASC ) t1 ,(SELECT(@row_num:=0)) rn 	
+			) t2 WHERE t2.id=#{id, jdbcType=INTEGER})+1
 	</select>
 	
 </mapper>

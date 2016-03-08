@@ -93,7 +93,8 @@ private BeanFactory factory;
 	public void findNear() {
 		TContent c = new TContent();
 		//c.setChannel(new TChannel());
-		c.setId(22);
+		c.setId(66);
+//		c.setOrderby("");
 		TContent r = service.selectOneInfoNext(c);
 		System.out.println("====================" + r);
 		r = service.selectOneInfoPre(c);

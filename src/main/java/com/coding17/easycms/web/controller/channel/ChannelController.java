@@ -43,6 +43,7 @@ public class ChannelController extends BaseController<Channel> {
 		if (sid!=-1) {
 			TChannel c = new TChannel();
 			c.setSiteId(sid);
+			c.setOrderby("SORT ASC");
 			List<TChannel> list = tChannelService.selectListByCondition(c);
 			request.setAttribute("channels", buildChannels(0, list));
 		}

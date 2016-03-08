@@ -77,6 +77,11 @@ public class StaticPageController extends BaseController<Content> {
 		for (String id : ids.split(",")) {
 			TContent para = new TContent();
 			para.setId(Integer.parseInt(id));
+			if (pid != null) {
+				TChannel c = new TChannel();
+				c.setPid(pid);
+				para.setChannel(c);
+			}
 			TContent tContent = tContentService.getInfoByPriKey(para);
 			if (tContent == null) {
 				result.put(id, "生成失败，文章不存在");

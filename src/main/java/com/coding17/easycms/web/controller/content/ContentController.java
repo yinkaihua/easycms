@@ -65,6 +65,7 @@ public class ContentController extends BaseController<Content> {
 			
 			c = new TChannel();
 			c.setSiteId(sid);
+			c.setOrderby("SORT ASC");
 			List<TChannel> channelList = tChannelService.selectListByCondition(c);
 			channels = ChannelController.buildChannels(0, channelList);
 			List<TreeNode> tree = TreeBuilder.build(channels, Channel.class, new String[] {"id","name","","","","level,pid","subChannel"});
