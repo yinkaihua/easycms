@@ -50,7 +50,7 @@ public class StaticPageController extends BaseController<Content> {
 	
 	@ResponseBody
 	@RequestMapping("/statiz.shtm")
-	public Map<String, Object> staticContents(String ids) {
+	public Map<String, Object> staticContents(String ids, Integer pid) {
 		LOG.info("=====>生成静态页 {}", ids);
 		SiteContext.check(request.getSession());
 		
@@ -59,6 +59,9 @@ public class StaticPageController extends BaseController<Content> {
 		TChannel channelPara = new TChannel();
 		channelPara.setSiteId(siteId);
 		channelPara.setState(Integer.parseInt(DictProperties.getValidState()));
+		if (pid != null) {
+			channelPara.setPid(pid);
+		}
 		channelPara.setPageNum(0);
 		channelPara.setPageSize(50);
 		channelPara.setOrderby("h.`SORT` asc, c.`ID` asc");

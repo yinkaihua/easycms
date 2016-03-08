@@ -70,6 +70,7 @@ function delContent(id) {
 	}
 }
 function statiz(id) {
+	var node = parent.getSelectedChannel();
 	var ids = "";
 	if (!id) {
 		$("input[name='contentCheckbox']").each(function() {
@@ -80,7 +81,15 @@ function statiz(id) {
 	} else {
 		ids = id;
 	}
-	$.getJSON("${_ctxPath}/gen/statiz.shtm", {ids:ids}, function(ret) {
+	if (ids=="") {
+		alert("请选择要静态化的文章");
+		return;
+	}
+	var para = {ids:ids};
+	if (node) {
+		para.pid = node.attributes.pid;
+	}
+	$.getJSON("${_ctxPath}/gen/statiz.shtm", para, function(ret) {
 		alert(ret.state);
 		location.reload();
 	});

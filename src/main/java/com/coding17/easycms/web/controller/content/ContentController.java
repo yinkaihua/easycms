@@ -67,7 +67,7 @@ public class ContentController extends BaseController<Content> {
 			c.setSiteId(sid);
 			List<TChannel> channelList = tChannelService.selectListByCondition(c);
 			channels = ChannelController.buildChannels(0, channelList);
-			List<TreeNode> tree = TreeBuilder.build(channels, Channel.class, new String[] {"id","name","","","","level","subChannel"});
+			List<TreeNode> tree = TreeBuilder.build(channels, Channel.class, new String[] {"id","name","","","","level,pid","subChannel"});
 			request.setAttribute("treejson", JSONArray.fromObject(tree).toString());
 		}
 		request.setAttribute("contents", cs);

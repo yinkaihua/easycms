@@ -53,6 +53,9 @@ function siteChangeEvent(newVal, oldVal) {
 function showContents(node) {
 	$("iframe[name='contentIframe']").attr("src", "${_ctxPath}/content/list.htm?cid="+node.id);
 }
+function getSelectedChannel() {
+	return $(".easyui-tree").tree("getSelected");
+}
 </script>
 </body>
 </html>
