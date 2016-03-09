@@ -4,8 +4,8 @@
    </div>
    <div>
       <ul class="nav navbar-nav" style="margin-left:20px;">
-         <li id="bootstrapbook"><a href="http://www.coding17.com/bootstrap/css/2016022519.html" title="Bootstrap教程，Bootstrap入门，进阶">Bootstrap</a></li>
-         <li id="seobook" ><a href="http://www.coding17.com/seo/friendly/2016030859.html" title="seo教程，网站建设，页面结构，页面内容优化">seo</a></li>
+         <li id="bootstrapbook"><a href="http://www.coding17.com/bootstrap" title="Bootstrap教程，Bootstrap入门，进阶">Bootstrap</a></li>
+         <li id="seobook" ><a href="http://www.coding17.com/seo" title="seo教程，网站建设，页面结构，页面内容优化">seo</a></li>
       </ul>
    </div>
 </nav>
