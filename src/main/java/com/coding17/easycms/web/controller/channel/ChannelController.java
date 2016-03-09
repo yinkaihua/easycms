@@ -52,7 +52,7 @@ public class ChannelController extends BaseController<Channel> {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/children_list_ajax.htm")
+	@RequestMapping("/children_list_ajax.shtm")
 	public Map<String, Object> getListByPid() {
 		Map<String, Object> json = new HashMap<String, Object>();
 		TChannel para = new TChannel();
@@ -123,7 +123,7 @@ public class ChannelController extends BaseController<Channel> {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/has_children.htm")
+	@RequestMapping("/has_children.shtm")
 	public Map<String, Object> hasChildren() {
 		Map<String, Object> json = new HashMap<String, Object>();
 		TChannel para = new TChannel();

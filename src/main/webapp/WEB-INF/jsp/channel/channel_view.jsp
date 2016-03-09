@@ -17,7 +17,7 @@
 	<a href="${_ctxPath}/channel/to_add.htm?pid=0" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建顶级栏目</a>
 	<a href="javascript:createSubChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建子栏目</a>
 	<a href="javascript:editChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑栏目</a>
-	<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
+	<a href="javascript:delChannel();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除栏目</a>
 </div>
 <hr>
 <div class="easyui-layout" style="width:90%;height:700px;margin:20px;">
@@ -62,13 +62,13 @@ function showSubNodes(node) {
 	$("iframe[name='channelIframe']").attr("src", "${_ctxPath}/channel/list.htm?pid="+node.id);
 }
 function delChannel() {
-	var selectedRow = $("#tt").datagrid("getSelected");
-	if (selectedRow==null) {
-		alert("当前没有选中的栏目");
+	var node = $(".easyui-tree").tree("getSelected");
+	if (!node) {
+		alert("未选择栏目");
 		return;
 	}
-	var id = selectedRow.id;
-	$.getJSON("${_ctxPath}/channel/has_children.htm?id="+id,{},function(ret) {
+	var id = node.id;
+	$.getJSON("${_ctxPath}/channel/has_children.shtm?id="+id,{},function(ret) {
 		if (ret.state=="1") {
 			alert(ret.msg);
 		} else {
