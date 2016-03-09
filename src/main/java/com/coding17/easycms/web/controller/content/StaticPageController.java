@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coding17.easycms.soa.base.pager.Pagination;
@@ -106,6 +107,25 @@ public class StaticPageController extends BaseController<Content> {
 			}
 		}
 		return JsonUtil.getSuccJsonResult(result);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/statiz_all.shtm")
+	public Map<String, Object> staticAll(Integer pid) {
+		LOG.info("=====>生成静态页 ，pid={}", pid);
+		SiteContext.check(request.getSession());
+		String allId = "";
+		if (pid == null) {
+			//全站生成
+			Integer siteId = SiteContext.get(request.getSession()).getId();
+			TChannel channelPara = new TChannel();
+			channelPara.setSiteId(siteId);
+			channelPara.setState(Integer.parseInt(DictProperties.getValidState()));
+			
+		} else {
+			//生成一个栏目
+		}
+		return staticContents(allId, pid);
 	}
 	
 	private static String getFilePath(Site site, Channel channel, Content content) {
