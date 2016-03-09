@@ -4,7 +4,7 @@
    </div>
    <div>
       <ul class="nav navbar-nav" style="margin-left:20px;">
-      	 <li id="html"><a href="http://www.coding17.com/htmlbook" title="HTML教程，HTML5教程">HTML教程</a></li>
+      	 <li id="html"><a href="http://www.coding17.com/html" title="HTML教程，HTML5教程">HTML教程</a></li>
       	 <li id="htmlbook"><a href="http://www.coding17.com/htmlbook" title="HTML参考手册，HTML5参考手册">HTML参考手册</a></li>
          <li id="bootstrapbook"><a href="http://www.coding17.com/bootstrap" title="Bootstrap教程，Bootstrap入门，进阶">Bootstrap教程</a></li>
          <li id="seobook" ><a href="http://www.coding17.com/seo" title="seo教程，网站建设，页面结构，页面内容优化">站长seo</a></li>
