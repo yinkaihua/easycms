@@ -7,7 +7,8 @@ public class StringEscapeUtil {
 
 	@Test
 	public void htmlEscape() {
-		System.out.println(StringEscapeUtils.escapeHtml("<!--"));
+		String s = StringEscapeUtils.escapeHtml("<!-->");
+		System.out.println(s);
 	}
 	
 }

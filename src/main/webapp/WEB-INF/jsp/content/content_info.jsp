@@ -70,6 +70,13 @@ function submitContent() {
 	$("#txt").val(txt);
 	$("#form").submit();
 }
+$(function() {
+	var isEdit = "${isEdit}";
+	if (isEdit!="yes") {
+		//设置默认seo标题
+		$("#metaTitle").val("－HTML教程－程序员手册");
+	}
+})
 </script>
 </body>
 </html>

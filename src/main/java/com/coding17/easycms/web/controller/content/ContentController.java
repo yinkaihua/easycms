@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -109,6 +110,10 @@ public class ContentController extends BaseController<Content> {
 			content.setChannel(channel);
 			content.setCreateTime(new Date());
 			content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
+			
+			//特殊字符处理
+			content.setTitle(StringEscapeUtils.escapeHtml(content.getTitle()));
+			
 			try {
 				content = tContentService.createContent(content);
 			} catch (Exception ex) {
@@ -122,6 +127,10 @@ public class ContentController extends BaseController<Content> {
 			content.setContentExt(ext);
 			content.setChannel(channel);
 			content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
+			
+			//特殊字符处理
+			content.setTitle(StringEscapeUtils.escapeHtml(content.getTitle()));
+			
 			try {
 				content = tContentService.updateContent(content);
 			} catch (Exception ex) {
