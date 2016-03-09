@@ -25,10 +25,10 @@
 			<td width="100px">文章ID</td>
 			<td>标题</td>
 			<td width="150px">栏目</td>
-			<td width="200px">创建时间</td>
-			<td width="150px">发布状态</td>
-			<td width="100px">状态</td>
-			<td width="250px">操作</td>
+			<td width="180px">创建时间</td>
+			<td width="90px">发布状态</td>
+			<td width="60px">状态</td>
+			<td width="300px">操作</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,6 +45,7 @@
 				<a href="${_ctxPath}/content/to_edit.htm?id=${s.id}" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</a>
 				<a href="javascript:statiz(${s.id})" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化</a>
 				<a href="javascript:delContent(${s.id})" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+				<a href="javascript:alert('http://www.coding17.com/${s.url}')" class="easyui-linkbutton" data-options="iconCls:'icon-add'">获取URL</a>
 			</td>
 		</tr>
 	</c:forEach>

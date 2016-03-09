@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default" role="navigation" style="background-color:#ffffff">
    <div class="navbar-header">
-      <a class="navbar-brand" href="#" style="color:#000">程序员手册</a>
+      <a class="navbar-brand" href="http://www.coding17.com" title="程序员手册，最全的程序员资料查询网站" style="color:#000">程序员手册</a>
    </div>
    <div>
       <ul class="nav navbar-nav" style="margin-left:20px;">
