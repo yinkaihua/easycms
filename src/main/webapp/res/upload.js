@@ -24,7 +24,6 @@ kanglaohui.widgets.upload.prototype = {
 	bind : function(container) {
 		var formHtml = '<form method="post" enctype="multipart/form-data" action="'+this.action+'">';
 		formHtml+=$(container).html()+'</form>';
-		
 	}
 };
 
