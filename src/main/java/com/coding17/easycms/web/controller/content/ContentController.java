@@ -21,6 +21,7 @@ import com.coding17.easycms.web.controller.channel.ChannelController;
 import com.coding17.easycms.web.util.BeanConverter;
 import com.coding17.easycms.web.util.DictProperties;
 import com.coding17.easycms.web.util.SiteContext;
+import com.coding17.easycms.web.util.StringEscapeUtil;
 import com.coding17.easycms.web.util.TreeBuilder;
 import com.coding17.easycms.web.util.WebConst;
 import com.coding17.easycms.web.vo.channel.Channel;
@@ -112,7 +113,8 @@ public class ContentController extends BaseController<Content> {
 			content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
 			
 			//特殊字符处理
-			content.setTitle(StringEscapeUtils.escapeHtml(content.getTitle()));
+			content.setTitle(StringEscapeUtil.escapeHtml(content.getTitle()));
+			content.setMetaDescription(StringEscapeUtil.escapeHtml(content.getMetaDescription()));
 			
 			try {
 				content = tContentService.createContent(content);
@@ -129,7 +131,8 @@ public class ContentController extends BaseController<Content> {
 			content.setPubState(Integer.parseInt(DictProperties.getNoPubState()));
 			
 			//特殊字符处理
-			content.setTitle(StringEscapeUtils.escapeHtml(content.getTitle()));
+			content.setTitle(StringEscapeUtil.escapeHtml(content.getTitle()));
+			content.setMetaDescription(StringEscapeUtil.escapeHtml(content.getMetaDescription()));
 			
 			try {
 				content = tContentService.updateContent(content);

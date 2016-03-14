@@ -17,7 +17,9 @@
 </head>
 <body>
 <div style="margin:20px;">
-	<label for="name">当前栏目：</label>${channel.name}<a style="float:right;" href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
+	<label for="name">当前栏目：</label>${channel.name}
+	<a style="float:right;" href="javascript:autoFill();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">自动填充</a>
+	<a style="float:right;" href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
 </div>
 <form action="${_ctxPath}/content/save.htm" method="post" id="form">
 <input type="hidden" name="id" value="${contents.id}">
@@ -70,11 +72,26 @@ function submitContent() {
 	$("#txt").val(txt);
 	$("#form").submit();
 }
+function autoFill() {
+	var txt = um.getContentTxt();
+	var r = /HTML (<\w*>)/.exec(txt);
+	if (r==null || r.length<2) {
+		alert("自动填充失败==>" + r);
+		return;
+	}
+	var tag = r[1];
+	alert("当前标签==>" + tag);
+	$("#metaTitle").val("HTML " + tag + " 标签" + "－HTML教程－程序员手册");
+	$("#title").val(tag);
+	tag = tag.replace(/<|>/g,"")
+	$("#metaKeywords").val(tag+"，"+tag+"标签，"+"HTML标签，HTML5，HTML实例");
+}
 $(function() {
 	var isEdit = "${isEdit}";
 	if (isEdit!="yes") {
 		//设置默认seo标题
 		$("#metaTitle").val("－HTML教程－程序员手册");
+		$("#metaKeywords").val("HTML标签，HTML5，HTML实例");
 	}
 })
 </script>
