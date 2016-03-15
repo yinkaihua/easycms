@@ -163,7 +163,7 @@ public class ContentController extends BaseController<Content> {
 		TChannel c = new TChannel();
 		c.setId(cid);
 		TContent para = new TContent();
-		para.setPageSize(50);
+		para.setPageSize(100);
 		para.setChannel(c);
 		para.setOrderby("id desc");
 		Pagination<TContent> pagination = tContentService.selectListInfoByPagination(para);	

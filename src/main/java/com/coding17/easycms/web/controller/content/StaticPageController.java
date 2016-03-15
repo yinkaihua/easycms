@@ -64,7 +64,7 @@ public class StaticPageController extends BaseController<Content> {
 			channelPara.setPid(pid);
 		}
 		channelPara.setPageNum(0);
-		channelPara.setPageSize(50);
+		channelPara.setPageSize(100);
 		channelPara.setOrderby("h.`SORT` asc, c.`ID` asc");
 		Pagination<TChannel> pagination = tChannelService.selectListInfoByPagination(channelPara);
 		List<TChannel> tChannels = pagination.getDatas();
