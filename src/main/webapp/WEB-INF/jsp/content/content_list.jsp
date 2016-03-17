@@ -36,7 +36,7 @@
 		<tr>
 			<td><input type="checkbox" value="${s.id}" name="contentCheckbox"></td>
 			<td>${s.id }</td>
-			<td>${s.title }</td>
+			<td onclick="alert('http://www.coding17.com/${s.url}')">${s.title }</td>
 			<td>${s.channel.name }</td>
 			<td><fmt:formatDate value="${s.createTime }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			<td><ec:dict catalog="pubstate" code="${s.pubState }"/></td>
