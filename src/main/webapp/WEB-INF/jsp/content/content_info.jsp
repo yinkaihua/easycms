@@ -74,7 +74,7 @@ function submitContent() {
 }
 function autoFill() {
 	var txt = um.getContentTxt();
-	var r = /HTML (<\w*>)/.exec(txt);
+	var r = /HTML5{0,1} (<\w*>)/.exec(txt);
 	if (r==null || r.length<2) {
 		alert("自动填充失败==>" + r);
 		return;

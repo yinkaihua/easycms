@@ -1,40 +1,41 @@
-<!Doctype html>
-<html xmlns=http://www.w3.org/1999/xhtml>
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-	<title>${content.metaTitle}</title>
-	<meta name="keywords" content="程序员手册，${content.metaKeywords}">
-	<meta name="description" content="程序员手册，${content.metaDescription}">
-
-	<link href="http://www.coding17.com/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="http://www.coding17.com/res/css/style.css" rel="stylesheet">
-	<link href="http://www.coding17.com/res/prettify/prettify.css" rel="stylesheet">
-	<script src="http://www.coding17.com/res/jquery/jquery-1.12.0.min.js"></script>
-	<script src="http://www.coding17.com/res/bootstrap/js/bootstrap.min.js"></script>
-	#include("./include/statistic.vm")
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta name="keywords" content="编程之家，程序员交流，资料查询">
+<meta name="description" content="编程之家，程序员交流，资料查询">
+<title>编程之家，程序员交流，资料查询</title>
+<link href="http://www.coding17.com/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://www.coding17.com/res/css/style.css" rel="stylesheet">
+<script src="http://www.coding17.com/res/jquery/jquery-1.12.0.min.js"></script>
+<script src="http://www.coding17.com/res/bootstrap/js/bootstrap.min.js"></script>
+#include("./include/statistic.vm")
+<style type="text/css">
+.nav li {float: left;}
+</style>
 </head>
 <body>
 #parse("./include/header.vm")
-<div class="main">
-<div class="index-main-center">
-	<div class="col middle-column-home">
-		<div style="display: block;" class="codelist codelist-desktop cate1">
-			<h2>HTML / CSS</h2>
-			<a href="http://www.coding17.com/html" class="item-top item-1"><h4>【学习HTML】</h4> <img width="36" height="36" src="http://static.runoob.com/images/icon/html.png" class="codeicon codeicon-36"> <strong>HTML，即超文本标记语言（Hyper	Text Markup Language）</strong></a> 
-			<a href="http://www.coding17.com/bootstrap" class="item-top item-1"><h4>【学习Bootstrap】</h4> <img width="36" height="36" src="http://static.runoob.com/images/icon/bootstrap.png" class="codeicon codeicon-36"><strong>Bootstrap，来自 Twitter，是目前最受欢迎的前端框架</strong></a>
+<div class="index-main">
+	<div class="index-main-center">
+		<div class="col middle-column-home">
+			<div class="codelist codelist-desktop cate1" style="display: block;">
+				<h2>HTML / CSS</h2>
+				<a class="item-top item-1" href="http://www.coding17.com/html"><h4>【学习HTML】</h4> <img class="codeicon codeicon-36" height="36" width="36" src="http://static.runoob.com/images/icon/html.png"> <strong>HTML，即超文本标记语言（Hyper	Text Markup Language）</strong></a> 
+				<a class="item-top item-1" href="http://www.coding17.com/bootstrap"><h4>【学习Bootstrap】</h4> <img class="codeicon codeicon-36" height="36" width="36" src="http://static.runoob.com/images/icon/bootstrap.png"><strong>Bootstrap，来自 Twitter，是目前最受欢迎的前端框架</strong></a>
+			</div>
+		</div>
+		<div class="col middle-column-home" style="margin-top:20px">
+			<div class="codelist codelist-desktop cate1" style="display: block;">
+				<h2>最近更新</h2>
+				#foreach( $l in $latest )
+				<p class="latest-p"><a class="latest" href="http://www.coding17.com/${l.channel.url}">【${l.channel.name}】</a><a class="latest" href="${l.url}">${l.title} － ${l.contentExt.txt}</a></p>
+				#end
+			</div>
 		</div>
 	</div>
-	<div style="margin-top:20px" class="col middle-column-home">
-		<div style="display: block;" class="codelist codelist-desktop cate1">
-			<h2>最近更新</h2>
-			<p class="latest-p"><a href="http://www.coding17.com/bootstrap" class="latest">【Bootstrap教程】</a><a href="http://www.coding17.com/bootstrap" class="latest">Bootstrap CSS概览 － Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。</a></p>
-			<p class="latest-p"><a href="http://www.coding17.com/bootstrap" class="latest">【Bootstrap教程】</a><a href="http://www.coding17.com/bootstrap" class="latest">Bootstrap CSS概览</a></p>
-		</div>
-	</div>
-</div>
 </div>
 #parse("./include/footer.vm")
-<div class="fixed-btn"><a title="返回顶部" href="#" class="go-top" style="display: inline-block;"><i class="fa fa-angle-up">顶部</i></a></div>
+<div class="fixed-btn"><a title="编程之家，返回页面顶部" href="#" class="go-top" style="display: inline-block;"><i class="fa fa-angle-up">顶部</i></a></div>
 </body>
 </html>
