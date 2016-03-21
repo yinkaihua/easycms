@@ -13,6 +13,9 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/site/site_selected.jsp" %>
+<div style="margin:20px;">
+	<a href="${_ctxPath}/gen/?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化首页</a>
+</div>
 <script type="text/javascript">
 function siteChangeEvent() {}
 </script>

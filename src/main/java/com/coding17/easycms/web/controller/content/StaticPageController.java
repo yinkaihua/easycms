@@ -110,21 +110,18 @@ public class StaticPageController extends BaseController<Content> {
 	
 	@RequestMapping("/statiz_page.htm")
 	public String staticPage(Integer pid) {
-		/*LOG.info("=====>生成静态页 ，pid={}", pid);
 		SiteContext.check(request.getSession());
-		String allId = "";
-		if (pid == null) {
-			//全站生成
-			Integer siteId = SiteContext.get(request.getSession()).getId();
-			TChannel channelPara = new TChannel();
-			channelPara.setSiteId(siteId);
-			channelPara.setState(Integer.parseInt(DictProperties.getValidState()));
-			
-		} else {
-			//生成一个栏目
-		}
-		return staticContents(allId, pid);*/
 		return "statiz/statiz_page";
+	}
+	
+	/**
+	 * 首页静态化
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/statiz_index.shtm")
+	public Map<String, Object> staticIndex() {
+		return JsonUtil.getSuccJsonResult(null);
 	}
 	
 	private static String getFilePath(Site site, Channel channel, Content content) {
