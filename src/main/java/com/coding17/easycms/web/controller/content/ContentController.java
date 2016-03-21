@@ -114,6 +114,7 @@ public class ContentController extends BaseController<Content> {
 			
 			//特殊字符处理
 			content.setTitle(StringEscapeUtil.escapeHtml(content.getTitle()));
+			content.setMetaTitle(StringEscapeUtil.escapeHtml(content.getMetaTitle()));
 			content.setMetaDescription(StringEscapeUtil.escapeHtml(content.getMetaDescription()));
 			
 			try {
@@ -132,6 +133,7 @@ public class ContentController extends BaseController<Content> {
 			
 			//特殊字符处理
 			content.setTitle(StringEscapeUtil.escapeHtml(content.getTitle()));
+			content.setMetaTitle(StringEscapeUtil.escapeHtml(content.getMetaTitle()));
 			content.setMetaDescription(StringEscapeUtil.escapeHtml(content.getMetaDescription()));
 			
 			try {
@@ -163,7 +165,7 @@ public class ContentController extends BaseController<Content> {
 		TChannel c = new TChannel();
 		c.setId(cid);
 		TContent para = new TContent();
-		para.setPageSize(100);
+		para.setPageSize(200);
 		para.setChannel(c);
 		para.setOrderby("id desc");
 		Pagination<TContent> pagination = tContentService.selectListInfoByPagination(para);	

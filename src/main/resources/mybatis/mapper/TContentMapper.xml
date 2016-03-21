@@ -306,9 +306,9 @@
 	<select id="selectListInfoByPagination" parameterType="com.coding17.easycms.soa.entity.content.TContent" resultMap="ContentInfoMap">
 	   <include refid="CommonEntity.paginationPrefix"/>
 	   SELECT   
-	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`
-	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s      
-	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID`
+	   		<include refid="baseColumnList"/>, h.`ID` as `CID`,h.`PID`,h.`SITE_ID`,h.`NAME`,h.`PATH`,h.`CREATE_TIME` as `C_CREATE_TIME`,h.`LEVEL`,h.`SORT`,h.`STATE` as `C_STATE`, e.`TXT`
+	   FROM   T_CONTENT c,T_CHANNEL_CONTENT j, T_CHANNEL h,T_SITE s, T_CONTENT_EXT e      
+	   WHERE 1=1 AND c.`ID`=j.`CONTENT_ID` AND j.`CHANNEL_ID`=h.`ID` AND h.`SITE_ID`=s.`ID` AND c.`ID`=e.`CONTENT_ID`
 		<include refid="whereContation"/>
 		<if test="channel != null">
 			<if test="channel.siteId != null">

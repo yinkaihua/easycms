@@ -4,8 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />  
 	<title>${content.metaTitle}</title>
-	<meta name="keywords" content="程序员手册，${content.metaKeywords}">
-	<meta name="description" content="程序员手册，${content.metaDescription}">
+	<meta name="keywords" content="编程之家，${content.metaKeywords}">
+	<meta name="description" content="编程之家，${content.metaDescription}">
 
 	<link href="http://www.coding17.com/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="http://www.coding17.com/res/css/style.css" rel="stylesheet">

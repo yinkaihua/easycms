@@ -63,7 +63,7 @@ public class StaticPageController extends BaseController<Content> {
 			channelPara.setPid(pid);
 		}
 		channelPara.setPageNum(0);
-		channelPara.setPageSize(100);
+		channelPara.setPageSize(200);
 		channelPara.setOrderby("h.`SORT` asc, c.`ID` asc");
 		Pagination<TChannel> pagination = tChannelService.selectListInfoByPagination(channelPara);
 		List<TChannel> tChannels = pagination.getDatas();
@@ -110,7 +110,7 @@ public class StaticPageController extends BaseController<Content> {
 	
 	@RequestMapping("/statiz_page.htm")
 	public String staticPage(Integer pid) {
-		SiteContext.check(request.getSession());
+		//SiteContext.check(request.getSession());
 		return "statiz/statiz_page";
 	}
 	
@@ -121,12 +121,39 @@ public class StaticPageController extends BaseController<Content> {
 	@ResponseBody
 	@RequestMapping("/statiz_index.shtm")
 	public Map<String, Object> staticIndex() {
+		LOG.info("=====>首页静态化");
+		SiteContext.check(request.getSession());
+		//最近更新文章
+		TContent param = new TContent();
+		param.setOrderby("c.`ID` DESC");
+		param.setPageNum(1);
+		param.setPageSize(10);
+		Pagination<TContent> pager = tContentService.selectListInfoByPagination(param);
+		List<TContent> tContents = pager.getDatas();
+		List<Content> contents = new ArrayList<Content>();
+		for (TContent tc : tContents) {
+			contents.add(Content.fromEntity(tc));
+		}
+		Map<String, Object> context = new HashMap<String, Object>();
+		context.put("latest", contents);
+		String html = VelocityUtil.genHtml(context, "index.vm");
+		try {
+			FileUtil.write(getSiteIndexPath(SiteContext.get(request.getSession())), html);
+		} catch (Exception ex) {
+			LOG.info("=====>首页静态化失败", ex);
+			return JsonUtil.getFailJsonResult("");
+		}
 		return JsonUtil.getSuccJsonResult(null);
 	}
 	
 	private static String getFilePath(Site site, Channel channel, Content content) {
 		String path = WebConst.wc_webapp_root_path + site.getPath() + File.separator + channel.getPath() + File.separator;
 		path += DateFormatUtils.format(content.getCreateTime(), "yyyyMMdd")+content.getId()+".html";
+		return path;
+	}
+	
+	private static String getSiteIndexPath(Site site) {
+		String path = WebConst.wc_webapp_root_path + site.getPath() + File.separator + "index.html";
 		return path;
 	}
 }

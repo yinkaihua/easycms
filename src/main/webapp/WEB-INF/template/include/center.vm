@@ -1,11 +1,11 @@
 <div class="main-center">
 	<div class="main-center-links">&nbsp;
-		<div class="main-center-pre"><a title="程序员手册，#if($pre)${pre.title}#else 没有了 #end" href="#if($pre)http://www.coding17.com/${pre.url}#else javascript:; #end">上一篇</a></div>
-		<div class="main-center-next"><a title="程序员手册，#if($next)${next.title}#else 没有了 #end" href="#if($next)http://www.coding17.com/${next.url}#else javascript:; #end">下一篇</a></div>
+		<div class="main-center-pre"><a title="编程之家，#if($pre)${pre.title}#else 没有了 #end" href="#if($pre)http://www.coding17.com/${pre.url}#else javascript:; #end">上一篇</a></div>
+		<div class="main-center-next"><a title="编程之家，#if($next)${next.title}#else 没有了 #end" href="#if($next)http://www.coding17.com/${next.url}#else javascript:; #end">下一篇</a></div>
 	</div>
 	<div class="main-content">${content.contentExt.txt}</div>
 	<div class="main-center-links">&nbsp;
-		<div class="main-center-pre"><a title="程序员手册，#if($pre)${pre.title}#else 没有了 #end" href="#if($pre)http://www.coding17.com/${pre.url}#else javascript:; #end">上一篇</a></div>
-		<div class="main-center-next"><a title="程序员手册，#if($next)${next.title}#else 没有了 #end" href="#if($next)http://www.coding17.com/${next.url}#else javascript:; #end">下一篇</a></div>
+		<div class="main-center-pre"><a title="编程之家，#if($pre)${pre.title}#else 没有了 #end" href="#if($pre)http://www.coding17.com/${pre.url}#else javascript:; #end">上一篇</a></div>
+		<div class="main-center-next"><a title="编程之家，#if($next)${next.title}#else 没有了 #end" href="#if($next)http://www.coding17.com/${next.url}#else javascript:; #end">下一篇</a></div>
 	</div>
 </div>

@@ -14,10 +14,17 @@
 <body>
 <%@ include file="/WEB-INF/jsp/site/site_selected.jsp" %>
 <div style="margin:20px;">
-	<a href="${_ctxPath}/gen/?cid=${cid}" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化首页</a>
+	<a href="javascript:statizIndex()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">静态化首页</a>
 </div>
 <script type="text/javascript">
-function siteChangeEvent() {}
+function siteChangeEvent(newVal, oldVal) {
+	location.href="${_ctxPath}/gen/statiz_page.htm?wc_p_context_sid="+newVal;
+}
+function statizIndex() {
+	$.getJSON("${_ctxPath}/gen/statiz_index.shtm",{},function(ret) {
+		alert(ret.state);
+	});
+}
 </script>
 </body>
 </html>

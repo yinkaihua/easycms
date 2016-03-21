@@ -57,10 +57,11 @@ public abstract class BaseServiceImpl<T extends BasicEntity> implements BaseServ
 		if (t.getPageSize()<=0 || t.getPageSize()>Pagination.MAX_PAGESIZE) {
 			t.setPageSize(Pagination.DEFAULT_PAGESIZE);
 		}
+		t.setOffset((t.getPageNum()-1) * t.getPageSize());
 		List<T> datas = getDao().selectListByPagination(t);
 		Integer totalCount = getDao().selectCountByCondition(t);
 		Integer totalPage = (totalCount-1)/t.getPageSize()+1;
-		return new Pagination<>(t.getPageNum(), t.getPageSize(), totalCount, totalPage, datas);
+		return new Pagination<T>(t.getPageNum(), t.getPageSize(), totalCount, totalPage, datas);
 	}
 
 	@Override

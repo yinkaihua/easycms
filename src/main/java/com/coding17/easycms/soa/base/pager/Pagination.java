@@ -26,7 +26,7 @@ public class Pagination<T> implements Serializable {
 	/**
 	 * 每页数量最大值
 	 */
-	public static final Integer MAX_PAGESIZE = 100;
+	public static final Integer MAX_PAGESIZE = 200;
 	
 	/**
 	 * 

@@ -1,13 +1,13 @@
 <nav class="navbar navbar-default" role="navigation" style="background-color:#ffffff">
    <div class="navbar-header">
-      <a class="navbar-brand" href="http://www.coding17.com" title="程序员手册，最全的程序员资料查询网站" style="color:#000">程序员手册</a>
+      <a class="navbar-brand" href="http://www.coding17.com" title="编程之家，程序员交流，资料查询" style="color:#000">编程之家</a>
    </div>
    <div>
       <ul class="nav navbar-nav" style="margin-left:20px;">
       	 <li id="html"><a href="http://www.coding17.com/html" title="HTML教程，HTML5教程">HTML教程</a></li>
       	 <li id="htmlbook"><a href="http://www.coding17.com/htmlbook" title="HTML参考手册，HTML5参考手册">HTML参考手册</a></li>
          <li id="bootstrapbook"><a href="http://www.coding17.com/bootstrap" title="Bootstrap教程，Bootstrap入门，进阶">Bootstrap教程</a></li>
-         <li id="seobook" ><a href="http://www.coding17.com/seo" title="seo教程，网站建设，页面结构，页面内容优化">站长seo</a></li>
+         <li id="seobook" ><a href="http://www.coding17.com/seo" title="站长SEO，网站建设，页面结构，页面内容优化">站长seo</a></li>
       </ul>
    </div>
 </nav>
