@@ -17,6 +17,7 @@
 </head>
 <body>
 <div style="margin:20px;">
+	<a href="javascript:history.go(-1);" class="easyui-linkbutton" data-options="iconCls:'icon-add'">返回</a>
 	<label for="name">当前栏目：</label>${channel.name}
 	<a style="float:right;" href="javascript:autoFill();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">自动填充</a>
 	<a style="float:right;" href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
@@ -53,6 +54,7 @@
 	<script type="text/plain" id="editor" style="width:100%;height:350px;"><p>${contents.contentExt.txt}</p></script>
 </div>
 <div style="margin:20px;">
+	<a href="javascript:history.go(-1);" class="easyui-linkbutton" data-options="iconCls:'icon-add'">返回</a>
 	<a href="javascript:submitContent();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">发布</a>
 </div>
 </form>

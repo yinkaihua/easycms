@@ -8,13 +8,18 @@
       	 <li id="htmlbook"><a href="http://www.coding17.com/htmlbook" title="HTML参考手册，HTML5参考手册">HTML参考手册</a></li>
          <li id="bootstrapbook"><a href="http://www.coding17.com/bootstrap" title="Bootstrap教程，Bootstrap入门，进阶">Bootstrap教程</a></li>
          <li id="seobook" ><a href="http://www.coding17.com/seo" title="站长SEO，网站建设，页面结构，页面内容优化">站长seo</a></li>
+         <li id="seostart" ><a href="http://www.coding17.com/seostart" title="了解SEO概念，SEO的用途，初步学习搜索引擎的知识">SEO入门教程</a></li>
       </ul>
    </div>
 </nav>
 <script type="text/javascript">
 $(function() {
 	if (location.href.indexOf("seo")!=-1) {
-		$("#seobook").attr("class","active");
+		if (location.href.indexOf("seostart")!=-1) {
+			$("#seostart").attr("class","active");
+		} else {
+			$("#seobook").attr("class","active");
+		}
 	} else if (location.href.indexOf("bootstrap")!=-1) {
 		$("#bootstrapbook").attr("class","active");
 	} else if (location.href.indexOf("html")!=-1) {
