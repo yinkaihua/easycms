@@ -81,17 +81,17 @@ function autoFill() {
 	}
 	var tag = r[1];
 	alert("当前标签==>" + tag);
-	$("#metaTitle").val("HTML " + tag + " 标签" + "－HTML教程－程序员手册");
+	$("#metaTitle").val("HTML " + tag + " 标签" + "－HTML教程－编程之家");
 	$("#title").val(tag);
 	tag = tag.replace(/<|>/g,"")
-	$("#metaKeywords").val(tag+"，"+tag+"标签，"+"HTML标签，HTML5，HTML实例");
+	$("#metaKeywords").val(tag+"，"+tag+"标签，"+"HTML5，HTML实例");
 }
 $(function() {
 	var isEdit = "${isEdit}";
 	if (isEdit!="yes") {
 		//设置默认seo标题
-		$("#metaTitle").val("－HTML教程－程序员手册");
-		$("#metaKeywords").val("HTML标签，HTML5，HTML实例");
+		$("#metaTitle").val("－HTML教程－编程之家");
+		$("#metaKeywords").val("HTML5，HTML实例");
 	}
 })
 </script>
